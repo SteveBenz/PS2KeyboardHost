@@ -15,8 +15,8 @@ void setup() {
 
 	// Start out with NumLock on
 	keyMapping.setNumLock(true);
-	lastLedSent = ps2::KeyboardLeds::Ps2LedNumLock;
-	ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::Ps2LedNumLock);
+	lastLedSent = ps2::KeyboardLeds::numLock;
+	ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::numLock);
 }
 
 void loop() {
@@ -37,8 +37,8 @@ void loop() {
 		}
 
 		ps2::KeyboardLeds newLeds =
-			  (keyMapping.getCapsLock() ? ps2::KeyboardLeds::Ps2LedCapsLock : ps2::KeyboardLeds::Ps2LedNone)
-			| (keyMapping.getNumLock() ? ps2::KeyboardLeds::Ps2LedNumLock : ps2::KeyboardLeds::Ps2LedNone);
+			  (keyMapping.getCapsLock() ? ps2::KeyboardLeds::capsLock : ps2::KeyboardLeds::none)
+			| (keyMapping.getNumLock() ? ps2::KeyboardLeds::numLock : ps2::KeyboardLeds::none);
 		if (newLeds != lastLedSent) {
 			ps2Keyboard.sendLedStatus(newLeds);
 			lastLedSent = newLeds;

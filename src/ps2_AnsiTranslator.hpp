@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 
 namespace ps2 {
 	// For reference: http://www.computer-engineering.org/ps2keyboard/scancodes2.html

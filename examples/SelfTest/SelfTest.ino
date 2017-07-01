@@ -19,7 +19,7 @@ void setup() {
 
 	// We're not actually going to pay much mind to this, but it could produce
 	// useful diagnostics if things don't go well.
-	ps2Keyboard.echo();
+	ps2Keyboard.reset();
 }
 
 int oldSwitch1PinValue = 0;
@@ -210,22 +210,22 @@ void loop() {
 			}
 			case ps2::KeyboardOutput::sc2_Q: {
 				waitForUnmake(scanCode);
-				printResult("LED:Num", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::Ps2LedNumLock));
+				printResult("LED:Num", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::numLock));
 				break;
 			}
 			case ps2::KeyboardOutput::sc2_W: {
 				waitForUnmake(scanCode);
-				printResult("LED:Caps", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::Ps2LedCapsLock));
+				printResult("LED:Caps", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::capsLock));
 				break;
 			}
 			case ps2::KeyboardOutput::sc2_E: {
 				waitForUnmake(scanCode);
-				printResult("LED:Scroll", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::Ps2LedScrollLock));
+				printResult("LED:Scroll", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::scrollLock));
 				break;
 			}
 			case ps2::KeyboardOutput::sc2_R: {
 				waitForUnmake(scanCode);
-				printResult("LED:none", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::Ps2LedNone));
+				printResult("LED:none", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::none));
 				break;
 			}
 			case ps2::KeyboardOutput::sc2_U: {

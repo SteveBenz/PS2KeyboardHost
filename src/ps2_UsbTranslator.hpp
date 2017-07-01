@@ -320,9 +320,9 @@ void ps2::UsbTranslator::reset() {
 
 ps2::KeyboardLeds ps2::UsbTranslator::translateLeds(UsbKeyboardLeds usbLeds)
 {
-	return ((usbLeds & UsbCapsLockLed) ? ps2::KeyboardLeds::Ps2LedCapsLock : ps2::KeyboardLeds::Ps2LedNone)
-		 | ((usbLeds & UsbNumLockLed) ? ps2::KeyboardLeds::Ps2LedNumLock : ps2::KeyboardLeds::Ps2LedNone)
-		 | ((usbLeds & UsbScrollLockLed) ? ps2::KeyboardLeds::Ps2LedScrollLock : ps2::KeyboardLeds::Ps2LedNone);
+	return ((usbLeds & UsbCapsLockLed) ? ps2::KeyboardLeds::capsLock : ps2::KeyboardLeds::none)
+		 | ((usbLeds & UsbNumLockLed) ? ps2::KeyboardLeds::numLock : ps2::KeyboardLeds::none)
+		 | ((usbLeds & UsbScrollLockLed) ? ps2::KeyboardLeds::scrollLock : ps2::KeyboardLeds::none);
 }
 
 ps2::UsbKeyAction ps2::UsbTranslator::translatePs2Keycode(ps2::KeyboardOutput ps2Scan)

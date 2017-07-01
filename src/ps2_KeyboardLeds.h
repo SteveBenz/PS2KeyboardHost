@@ -2,12 +2,12 @@
 
 namespace ps2 {
 	enum class KeyboardLeds {
-		Ps2LedCapsLock = 0x4,
-		Ps2LedNumLock = 0x2,
-		Ps2LedScrollLock = 0x1,
+		capsLock = 0x4,
+		numLock = 0x2,
+		scrollLock = 0x1,
 
-		Ps2LedAll = 0x7,
-		Ps2LedNone = 0x0,
+		all = 0x7,
+		none = 0x0,
 	};
 	inline KeyboardLeds operator|(KeyboardLeds a, KeyboardLeds b)
 	{

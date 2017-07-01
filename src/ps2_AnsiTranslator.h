@@ -30,6 +30,9 @@ namespace ps2 {
 		char rawTranslate(KeyboardOutput ps2Key);
 		bool isKeyAffectedByNumlock(KeyboardOutput ps2Key, char rawTranslation);
 
+		static const char ps2ToAsciiMap[] PROGMEM;
+		static const byte pauseKeySequence[] PROGMEM;
+
 		bool isSpecial;
 		bool isUnmake;
 		bool isCtrlDown;

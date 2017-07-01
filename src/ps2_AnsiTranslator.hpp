@@ -2,7 +2,7 @@
 
 namespace ps2 {
 	// For reference: http://www.computer-engineering.org/ps2keyboard/scancodes2.html
-	const char ps2ToAsciiMap[] PROGMEM = {
+	const char AnsiTranslator::ps2ToAsciiMap[] PROGMEM = {
 		'\t', // [0d] Tab
 		'`',  // [0e] ` ~
 		'=',  // [0f] Keypad =
@@ -118,9 +118,8 @@ namespace ps2 {
 		'9',  // [7d] Keypad 9 PageUp
 	};
 
-	static const byte pauseKeySequence[]{
+	const byte AnsiTranslator::pauseKeySequence[] PROGMEM {
 		0xe1, 0x14, 0x77
-		//0xe1, 0xfc, 0x00, 0x04, 0x14, 0x77
 	};
 
 	AnsiTranslator::AnsiTranslator()
@@ -154,7 +153,7 @@ namespace ps2 {
 		}
 
 		byte usbCode = 0;
-		if ((uint8_t)ps2Scan == pauseKeySequence[this->pauseKeySequenceIndex]) {
+		if ((uint8_t)ps2Scan == pgm_read_byte(pauseKeySequence + this->pauseKeySequenceIndex)) {
 			++this->pauseKeySequenceIndex;
 			if (this->pauseKeySequenceIndex < sizeof(pauseKeySequence))
 				return '\0';

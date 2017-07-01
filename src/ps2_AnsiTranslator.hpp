@@ -98,7 +98,7 @@ namespace ps2 {
 		'\0', // [63] unused
 		'\0', // [64] unused
 		'\0', // [65] unused
-		(char)0x08, // [66] Backspace
+		'\b', // [66] Backspace
 		'\0', // [67] unused
 		'\0', // [68] unused
 		'1',  // [69] Keypad 1 End
@@ -184,11 +184,12 @@ namespace ps2 {
 		// We have a complete make or unmake sequence here, so we'll reset to be ready for the next key
 		//  and we can return when we know something...
 		pauseKeySequenceIndex = 0;
-		this->isSpecial = false;
 
-		if (this->isUnmake) {
+		if (this->isUnmake || (this->isSpecial && ps2Scan != KeyboardOutput::sc2_KP_ENTER)) {
 			// We only care about unmakes for modifier keys
+			// None of the extended set are normal characters except for the Keypad Enter key
 			this->isUnmake = false;
+			this->isSpecial = false;
 			return '\0';
 		}
 

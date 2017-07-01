@@ -152,6 +152,7 @@ namespace ps2 {
         sc2_BREAK    = 0x7E,
         sc2_HOME     = 0x6C,
         sc2_END      = 0x69,
+		sc2_KP_1	 = 0x69,
         sc2_PGUP     = 0x7D,
         sc2_PGDN     = 0x7A,
         sc2_L_ARROW  = 0x6B,

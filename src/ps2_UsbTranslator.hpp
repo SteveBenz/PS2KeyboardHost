@@ -27,7 +27,8 @@
 #define KEY_MEDIA_CALC 0xfb
 */
 
-// These tables were gleaned from a PDF file that I can no longer find.
+// These translation tables were distilled from here:
+//  http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf
 // They could certainly be ProgMem, but it's unlikely to matter to anybody,
 // as if you're implementing a PS2->USB conversion on your Arduino, it's
 // unlikely you'll be doing anything else that requires a ton of space,

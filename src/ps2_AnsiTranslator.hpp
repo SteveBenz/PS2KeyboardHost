@@ -1,14 +1,8 @@
 #pragma once
 
 namespace ps2 {
-
-	// These tables were gleaned from a PDF file that I can no longer find.
-	// They could certainly be ProgMem, but it's unlikely to matter to anybody,
-	// as if you're implementing a PS2->USB conversion on your Arduino, it's
-	// unlikely you'll be doing anything else that requires a ton of space,
-	// so we'll keep it simple.
-
-	/*PROGMEM*/ const char ps2ToAsciiMap[] = {
+	// For reference: http://www.computer-engineering.org/ps2keyboard/scancodes2.html
+	const char ps2ToAsciiMap[] PROGMEM = {
 		'\t', // [0d] Tab
 		'`',  // [0e] ` ~
 		'=',  // [0f] Keypad =
@@ -296,7 +290,7 @@ namespace ps2 {
 
 	char AnsiTranslator::rawTranslate(KeyboardOutput ps2Scan) {
 		return ((uint8_t)ps2Scan >= 0x0d && ((uint8_t)ps2Scan - 0x0d) < sizeof(ps2ToAsciiMap))
-			? ps2ToAsciiMap[(uint8_t)ps2Scan - 0x0d]
+			? (char)pgm_read_byte(ps2ToAsciiMap + (uint8_t)ps2Scan - 0x0d)
 			: '\0';
 	}
 

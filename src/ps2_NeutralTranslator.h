@@ -86,15 +86,14 @@ namespace ps2
         PS2_KEY_7           = 0x37,
         PS2_KEY_8           = 0x38,
         PS2_KEY_9           = 0x39,
-        PS2_KEY_APOS        = 0x3A,
+        PS2_KEY_APOS        = 0x3A, // '
         PS2_KEY_COMMA       = 0x3B,
         PS2_KEY_MINUS       = 0x3C,
         PS2_KEY_DOT         = 0x3D,
         PS2_KEY_DIV         = 0x3E,
 		/* Some Numeric keyboards have an '=' on right keypad */
         PS2_KEY_KP_EQUAL    = 0x3F,
-		/* Single quote or back quote */
-        PS2_KEY_SINGLE      = 0x40,
+        PS2_KEY_SINGLE      = 0x40, // `
         PS2_KEY_A           = 0x41,
         PS2_KEY_B           = 0x42,
         PS2_KEY_C           = 0x43,
@@ -389,7 +388,7 @@ namespace ps2
 				case KeyboardOutput::sc2_dash: return KeyCode::PS2_KEY_MINUS;
 				case KeyboardOutput::sc2_period: return KeyCode::PS2_KEY_DOT;
 				case KeyboardOutput::sc2_forwardSlash: return KeyCode::PS2_KEY_DIV;
-				case KeyboardOutput::sc2_singleQuote: return KeyCode::PS2_KEY_SINGLE;
+				case KeyboardOutput::sc2_openQuote: return KeyCode::PS2_KEY_SINGLE;
 				case KeyboardOutput::sc2_a: return KeyCode::PS2_KEY_A;
 				case KeyboardOutput::sc2_b: return KeyCode::PS2_KEY_B;
 				case KeyboardOutput::sc2_c: return KeyCode::PS2_KEY_C;

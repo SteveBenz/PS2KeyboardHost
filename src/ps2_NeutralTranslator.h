@@ -6,6 +6,19 @@
   to applications.  This translator provides that kind of thing to the Arduino.
   It translates the keycodes into a made-up, but at least predictable, coding.
   
+  Author's Note (2017/7/1) This is a port of the translation that's done in the
+  PS2KeyAdvanced library (https://github.com/techpaul/PS2KeyAdvanced).  I kept
+  it here only because I hope to make this library a superset of all of the
+  assorted PS2 libraries currently available.  While PS2KeyAdvanced has great
+  functionality, I feel like this translation mechanism (which you can't turn off
+  in that library) is a silly thing to do.  You should either go all the way to
+  ASCII (and be your own keyboard controller) or have a nicely packaged collection
+  of buttons.  If you're a nicely packaged collection of buttons, then you'd be
+  better off switching to the PS2 ScanCode set and mapping between the keycode
+  there and the function you want to enable when it's pressed.  Having a layer
+  like this in between just costs you bytes and adds a new way to have things
+  go south.  So I can't recommend using this class at all, but perhaps there's a
+  use-case I failed to imagine.
 */
 #pragma once
 #include "ps2_KeyboardOutput.h"

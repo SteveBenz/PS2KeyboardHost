@@ -327,40 +327,16 @@ namespace ps2
 			}
 		}
 
-#if false
-		// Is this useful?  I think not - it would add a lot of complexity, and the
-		// consumers of this class are aiming for something simple.  If we did
-		// somothing like this, it should be its own class.
-
-		/**
-		 *  Returns true if there's something to read
-		 */
-		bool hasStateChanged();
-
-		/*
-		 *  Reads all the keys that are currently pressed.
-		 *
-		 *  Inputs:
-		 *   buffer - This will be filled in with the keys that are down
-		 *   szBuffer - the number of entries in the KeyCode array that buffer describes
-		 *
-		 *  Outputs:
-		 *   The actual number of keys that are recorded as pressed down right now.  This can
-		 *   be greater than szBuffer.
-		 */
-		int readDownKeys(KeyCode *buffer, unsigned int szBuffer);
-#endif
-
 	private:
 		KeyCode translateModifier(KeyboardOutput inputCode)
 		{
 			switch (inputCode) {
-				case KeyboardOutput::sc2_L_SHIFT: return KeyCode::PS2_SHIFT;
-				case KeyboardOutput::sc2_R_SHIFT: return KeyCode::PS2_SHIFT;
-				case KeyboardOutput::sc2_CTRL: return KeyCode::PS2_CTRL;
-				case KeyboardOutput::sc2_ALT: return KeyCode::PS2_ALT;
-				case KeyboardOutput::sc2_L_GUI: return KeyCode::PS2_GUI;
-				case KeyboardOutput::sc2_R_GUI: return KeyCode::PS2_GUI;
+				case KeyboardOutput::sc2_leftShift: return KeyCode::PS2_SHIFT;
+				case KeyboardOutput::sc2_rightShift: return KeyCode::PS2_SHIFT;
+				case KeyboardOutput::sc2_leftCtrl: return KeyCode::PS2_CTRL;
+				case KeyboardOutput::sc2_leftAlt: return KeyCode::PS2_ALT;
+				case KeyboardOutput::sc2ex_leftGui: return KeyCode::PS2_GUI;
+				case KeyboardOutput::sc2ex_rightGui: return KeyCode::PS2_GUI;
 				default: return KeyCode::PS2_NONE;
 			}
 		}
@@ -370,34 +346,34 @@ namespace ps2
 			// This switch statements might make a bad bargain - they trade
 			//  time-efficiency for program size.
 			switch (inputCode) {
-				case KeyboardOutput::sc2_NUM: return KeyCode::PS2_KEY_NUM;
-				case KeyboardOutput::sc2_SCROLL: return KeyCode::PS2_KEY_SCROLL;
-				case KeyboardOutput::sc2_CAPS: return KeyCode::PS2_KEY_CAPS;
-				case KeyboardOutput::sc2_L_SHIFT: return KeyCode::PS2_KEY_L_SHIFT;
-				case KeyboardOutput::sc2_R_SHIFT: return KeyCode::PS2_KEY_R_SHIFT;
-				case KeyboardOutput::sc2_CTRL: return KeyCode::PS2_KEY_L_CTRL;
-				case KeyboardOutput::sc2_ALT: return KeyCode::PS2_KEY_L_ALT;
-				case KeyboardOutput::sc2_SYSRQ: return KeyCode::PS2_KEY_SYSRQ;
-				case KeyboardOutput::sc2_ESC: return KeyCode::PS2_KEY_ESC;
-				case KeyboardOutput::sc2_BS: return KeyCode::PS2_KEY_BS;
-				case KeyboardOutput::sc2_TAB: return KeyCode::PS2_KEY_TAB;
-				case KeyboardOutput::sc2_ENTER: return KeyCode::PS2_KEY_ENTER;
-				case KeyboardOutput::sc2_SPACE: return KeyCode::PS2_KEY_SPACE;
-				case KeyboardOutput::sc2_KP0: return KeyCode::PS2_KEY_KP0;
-				case KeyboardOutput::sc2_KP1: return KeyCode::PS2_KEY_KP1;
-				case KeyboardOutput::sc2_KP2: return KeyCode::PS2_KEY_KP2;
-				case KeyboardOutput::sc2_KP3: return KeyCode::PS2_KEY_KP3;
-				case KeyboardOutput::sc2_KP4: return KeyCode::PS2_KEY_KP4;
-				case KeyboardOutput::sc2_KP5: return KeyCode::PS2_KEY_KP5;
-				case KeyboardOutput::sc2_KP6: return KeyCode::PS2_KEY_KP6;
-				case KeyboardOutput::sc2_KP7: return KeyCode::PS2_KEY_KP7;
-				case KeyboardOutput::sc2_KP8: return KeyCode::PS2_KEY_KP8;
-				case KeyboardOutput::sc2_KP9: return KeyCode::PS2_KEY_KP9;
-				case KeyboardOutput::sc2_KP_DOT: return KeyCode::PS2_KEY_KP_DOT;
-				case KeyboardOutput::sc2_KP_PLUS: return KeyCode::PS2_KEY_KP_PLUS;
-				case KeyboardOutput::sc2_KP_MINUS: return KeyCode::PS2_KEY_KP_MINUS;
-				case KeyboardOutput::sc2_KP_TIMES: return KeyCode::PS2_KEY_KP_TIMES;
-				case KeyboardOutput::sc2_KP_EQUAL: return KeyCode::PS2_KEY_KP_EQUAL;
+				case KeyboardOutput::sc2_numLock: return KeyCode::PS2_KEY_NUM;
+				case KeyboardOutput::sc2_scrollLock: return KeyCode::PS2_KEY_SCROLL;
+				case KeyboardOutput::sc2_capsLock: return KeyCode::PS2_KEY_CAPS;
+				case KeyboardOutput::sc2_leftShift: return KeyCode::PS2_KEY_L_SHIFT;
+				case KeyboardOutput::sc2_rightShift: return KeyCode::PS2_KEY_R_SHIFT;
+				case KeyboardOutput::sc2_leftCtrl: return KeyCode::PS2_KEY_L_CTRL;
+				case KeyboardOutput::sc2_leftAlt: return KeyCode::PS2_KEY_L_ALT;
+				case KeyboardOutput::sc2_sysRequest: return KeyCode::PS2_KEY_SYSRQ;
+				case KeyboardOutput::sc2_esc: return KeyCode::PS2_KEY_ESC;
+				case KeyboardOutput::sc2_backslash: return KeyCode::PS2_KEY_BACK;
+				case KeyboardOutput::sc2_tab: return KeyCode::PS2_KEY_TAB;
+				case KeyboardOutput::sc2_enter: return KeyCode::PS2_KEY_ENTER;
+				case KeyboardOutput::sc2_space: return KeyCode::PS2_KEY_SPACE;
+				case KeyboardOutput::sc2_keypad0: return KeyCode::PS2_KEY_KP0;
+				case KeyboardOutput::sc2_keypad1: return KeyCode::PS2_KEY_KP1;
+				case KeyboardOutput::sc2_keypad2: return KeyCode::PS2_KEY_KP2;
+				case KeyboardOutput::sc2_keypad3: return KeyCode::PS2_KEY_KP3;
+				case KeyboardOutput::sc2_keypad4: return KeyCode::PS2_KEY_KP4;
+				case KeyboardOutput::sc2_keypad5: return KeyCode::PS2_KEY_KP5;
+				case KeyboardOutput::sc2_keypad6: return KeyCode::PS2_KEY_KP6;
+				case KeyboardOutput::sc2_keypad7: return KeyCode::PS2_KEY_KP7;
+				case KeyboardOutput::sc2_keypad8: return KeyCode::PS2_KEY_KP8;
+				case KeyboardOutput::sc2_keypad9: return KeyCode::PS2_KEY_KP9;
+				case KeyboardOutput::sc2_keypadPeriod: return KeyCode::PS2_KEY_KP_DOT;
+				case KeyboardOutput::sc2_keypadPlus: return KeyCode::PS2_KEY_KP_PLUS;
+				case KeyboardOutput::sc2_keypadDash: return KeyCode::PS2_KEY_KP_MINUS;
+				case KeyboardOutput::sc2_keypadAsterisk: return KeyCode::PS2_KEY_KP_TIMES;
+				case KeyboardOutput::sc2_KeypadEquals: return KeyCode::PS2_KEY_KP_EQUAL;
 				case KeyboardOutput::sc2_0: return KeyCode::PS2_KEY_0;
 				case KeyboardOutput::sc2_1: return KeyCode::PS2_KEY_1;
 				case KeyboardOutput::sc2_2: return KeyCode::PS2_KEY_2;
@@ -408,78 +384,78 @@ namespace ps2
 				case KeyboardOutput::sc2_7: return KeyCode::PS2_KEY_7;
 				case KeyboardOutput::sc2_8: return KeyCode::PS2_KEY_8;
 				case KeyboardOutput::sc2_9: return KeyCode::PS2_KEY_9;
-				case KeyboardOutput::sc2_APOS: return KeyCode::PS2_KEY_APOS;
-				case KeyboardOutput::sc2_COMMA: return KeyCode::PS2_KEY_COMMA;
-				case KeyboardOutput::sc2_MINUS: return KeyCode::PS2_KEY_MINUS;
-				case KeyboardOutput::sc2_DOT: return KeyCode::PS2_KEY_DOT;
-				case KeyboardOutput::sc2_DIV: return KeyCode::PS2_KEY_DIV;
-				case KeyboardOutput::sc2_SINGLE: return KeyCode::PS2_KEY_SINGLE;
-				case KeyboardOutput::sc2_A: return KeyCode::PS2_KEY_A;
-				case KeyboardOutput::sc2_B: return KeyCode::PS2_KEY_B;
-				case KeyboardOutput::sc2_C: return KeyCode::PS2_KEY_C;
-				case KeyboardOutput::sc2_D: return KeyCode::PS2_KEY_D;
-				case KeyboardOutput::sc2_E: return KeyCode::PS2_KEY_E;
-				case KeyboardOutput::sc2_F: return KeyCode::PS2_KEY_F;
-				case KeyboardOutput::sc2_G: return KeyCode::PS2_KEY_G;
-				case KeyboardOutput::sc2_H: return KeyCode::PS2_KEY_H;
-				case KeyboardOutput::sc2_I: return KeyCode::PS2_KEY_I;
-				case KeyboardOutput::sc2_J: return KeyCode::PS2_KEY_J;
-				case KeyboardOutput::sc2_K: return KeyCode::PS2_KEY_K;
-				case KeyboardOutput::sc2_L: return KeyCode::PS2_KEY_L;
-				case KeyboardOutput::sc2_M: return KeyCode::PS2_KEY_M;
-				case KeyboardOutput::sc2_N: return KeyCode::PS2_KEY_N;
-				case KeyboardOutput::sc2_O: return KeyCode::PS2_KEY_O;
-				case KeyboardOutput::sc2_P: return KeyCode::PS2_KEY_P;
-				case KeyboardOutput::sc2_Q: return KeyCode::PS2_KEY_Q;
-				case KeyboardOutput::sc2_R: return KeyCode::PS2_KEY_R;
-				case KeyboardOutput::sc2_S: return KeyCode::PS2_KEY_S;
-				case KeyboardOutput::sc2_T: return KeyCode::PS2_KEY_T;
-				case KeyboardOutput::sc2_U: return KeyCode::PS2_KEY_U;
-				case KeyboardOutput::sc2_V: return KeyCode::PS2_KEY_V;
-				case KeyboardOutput::sc2_W: return KeyCode::PS2_KEY_W;
-				case KeyboardOutput::sc2_X: return KeyCode::PS2_KEY_X;
-				case KeyboardOutput::sc2_Y: return KeyCode::PS2_KEY_Y;
-				case KeyboardOutput::sc2_Z: return KeyCode::PS2_KEY_Z;
-				case KeyboardOutput::sc2_SEMI: return KeyCode::PS2_KEY_SEMI;
-				case KeyboardOutput::sc2_BACK: return KeyCode::PS2_KEY_BACK;
-				case KeyboardOutput::sc2_OPEN_SQ: return KeyCode::PS2_KEY_OPEN_SQ;
-				case KeyboardOutput::sc2_CLOSE_SQ: return KeyCode::PS2_KEY_CLOSE_SQ;
-				case KeyboardOutput::sc2_EQUAL: return KeyCode::PS2_KEY_EQUAL;
-				case KeyboardOutput::sc2_EUROPE2: return KeyCode::PS2_KEY_EUROPE2;
-				case KeyboardOutput::sc2_F1: return KeyCode::PS2_KEY_F1;
-				case KeyboardOutput::sc2_F2: return KeyCode::PS2_KEY_F2;
-				case KeyboardOutput::sc2_F3: return KeyCode::PS2_KEY_F3;
-				case KeyboardOutput::sc2_F4: return KeyCode::PS2_KEY_F4;
-				case KeyboardOutput::sc2_F5: return KeyCode::PS2_KEY_F5;
-				case KeyboardOutput::sc2_F6: return KeyCode::PS2_KEY_F6;
-				case KeyboardOutput::sc2_F7: return KeyCode::PS2_KEY_F7;
-				case KeyboardOutput::sc2_F8: return KeyCode::PS2_KEY_F8;
-				case KeyboardOutput::sc2_F9: return KeyCode::PS2_KEY_F9;
-				case KeyboardOutput::sc2_F10: return KeyCode::PS2_KEY_F10;
-				case KeyboardOutput::sc2_F11: return KeyCode::PS2_KEY_F11;
-				case KeyboardOutput::sc2_F12: return KeyCode::PS2_KEY_F12;
-				case KeyboardOutput::sc2_F13: return KeyCode::PS2_KEY_F13;
-				case KeyboardOutput::sc2_F14: return KeyCode::PS2_KEY_F14;
-				case KeyboardOutput::sc2_F15: return KeyCode::PS2_KEY_F15;
-				case KeyboardOutput::sc2_F16: return KeyCode::PS2_KEY_F16;
-				case KeyboardOutput::sc2_F17: return KeyCode::PS2_KEY_F17;
-				case KeyboardOutput::sc2_F18: return KeyCode::PS2_KEY_F18;
-				case KeyboardOutput::sc2_F19: return KeyCode::PS2_KEY_F19;
-				case KeyboardOutput::sc2_F20: return KeyCode::PS2_KEY_F20;
-				case KeyboardOutput::sc2_F21: return KeyCode::PS2_KEY_F21;
-				case KeyboardOutput::sc2_F22: return KeyCode::PS2_KEY_F22;
-				case KeyboardOutput::sc2_F23: return KeyCode::PS2_KEY_F23;
-				case KeyboardOutput::sc2_F24: return KeyCode::PS2_KEY_F24;
-				case KeyboardOutput::sc2_KP_COMMA: return KeyCode::PS2_KEY_KP_COMMA;
-				case KeyboardOutput::sc2_INTL1: return KeyCode::PS2_KEY_INTL1;
-				case KeyboardOutput::sc2_INTL2: return KeyCode::PS2_KEY_INTL2;
-				case KeyboardOutput::sc2_INTL3: return KeyCode::PS2_KEY_INTL3;
-				case KeyboardOutput::sc2_INTL4: return KeyCode::PS2_KEY_INTL4;
-				case KeyboardOutput::sc2_INTL5: return KeyCode::PS2_KEY_INTL5;
-				case KeyboardOutput::sc2_LANG1: return KeyCode::PS2_KEY_LANG1;
-				case KeyboardOutput::sc2_LANG2: return KeyCode::PS2_KEY_LANG2;
-				case KeyboardOutput::sc2_LANG3: return KeyCode::PS2_KEY_LANG3;
-				case KeyboardOutput::sc2_LANG4: return KeyCode::PS2_KEY_LANG4;
+				case KeyboardOutput::sc2_apostrophe: return KeyCode::PS2_KEY_APOS;
+				case KeyboardOutput::sc2_comma: return KeyCode::PS2_KEY_COMMA;
+				case KeyboardOutput::sc2_dash: return KeyCode::PS2_KEY_MINUS;
+				case KeyboardOutput::sc2_period: return KeyCode::PS2_KEY_DOT;
+				case KeyboardOutput::sc2_forwardSlash: return KeyCode::PS2_KEY_DIV;
+				case KeyboardOutput::sc2_singleQuote: return KeyCode::PS2_KEY_SINGLE;
+				case KeyboardOutput::sc2_a: return KeyCode::PS2_KEY_A;
+				case KeyboardOutput::sc2_b: return KeyCode::PS2_KEY_B;
+				case KeyboardOutput::sc2_c: return KeyCode::PS2_KEY_C;
+				case KeyboardOutput::sc2_d: return KeyCode::PS2_KEY_D;
+				case KeyboardOutput::sc2_e: return KeyCode::PS2_KEY_E;
+				case KeyboardOutput::sc2_f: return KeyCode::PS2_KEY_F;
+				case KeyboardOutput::sc2_g: return KeyCode::PS2_KEY_G;
+				case KeyboardOutput::sc2_h: return KeyCode::PS2_KEY_H;
+				case KeyboardOutput::sc2_i: return KeyCode::PS2_KEY_I;
+				case KeyboardOutput::sc2_j: return KeyCode::PS2_KEY_J;
+				case KeyboardOutput::sc2_k: return KeyCode::PS2_KEY_K;
+				case KeyboardOutput::sc2_l: return KeyCode::PS2_KEY_L;
+				case KeyboardOutput::sc2_m: return KeyCode::PS2_KEY_M;
+				case KeyboardOutput::sc2_n: return KeyCode::PS2_KEY_N;
+				case KeyboardOutput::sc2_o: return KeyCode::PS2_KEY_O;
+				case KeyboardOutput::sc2_p: return KeyCode::PS2_KEY_P;
+				case KeyboardOutput::sc2_q: return KeyCode::PS2_KEY_Q;
+				case KeyboardOutput::sc2_r: return KeyCode::PS2_KEY_R;
+				case KeyboardOutput::sc2_s: return KeyCode::PS2_KEY_S;
+				case KeyboardOutput::sc2_t: return KeyCode::PS2_KEY_T;
+				case KeyboardOutput::sc2_u: return KeyCode::PS2_KEY_U;
+				case KeyboardOutput::sc2_v: return KeyCode::PS2_KEY_V;
+				case KeyboardOutput::sc2_w: return KeyCode::PS2_KEY_W;
+				case KeyboardOutput::sc2_x: return KeyCode::PS2_KEY_X;
+				case KeyboardOutput::sc2_y: return KeyCode::PS2_KEY_Y;
+				case KeyboardOutput::sc2_z: return KeyCode::PS2_KEY_Z;
+				case KeyboardOutput::sc2_semicolon: return KeyCode::PS2_KEY_SEMI;
+				case KeyboardOutput::sc2_backspace: return KeyCode::PS2_KEY_BS;
+				case KeyboardOutput::sc2_openSquareBracket: return KeyCode::PS2_KEY_OPEN_SQ;
+				case KeyboardOutput::sc2_closeSquareBracket: return KeyCode::PS2_KEY_CLOSE_SQ;
+				case KeyboardOutput::sc2_equal: return KeyCode::PS2_KEY_EQUAL;
+				case KeyboardOutput::sc2_europe2: return KeyCode::PS2_KEY_EUROPE2;
+				case KeyboardOutput::sc2_f1: return KeyCode::PS2_KEY_F1;
+				case KeyboardOutput::sc2_f2: return KeyCode::PS2_KEY_F2;
+				case KeyboardOutput::sc2_f3: return KeyCode::PS2_KEY_F3;
+				case KeyboardOutput::sc2_f4: return KeyCode::PS2_KEY_F4;
+				case KeyboardOutput::sc2_f5: return KeyCode::PS2_KEY_F5;
+				case KeyboardOutput::sc2_f6: return KeyCode::PS2_KEY_F6;
+				case KeyboardOutput::sc2_f7: return KeyCode::PS2_KEY_F7;
+				case KeyboardOutput::sc2_f8: return KeyCode::PS2_KEY_F8;
+				case KeyboardOutput::sc2_f9: return KeyCode::PS2_KEY_F9;
+				case KeyboardOutput::sc2_f10: return KeyCode::PS2_KEY_F10;
+				case KeyboardOutput::sc2_f11: return KeyCode::PS2_KEY_F11;
+				case KeyboardOutput::sc2_f12: return KeyCode::PS2_KEY_F12;
+				case KeyboardOutput::sc2_f13: return KeyCode::PS2_KEY_F13;
+				case KeyboardOutput::sc2_f14: return KeyCode::PS2_KEY_F14;
+				case KeyboardOutput::sc2_f15: return KeyCode::PS2_KEY_F15;
+				case KeyboardOutput::sc2_f16: return KeyCode::PS2_KEY_F16;
+				case KeyboardOutput::sc2_f17: return KeyCode::PS2_KEY_F17;
+				case KeyboardOutput::sc2_f18: return KeyCode::PS2_KEY_F18;
+				case KeyboardOutput::sc2_f19: return KeyCode::PS2_KEY_F19;
+				case KeyboardOutput::sc2_f20: return KeyCode::PS2_KEY_F20;
+				case KeyboardOutput::sc2_f21: return KeyCode::PS2_KEY_F21;
+				case KeyboardOutput::sc2_f22: return KeyCode::PS2_KEY_F22;
+				case KeyboardOutput::sc2_f23: return KeyCode::PS2_KEY_F23;
+				case KeyboardOutput::sc2_f24: return KeyCode::PS2_KEY_F24;
+				case KeyboardOutput::sc2_keypadComma: return KeyCode::PS2_KEY_KP_COMMA;
+				case KeyboardOutput::sc2_intl1: return KeyCode::PS2_KEY_INTL1;
+				case KeyboardOutput::sc2_intl2: return KeyCode::PS2_KEY_INTL2;
+				case KeyboardOutput::sc2_intl3: return KeyCode::PS2_KEY_INTL3;
+				case KeyboardOutput::sc2_intl4: return KeyCode::PS2_KEY_INTL4;
+				case KeyboardOutput::sc2_intl5: return KeyCode::PS2_KEY_INTL5;
+				case KeyboardOutput::sc2_lang1: return KeyCode::PS2_KEY_LANG1;
+				case KeyboardOutput::sc2_lang2: return KeyCode::PS2_KEY_LANG2;
+				case KeyboardOutput::sc2_lang3: return KeyCode::PS2_KEY_LANG3;
+				case KeyboardOutput::sc2_lang4: return KeyCode::PS2_KEY_LANG4;
 				// case KeyboardOutput::sc2_LANG5: return KeyCode::PS2_KEY_LANG5;
 				default: return (KeyCode)0;
 			};
@@ -488,46 +464,46 @@ namespace ps2
 		KeyCode translateExtended(KeyboardOutput inputCode)
 		{
 			switch (inputCode) {
-				case KeyboardOutput::sc2_PRTSCR: return KeyCode::PS2_KEY_PRTSCR;
-				case KeyboardOutput::sc2_CTRL: return KeyCode::PS2_KEY_R_CTRL;
-				case KeyboardOutput::sc2_ALT: return KeyCode::PS2_KEY_R_ALT;
-				case KeyboardOutput::sc2_L_GUI: return KeyCode::PS2_KEY_L_GUI;
-				case KeyboardOutput::sc2_R_GUI: return KeyCode::PS2_KEY_R_GUI;
-				case KeyboardOutput::sc2_MENU: return KeyCode::PS2_KEY_MENU;
-				case KeyboardOutput::sc2_BREAK: return KeyCode::PS2_KEY_BREAK;
-				case KeyboardOutput::sc2_HOME: return KeyCode::PS2_KEY_HOME;
-				case KeyboardOutput::sc2_END: return KeyCode::PS2_KEY_END;
-				case KeyboardOutput::sc2_PGUP: return KeyCode::PS2_KEY_PGUP;
-				case KeyboardOutput::sc2_PGDN: return KeyCode::PS2_KEY_PGDN;
-				case KeyboardOutput::sc2_L_ARROW: return KeyCode::PS2_KEY_L_ARROW;
-				case KeyboardOutput::sc2_R_ARROW: return KeyCode::PS2_KEY_R_ARROW;
-				case KeyboardOutput::sc2_UP_ARROW: return KeyCode::PS2_KEY_UP_ARROW;
-				case KeyboardOutput::sc2_DN_ARROW: return KeyCode::PS2_KEY_DN_ARROW;
-				case KeyboardOutput::sc2_INSERT: return KeyCode::PS2_KEY_INSERT;
-				case KeyboardOutput::sc2_DELETE: return KeyCode::PS2_KEY_DELETE;
-				case KeyboardOutput::sc2_KP_ENTER: return KeyCode::PS2_KEY_KP_ENTER;
-				case KeyboardOutput::sc2_KP_DIV: return KeyCode::PS2_KEY_KP_DIV;
-				case KeyboardOutput::sc2_NEXT_TR: return KeyCode::PS2_KEY_NEXT_TR;
-				case KeyboardOutput::sc2_PREV_TR: return KeyCode::PS2_KEY_PREV_TR;
-				case KeyboardOutput::sc2_STOP: return KeyCode::PS2_KEY_STOP;
-				case KeyboardOutput::sc2_PLAY: return KeyCode::PS2_KEY_PLAY;
-				case KeyboardOutput::sc2_MUTE: return KeyCode::PS2_KEY_MUTE;
-				case KeyboardOutput::sc2_VOL_UP: return KeyCode::PS2_KEY_VOL_UP;
-				case KeyboardOutput::sc2_VOL_DN: return KeyCode::PS2_KEY_VOL_DN;
-				case KeyboardOutput::sc2_MEDIA: return KeyCode::PS2_KEY_MEDIA;
-				case KeyboardOutput::sc2_EMAIL: return KeyCode::PS2_KEY_EMAIL;
-				case KeyboardOutput::sc2_CALC: return KeyCode::PS2_KEY_CALC;
-				case KeyboardOutput::sc2_COMPUTER: return KeyCode::PS2_KEY_COMPUTER;
-				case KeyboardOutput::sc2_WEB_SEARCH: return KeyCode::PS2_KEY_WEB_SEARCH;
-				case KeyboardOutput::sc2_WEB_HOME: return KeyCode::PS2_KEY_WEB_HOME;
-				//case KeyboardOutput::sc2_WEB_BACK: return KeyCode::PS2_KEY_WEB_BACK;
-				case KeyboardOutput::sc2_WEB_FORWARD: return KeyCode::PS2_KEY_WEB_FORWARD;
-				case KeyboardOutput::sc2_WEB_STOP: return KeyCode::PS2_KEY_WEB_STOP;
-				case KeyboardOutput::sc2_WEB_REFRESH: return KeyCode::PS2_KEY_WEB_REFRESH;
-				case KeyboardOutput::sc2_WEB_FAVOR: return KeyCode::PS2_KEY_WEB_FAVOR;
-				case KeyboardOutput::sc2_POWER: return KeyCode::PS2_KEY_POWER;
-				case KeyboardOutput::sc2_SLEEP: return KeyCode::PS2_KEY_SLEEP;
-				case KeyboardOutput::sc2_WAKE: return KeyCode::PS2_KEY_WAKE;
+				case KeyboardOutput::sc2ex_printScreen: return KeyCode::PS2_KEY_PRTSCR;
+				case KeyboardOutput::sc2ex_rightCtrl: return KeyCode::PS2_KEY_R_CTRL;
+				case KeyboardOutput::sc2ex_rightAlt: return KeyCode::PS2_KEY_R_ALT;
+				case KeyboardOutput::sc2ex_leftGui: return KeyCode::PS2_KEY_L_GUI;
+				case KeyboardOutput::sc2ex_rightGui: return KeyCode::PS2_KEY_R_GUI;
+				case KeyboardOutput::sc2ex_menu: return KeyCode::PS2_KEY_MENU;
+				// case KeyboardOutput::sc2_BREAK: return KeyCode::PS2_KEY_BREAK; // <- This doesn't match up with how my keyboards work; I think it's an error
+				case KeyboardOutput::sc2ex_home: return KeyCode::PS2_KEY_HOME;
+				case KeyboardOutput::sc2ex_end: return KeyCode::PS2_KEY_END;
+				case KeyboardOutput::sc2ex_pageUp: return KeyCode::PS2_KEY_PGUP;
+				case KeyboardOutput::sc2ex_pageDown: return KeyCode::PS2_KEY_PGDN;
+				case KeyboardOutput::sc2ex_leftArrow: return KeyCode::PS2_KEY_L_ARROW;
+				case KeyboardOutput::sc2ex_rightArrow: return KeyCode::PS2_KEY_R_ARROW;
+				case KeyboardOutput::sc2ex_upArrow: return KeyCode::PS2_KEY_UP_ARROW;
+				case KeyboardOutput::sc2ex_downArrow: return KeyCode::PS2_KEY_DN_ARROW;
+				case KeyboardOutput::sc2ex_insert: return KeyCode::PS2_KEY_INSERT;
+				case KeyboardOutput::sc2ex_delete: return KeyCode::PS2_KEY_DELETE;
+				case KeyboardOutput::sc2ex_keypadEnter: return KeyCode::PS2_KEY_KP_ENTER;
+				case KeyboardOutput::sc2ex_keypadForwardSlash: return KeyCode::PS2_KEY_KP_DIV;
+				case KeyboardOutput::sc2ex_nextTrack: return KeyCode::PS2_KEY_NEXT_TR;
+				case KeyboardOutput::sc2ex_prevTrack: return KeyCode::PS2_KEY_PREV_TR;
+				case KeyboardOutput::sc2ex_stop: return KeyCode::PS2_KEY_STOP;
+				case KeyboardOutput::sc2ex_play: return KeyCode::PS2_KEY_PLAY;
+				case KeyboardOutput::sc2ex_mute: return KeyCode::PS2_KEY_MUTE;
+				case KeyboardOutput::sc2ex_volumeUp: return KeyCode::PS2_KEY_VOL_UP;
+				case KeyboardOutput::sc2ex_volumeDown: return KeyCode::PS2_KEY_VOL_DN;
+				case KeyboardOutput::sc2ex_mediaSelect: return KeyCode::PS2_KEY_MEDIA;
+				case KeyboardOutput::sc2ex_email: return KeyCode::PS2_KEY_EMAIL;
+				case KeyboardOutput::sc2ex_calculator: return KeyCode::PS2_KEY_CALC;
+				case KeyboardOutput::sc2ex_myComputer: return KeyCode::PS2_KEY_COMPUTER;
+				case KeyboardOutput::sc2ex_webSearch: return KeyCode::PS2_KEY_WEB_SEARCH;
+				case KeyboardOutput::sc2ex_webHome: return KeyCode::PS2_KEY_WEB_HOME;
+				case KeyboardOutput::sc2ex_webBack: return KeyCode::PS2_KEY_WEB_BACK;
+				case KeyboardOutput::sc2ex_webForward: return KeyCode::PS2_KEY_WEB_FORWARD;
+				case KeyboardOutput::sc2ex_webStop: return KeyCode::PS2_KEY_WEB_STOP;
+				case KeyboardOutput::sc2ex_webRefresh: return KeyCode::PS2_KEY_WEB_REFRESH;
+				case KeyboardOutput::sc2ex_webFavorites: return KeyCode::PS2_KEY_WEB_FAVOR;
+				case KeyboardOutput::sc2ex_power: return KeyCode::PS2_KEY_POWER;
+				case KeyboardOutput::sc2ex_sleep: return KeyCode::PS2_KEY_SLEEP;
+				case KeyboardOutput::sc2ex_wake: return KeyCode::PS2_KEY_WAKE;
 				default: return (KeyCode)0;
 			}
 		}

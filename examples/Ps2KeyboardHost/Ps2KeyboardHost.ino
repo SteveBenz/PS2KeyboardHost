@@ -32,7 +32,7 @@ void loop() {
 		if (buf[0] == '\r') {
 			Serial.println();
 		}
-		else if (buf[0] >= ' ') { // Stuff < ' ' are control-characters; this example isn't clever enough to do anything with them.
+		else if (buf[0] >= ' ') { // Characters < ' ' are control-characters; this example isn't clever enough to do anything with them.
 			Serial.write(buf);
 		}
 

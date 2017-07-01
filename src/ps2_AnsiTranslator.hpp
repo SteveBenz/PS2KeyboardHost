@@ -166,12 +166,12 @@ namespace ps2 {
 		}
 
 		switch (ps2Scan) {
-		case KeyboardOutput::sc2_L_SHIFT:
-		case KeyboardOutput::sc2_R_SHIFT:
+		case KeyboardOutput::sc2_leftShift:
+		case KeyboardOutput::sc2_rightShift:
 			this->isShiftDown = !this->isUnmake;
 			break;
-		case KeyboardOutput::sc2_CTRL:
-			this->isCtrlDown = !this->isUnmake;
+        case KeyboardOutput::sc2_leftCtrl: // sc2_exRightControl
+            this->isCtrlDown = !this->isUnmake;
 			break;
 		}
 
@@ -179,7 +179,7 @@ namespace ps2 {
 		//  and we can return when we know something...
 		pauseKeySequenceIndex = 0;
 
-		if (this->isUnmake || (this->isSpecial && ps2Scan != KeyboardOutput::sc2_KP_ENTER)) {
+		if (this->isUnmake || (this->isSpecial && ps2Scan != KeyboardOutput::sc2ex_keypadEnter)) {
 			// We only care about unmakes for modifier keys
 			// None of the extended set are normal characters except for the Keypad Enter key
 			this->isUnmake = false;
@@ -188,10 +188,10 @@ namespace ps2 {
 		}
 
 		switch (ps2Scan) {
-		case KeyboardOutput::sc2_NUM:
+		case KeyboardOutput::sc2_numLock:
 			this->isNumLockMode = !this->isNumLockMode;
 			return '\0';
-		case KeyboardOutput::sc2_CAPS:
+		case KeyboardOutput::sc2_capsLock:
 			this->isCapsLockMode = !this->isCapsLockMode;
 			return '\0';
 		}
@@ -295,7 +295,7 @@ namespace ps2 {
 	}
 
 	bool AnsiTranslator::isKeyAffectedByNumlock(KeyboardOutput ps2Scan, char rawTranslation) {
-		if (ps2Scan < KeyboardOutput::sc2_KP_1)
+		if (ps2Scan < KeyboardOutput::sc2_keypad1)
 			return false;
 		return rawTranslation == '.' || (rawTranslation >= '0' && rawTranslation <= '9');
 	}

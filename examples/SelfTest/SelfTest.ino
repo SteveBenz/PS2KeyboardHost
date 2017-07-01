@@ -208,48 +208,48 @@ void loop() {
 				printResult("reset to default", ps2Keyboard.resetToDefaults());
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_Q: {
+			case ps2::KeyboardOutput::sc2_q: {
 				waitForUnmake(scanCode);
 				printResult("LED:Num", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::numLock));
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_W: {
+			case ps2::KeyboardOutput::sc2_w: {
 				waitForUnmake(scanCode);
 				printResult("LED:Caps", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::capsLock));
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_E: {
+			case ps2::KeyboardOutput::sc2_e: {
 				waitForUnmake(scanCode);
 				printResult("LED:Scroll", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::scrollLock));
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_R: {
+			case ps2::KeyboardOutput::sc2_r: {
 				waitForUnmake(scanCode);
 				printResult("LED:none", ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::none));
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_U: {
+			case ps2::KeyboardOutput::sc2_u: {
 				waitForUnmake(scanCode);
 				printResult("disable breaks F1-F4", ps2Keyboard.disableBreakCodes(f1_f4, 4));
 				printResult("disable breaks F7-F8", ps2Keyboard.disableBreakCodes(f7_f8, 2));
 				printResult("enable", ps2Keyboard.enable());
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_I: {
+			case ps2::KeyboardOutput::sc2_i: {
 				waitForUnmake(scanCode);
 				printResult("disable typematic F1-F4", ps2Keyboard.disableTypematic(f1_f4, 4));
 				printResult("disable typematic F7-F8", ps2Keyboard.disableTypematic(f7_f8, 2));
 				printResult("enable", ps2Keyboard.enable());
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_O: {
+			case ps2::KeyboardOutput::sc2_o: {
 				waitForUnmake(scanCode);
 				printResult("disable break & typematic F1-F4", ps2Keyboard.disableBreakAndTypematic(f1_f4, 4));
 				printResult("disable break & typematic F7-F8", ps2Keyboard.disableBreakAndTypematic(f7_f8, 2));
 				printResult("enable", ps2Keyboard.enable());
 				break;
 			}
-			case ps2::KeyboardOutput::sc2_T: {
+			case ps2::KeyboardOutput::sc2_t: {
 				waitForUnmake(scanCode);
 				testQueue();
 				Serial.println("testQueue done");

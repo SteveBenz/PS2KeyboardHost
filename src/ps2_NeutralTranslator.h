@@ -203,73 +203,61 @@ namespace ps2
 	KeyCode &operator &=(KeyCode &code, KeyCode modifiers) { return code = (KeyCode)((uint16_t)code & (uint16_t)modifiers); }
 	KeyCode operator ~(KeyCode code) { return (KeyCode)(~(uint16_t)code); }
 
-	class NullKeyboardOutputSource {
-	public:
-		KeyboardOutput operator()() { return KeyboardOutput::none; }
-	};
-
-	template <typename KeyboardOutputSource = NullKeyboardOutputSource>
 	class NeutralTranslator {
 		bool isUnmake : 1;
 		bool isExtended : 1;
 		bool isExtended1 : 1;
 		bool haveGotExtended1FirstByte : 1;
-		KeyCode lastKeyDown;
-		KeyboardOutputSource *source;
+        KeyCode modifiers = PS2_NONE;
 
 	public:
-		NeutralTranslator(KeyboardOutputSource &source) {
-			this->source = &source;
-		}
-
-		NeutralTranslator() {
-			this->source = nullptr;
-		}
+		NeutralTranslator() { }
 
 		/**
 		 * If a scancode is read from the PS2 interface itself, it should be sent here.
 		 */
-		void processPs2Keycode(KeyboardOutput code) {
+		KeyCode translatePs2Keycode(KeyboardOutput code) {
+            KeyCode result = PS2_NONE;
 			if (code == KeyboardOutput::none) {
-				return;
+				return PS2_NONE;
 			}
 			if (code == KeyboardOutput::unmake) {
 				this->isUnmake = true;
-				return;
-			}
+                return PS2_NONE;
+            }
 			if (code == KeyboardOutput::extend) {
 				this->isExtended = true;
-				return;
-			}
+                return PS2_NONE;
+            }
 			if (code == KeyboardOutput::extend1) {
 				this->isExtended1 = true;
-				return;
-			}
+                return PS2_NONE;
+            }
 
 			if (this->isExtended1) {
 				if (!this->haveGotExtended1FirstByte) {
 					this->haveGotExtended1FirstByte = true;
 					// Don't care about the actual content of the thing, because, oddly, there's only one
 					//   key that uses Extended-1 mode
-					return;
-				}
+                    return PS2_NONE;
+                }
 				if (!this->isUnmake) {
-					this->lastKeyDown = KeyCode::PS2_KEY_BREAK;
+					result = KeyCode::PS2_KEY_BREAK;
 				}
 				this->reset();
-				return;
+				return result;
 			}
 
 			KeyCode modifier = this->translateModifier(code);
 			if (modifier != KeyCode::PS2_NONE) {
 				if (this->isUnmake) {
-					this->lastKeyDown &= ~modifier;
+					this->modifiers &= ~modifier;
 				}
 				else {
-					this->lastKeyDown |= modifier;
+					this->modifiers |= modifier;
 				}
 				this->reset();
-				return;
+				return PS2_NONE;
 			}
 
 			if (this->isUnmake) {
@@ -280,25 +268,18 @@ namespace ps2
 					this->reset();
 				}
 				// Don't care about unmake
-				return;
+				return PS2_NONE;
 			}
 
-			if (this->isExtended) {
-				KeyCode translatedCode = translateExtended(code);
-				if (translatedCode != PS2_NONE) {
-					this->lastKeyDown = (this->lastKeyDown & KeyCode::PS2_MODIFIERS) | translatedCode;
-				}
-			}
-			else {
-				KeyCode translatedCode = translateNonExtended(code);
-				if (translatedCode != PS2_NONE) {
-					this->lastKeyDown = (this->lastKeyDown & KeyCode::PS2_MODIFIERS) | translatedCode;
-				}
-			}
+            KeyCode translatedCode = this->isExtended
+                ? translateExtended(code)
+                : translateNonExtended(code);
+            if (translatedCode != PS2_NONE) {
+                result = translatedCode | this->modifiers;
+            }
 
-			this->isUnmake = false;
-			this->isExtended = false;
-			this->isExtended1 = false;
+            this->reset();
+            return result;
 		}
 
 		void reset()
@@ -307,36 +288,6 @@ namespace ps2
 			this->isExtended = false;
 			this->isExtended1 = false;
 			this->haveGotExtended1FirstByte = false;
-		}
-
-		/**
-		 *  If a key has been pressed down sice the last time this method was read, this will return it.
-		 *  Otherwise it returns KeyCode::PS2_NONE
-		 */
-		KeyCode readKeypress()
-		{
-			// Clear anything in our source buffer first:
-			KeyboardOutput scanCode;
-			while (KeyboardOutput::none != (scanCode = (*this->source)())) {
-				this->processPs2Keycode(scanCode);
-			}
-
-			if (this->lastKeyDown & ~KeyCode::PS2_MODIFIERS) {
-				KeyCode existingKey = this->lastKeyDown;
-				// Clear it for the next time...
-				this->lastKeyDown = this->lastKeyDown & KeyCode::PS2_MODIFIERS;
-
-				// Print-Screen always comes across as shift-print-screen
-				if (existingKey == (KeyCode::PS2_SHIFT | KeyCode::PS2_KEY_PRTSCR)) {
-					existingKey = KeyCode::PS2_KEY_PRTSCR;
-				}
-
-				return existingKey;
-			}
-			else {
-				// Nothing but modifiers are down
-				return KeyCode::PS2_NONE;
-			}
 		}
 
 	private:

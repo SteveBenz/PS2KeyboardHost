@@ -24,7 +24,7 @@ void setup() {
 
 int oldSwitch1PinValue = 0;
 int oldSwitch2PinValue = -2;
-static ps2::NeutralTranslator<> translator;
+static ps2::NeutralTranslator translator;
 
 void waitForUnmake(ps2::KeyboardOutput key)
 {
@@ -257,8 +257,7 @@ void loop() {
 			}
 		}
 
-		translator.processPs2Keycode(scanCode);
-		ps2::KeyCode translated = translator.readKeypress();
+        ps2::KeyCode translated = translator.translatePs2Keycode(scanCode);
 		if (translated != ps2::KeyCode::PS2_NONE) {
 			Serial.print("<");
 			Serial.print((uint16_t)translated, HEX);

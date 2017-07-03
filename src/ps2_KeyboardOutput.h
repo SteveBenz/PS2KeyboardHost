@@ -1,28 +1,28 @@
 #pragma once
 
 namespace ps2 {
-	// Byte-codes sent back from the Ps2 keyboard to the host.  
-	enum class KeyboardOutput : uint8_t {
-		// These are codes returned from this API, rather than from the keyboard itself.
-		none            = 0x0,
-		garbled         = 0xfe,
+    // Byte-codes sent back from the Ps2 keyboard to the host.  
+    enum class KeyboardOutput : uint8_t {
+        // These are codes returned from this API, rather than from the keyboard itself.
+        none            = 0x0,
+        garbled         = 0xfe,
 
-		batSuccessful   = 0xaa, // Reset or power-up successful
-		batFailure      = 0xfc, // Not so fortunate
+        batSuccessful   = 0xaa, // Reset or power-up successful
+        batFailure      = 0xfc, // Not so fortunate
 
-		ack             = 0xfa,
-		echo            = 0xee,
-		nack            = 0xfe,
+        ack             = 0xfa,
+        echo            = 0xee,
+        nack            = 0xfe,
 
-		unmake          = 0xf0,
+        unmake          = 0xf0,
 
-		extend          = 0xe0,
-		extend1         = 0xe1,
+        extend          = 0xe0,
+        extend1         = 0xe1,
 
-		// "sc2" is short for "ScanCode Set 2".  Similarly for "sc3"
+        // "sc2" is short for "ScanCode Set 2".  Similarly for "sc3"
         // "sc2ex" is ScanCode set 2, prefixed by an 'extend' byte
 
-		// There are lots of sources for scancode values; some more complete than others.  This set
+        // There are lots of sources for scancode values; some more complete than others.  This set
         //  is, at best, an approximation.
         sc2_numLock     = 0x77,
         sc2_scrollLock  = 0x7e,
@@ -300,5 +300,5 @@ namespace ps2 {
 
         sc3_apps        = 0x8d,
         sc3_menu        = 0x8d,
-	};
+    };
 }

@@ -43,73 +43,73 @@ static const int switch2Pin = 8;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-	pinMode(LED_BUILTIN, OUTPUT);
-	ps2Keyboard.begin();
-	pinMode(switch1Pin, INPUT_PULLUP);
-	pinMode(switch2Pin, INPUT_PULLUP);
+    pinMode(LED_BUILTIN, OUTPUT);
+    ps2Keyboard.begin();
+    pinMode(switch1Pin, INPUT_PULLUP);
+    pinMode(switch2Pin, INPUT_PULLUP);
 
-	// We're not actually going to pay much mind to this, but it could produce
-	// useful diagnostics if things don't go well.
-	ps2Keyboard.echo();
+    // We're not actually going to pay much mind to this, but it could produce
+    // useful diagnostics if things don't go well.
+    ps2Keyboard.echo();
 }
 
 static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
 {
-	switch (usbKeystroke)
-	{
-	case KEY_LEFT_ALT:
-		return KEY_LEFT_GUI;
+    switch (usbKeystroke)
+    {
+    case KEY_LEFT_ALT:
+        return KEY_LEFT_GUI;
 
-	case KEY_LEFT_CTRL:
-		return KEY_LEFT_ALT;
+    case KEY_LEFT_CTRL:
+        return KEY_LEFT_ALT;
 
-	case HID_KEYBOARD_CAPS_LOCK:
-		return KEY_LEFT_CTRL;
+    case HID_KEYBOARD_CAPS_LOCK:
+        return KEY_LEFT_CTRL;
 
-	case KEY_PAUSE: // pause
-		return (KeyboardKeycode)0xe8;
+    case KEY_PAUSE: // pause
+        return (KeyboardKeycode)0xe8;
 
-	default:
-		return usbKeystroke;
-	}
+    default:
+        return usbKeystroke;
+    }
 }
 
 
 void loop() {
-	ps2::UsbKeyboardLeds newLedState = (ps2::UsbKeyboardLeds)BootKeyboard.getLeds();
-	if (newLedState != ledValueLastSentToPs2)
-	{
-		ps2Keyboard.sendLedStatus(keyMapping.translateLeds(newLedState));
-		ledValueLastSentToPs2 = newLedState;
-	}
+    ps2::UsbKeyboardLeds newLedState = (ps2::UsbKeyboardLeds)BootKeyboard.getLeds();
+    if (newLedState != ledValueLastSentToPs2)
+    {
+        ps2Keyboard.sendLedStatus(keyMapping.translateLeds(newLedState));
+        ledValueLastSentToPs2 = newLedState;
+    }
 
-	bool isRemapMode = digitalRead(switch1Pin) != 0;
+    bool isRemapMode = digitalRead(switch1Pin) != 0;
 
     // On the Pro-Micro, which is what this code was developed on, pin 13 is not connected to anything,
     //  so pin 17 is the easiest one.
     Diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::onErrorOnly>();
 
-	ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
-	if (scanCode == ps2::KeyboardOutput::garbled) {
+    ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
+    if (scanCode == ps2::KeyboardOutput::garbled) {
         // although it'll auto-retry, we want to ensure we don't end up with stuck keys.
-		keyMapping.reset();
-	}
-	else if (scanCode != ps2::KeyboardOutput::none)
-	{
-		if (!hasBegun)
-		{
-			BootKeyboard.begin();
-			hasBegun = true;
-		}
+        keyMapping.reset();
+    }
+    else if (scanCode != ps2::KeyboardOutput::none)
+    {
+        if (!hasBegun)
+        {
+            BootKeyboard.begin();
+            hasBegun = true;
+        }
 
-		ps2::UsbKeyAction action = keyMapping.translatePs2Keycode(scanCode);
-		KeyboardKeycode hidCode = (KeyboardKeycode)action.hidCode;
+        ps2::UsbKeyAction action = keyMapping.translatePs2Keycode(scanCode);
+        KeyboardKeycode hidCode = (KeyboardKeycode)action.hidCode;
 
-		if (isRemapMode) {
-			hidCode = translateUsbKeystroke(hidCode);
-		}
-		switch (action.gesture) {
-			case ps2::UsbKeyAction::KeyDown:
+        if (isRemapMode) {
+            hidCode = translateUsbKeystroke(hidCode);
+        }
+        switch (action.gesture) {
+            case ps2::UsbKeyAction::KeyDown:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {
                     // Real use-cases for using the Scroll Lock key are thin on the ground, so this is okay,
                     //  but perhaps it'd be better to send the report if the key is held down or some other
@@ -122,8 +122,8 @@ void loop() {
                     Diagnostics.sentUsbKeyDown(hidCode);
                     BootKeyboard.press(hidCode);
                 }
-				break;
-			case ps2::UsbKeyAction::KeyUp:
+                break;
+            case ps2::UsbKeyAction::KeyUp:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {
                     // Don't send the keyup, because we hid the keydown.
                 }
@@ -131,7 +131,7 @@ void loop() {
                     Diagnostics.sentUsbKeyUp(hidCode);
                     BootKeyboard.release(hidCode);
                 }
-				break;
-		}
-	}
+                break;
+        }
+    }
 }

@@ -5,8 +5,11 @@
 */
 #include "ps2_Keyboard.h"
 #include "ps2_NeutralTranslator.h"
+#include "ps2_SimpleDiagnostics.h"
 
-static ps2::Keyboard<4,2,6> ps2Keyboard;
+typedef ps2::SimpleDiagnostics<32> Diagnostics;
+static Diagnostics diagnostics;
+static ps2::Keyboard<4,2,6,Diagnostics> ps2Keyboard(diagnostics);
 static const int switch1Pin = 6;
 static const int switch2Pin = 8;
 
@@ -119,7 +122,9 @@ static void testQueue()
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	int pin1Value = digitalRead(switch1Pin);
+    diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::keepAliveBlink>();
+
+    int pin1Value = digitalRead(switch1Pin);
 	byte f1_f4[4] = { 0x07, 0x0f, 0x17, 0x1f };
 	byte f7_f8[4] = { 0x37, 0x3f };
 
@@ -255,6 +260,13 @@ void loop() {
 				Serial.println("testQueue done");
 				break;
 			}
+
+            case ps2::KeyboardOutput::sc2_tab: {
+                waitForUnmake(scanCode);
+                diagnostics.sendReport(Serial);
+                Serial.println();
+                break;
+            }
 		}
 
         ps2::KeyCode translated = translator.translatePs2Keycode(scanCode);

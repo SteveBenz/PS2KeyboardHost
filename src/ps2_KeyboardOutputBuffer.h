@@ -15,9 +15,10 @@ namespace ps2 {
 		const uint8_t EmptyMarker = 0xff;
 
 	public:
-		KeyboardOutputBuffer(const TDiagnostics diagnostics) {
-			head = EmptyMarker;
-			tail = 0;
+		KeyboardOutputBuffer(TDiagnostics &diagnostics) {
+			this->head = EmptyMarker;
+            this->tail = 0;
+            this->diagnostics = &diagnostics;
 		};
 
 		/** Enqueues the given data from the keyboard.  This code
@@ -64,48 +65,45 @@ namespace ps2 {
 		}
 	};
 
-#if 0
-	template <uint8_t Size, typename TDiagnostics> class KeyboardOutputBuffer<1, TDiagnostics>
-	class KeyboardOutputBuffer {
-		volatile KeyboardOutput buffer;
-		TDiagnostics *diagnostics;
 
-	public:
-		KeyboardOutputBuffer(const TDiagnostics diagnostics) {
-			buffer = KeyboardOutput::none;
-		};
+    // If the only thing you're driving is the keyboard, then you really don't need a multi-byte buffer.
 
-		/** Enqueues the given data from the keyboard.  This code
-		*  expects to be run from inside an interrupt handler
-		*/
-		void push(KeyboardOutput valueAtTop) {
-			if (buffer != KeyboardOutput::none) {
-				this->diagnostics->bufferOverflow();
-			}
-			buffer = valueAtTop;
-		}
+    template <typename TDiagnostics>
+    class KeyboardOutputBuffer<1, TDiagnostics> {
+        volatile KeyboardOutput buffer;
+        TDiagnostics *diagnostics;
 
-		/** If the queue has any content, it returns true and sets
-		* valueAtTop to the least-recently-pushed byte of output.
-		* If it does not contain anything, then it returns false and
-		* sets valueAtTop to KeyboardOutput::none.
-		*/
-		bool pop(KeyboardOutput &valueAtTop) {
-			ATOMIC_BLOCK(ATOMIC_FORCEON)
-			{
-				valueAtTop = buffer;
-				buffer = KeyboardOutput::none;
-			}
-			return valueAtTop != KeyboardOutput::none;
-		}
+    public:
+        KeyboardOutputBuffer(TDiagnostics &diagnostics) {
+            this->diagnostics = &diagnostics;
+            this->buffer = KeyboardOutput::none;
+        };
 
-		void clear() {
-			buffer = KeyboardOutput::none;
-		}
+        /** Enqueues the given data from the keyboard.  This code
+        *  expects to be run from inside an interrupt handler
+        */
+        void push(KeyboardOutput valueAtTop) {
+            if (buffer != KeyboardOutput::none) {
+                this->diagnostics->bufferOverflow();
+            }
+            this->buffer = valueAtTop;
+        }
 
-		// Functors that allow this to be composed with translators
-		KeyboardOutput operator()() { KeyboardOutput o; this->pop(o); return o; }
-		void operator()(KeyboardOutput o) { this->push(o); }
-	};
-#endif
+        /** If the queue has any content, it returns the value.  if there
+        *  is no data, it returns KeyboardOutput::none
+        */
+        KeyboardOutput pop() {
+            KeyboardOutput valueAtTop;
+            ATOMIC_BLOCK(ATOMIC_FORCEON)
+            {
+                valueAtTop = buffer;
+                buffer = KeyboardOutput::none;
+            }
+            return valueAtTop;
+        }
+
+        void clear() {
+            buffer = KeyboardOutput::none;
+        }
+    };
 }

@@ -9,7 +9,7 @@
 
 typedef ps2::SimpleDiagnostics<32> Diagnostics;
 static Diagnostics diagnostics;
-static ps2::Keyboard<4,2,6,Diagnostics> ps2Keyboard(diagnostics);
+static ps2::Keyboard<4,2,1,Diagnostics> ps2Keyboard(diagnostics);
 static const int switch1Pin = 6;
 static const int switch2Pin = 8;
 

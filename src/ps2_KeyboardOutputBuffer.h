@@ -29,7 +29,7 @@ namespace ps2 {
 				head = tail;
 			}
 			else if (head == tail) {
-				this->diagnostics->BufferOverflow();
+				this->diagnostics->bufferOverflow();
 				++head;
 			}
 			buffer[tail] = valueAtTop;
@@ -62,11 +62,6 @@ namespace ps2 {
 				head = EmptyMarker;
 			}
 		}
-
-
-		// Functors that allow this to be composed with translators
-		KeyboardOutput operator()() { KeyboardOutput o; this->pop(o); return o; }
-		void operator()(KeyboardOutput o) { this->push(o); }
 	};
 
 #if 0
@@ -85,7 +80,7 @@ namespace ps2 {
 		*/
 		void push(KeyboardOutput valueAtTop) {
 			if (buffer != KeyboardOutput::none) {
-				this->diagnostics->BufferOverflow();
+				this->diagnostics->bufferOverflow();
 			}
 			buffer = valueAtTop;
 		}

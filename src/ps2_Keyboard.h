@@ -189,6 +189,7 @@ namespace ps2 {
 				}
 
 				if (!receivedHasFramingError) {
+                    this->diagnostics->receivedByte(ioByte);
 					this->inputBuffer.push((KeyboardOutput)ioByte);
 				}
 				bitCounter = 0;
@@ -284,7 +285,8 @@ namespace ps2 {
 			instance->writeInterruptHandler();
 		}
 
-		KeyboardOutput expectResponse(uint16_t timeoutInMilliseconds = immediateResponseTimeInMilliseconds) {
+		KeyboardOutput expectResponse(uint16_t timeoutInMilliseconds = immediateResponseTimeInMilliseconds)
+        {
 			unsigned long startMilliseconds = millis();
 			unsigned long stopMilliseconds = startMilliseconds + timeoutInMilliseconds;
 			unsigned long nowMilliseconds;
@@ -323,19 +325,16 @@ namespace ps2 {
 			return this->expectResponse(KeyboardOutput::ack);
 		}
 
-		bool sendCommand(ps2CommandCode command)
-		{
+		bool sendCommand(ps2CommandCode command) {
 			return this->sendData((byte)command);
 		}
 
-		bool sendCommand(ps2CommandCode command, byte data)
-		{
+		bool sendCommand(ps2CommandCode command, byte data) {
 			return this->sendCommand(command)
 				&& this->sendData(data);
 		}
 
-		bool sendCommand(ps2CommandCode command, const byte *data, int numBytes)
-		{
+		bool sendCommand(ps2CommandCode command, const byte *data, int numBytes) {
 			if (!this->sendCommand(command)) {
 				return false;
 			}
@@ -347,8 +346,8 @@ namespace ps2 {
 			return true;
 		}
 
-		bool sendData(byte data)
-		{
+		bool sendData(byte data) {
+            this->diagnostics->sentByte(data);
 			this->sendByte(data);
 			bool isOk = this->expectAck();
 			if (!isOk)
@@ -359,7 +358,6 @@ namespace ps2 {
 		}
 
 		void sendNack() {
-			this->diagnostics->sentNack();
 			this->sendByte((byte)ps2CommandCode::resend);
 		}
 
@@ -389,7 +387,10 @@ namespace ps2 {
 		}
 
 		/** Returns the last code sent by the keyboard.  You should call this function frequently
-		 *  (several times per millisecond) as there is no buffering.
+		 *  (several times per millisecond) as there is no buffering.  If there is nothing to read,
+         *  this method will return 'none'.  It can also return 'garbled' if there's been a framing
+         *  error.  You should probably just ignore this result, the keyboard will attempt to retry,
+         *  but that's far from a sure-thing.
 		 */
 		KeyboardOutput readScanCode() {
 			KeyboardOutput code = this->inputBuffer.pop();
@@ -408,14 +409,9 @@ namespace ps2 {
 					return KeyboardOutput::none;
 				}
 				this->sendNack();
-				this->diagnostics->returnedBadScanCode();
 				return KeyboardOutput::garbled;
 			}
 
-			if (code != KeyboardOutput::none)
-			{
-				this->diagnostics->returnedScanCode(code);
-			}
 			return code;
 		}
 

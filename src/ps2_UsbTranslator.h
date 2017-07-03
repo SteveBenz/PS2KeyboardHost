@@ -5,12 +5,12 @@
 
 namespace ps2 {
 
-	enum UsbKeyboardLeds {
-		UsbNoLeds = 0x0,
-		UsbNumLockLed = 0x1,
-		UsbCapsLockLed = 0x2,
-		UsbScrollLockLed = 0x4,
-		UsbLedMask = 0x07,
+	enum class UsbKeyboardLeds {
+		none = 0x0,
+		numLock = 0x1,
+		capsLock = 0x2,
+		scrollLock = 0x4,
+		all = 0x07,
 	};
 
 	struct UsbKeyAction {
@@ -23,10 +23,12 @@ namespace ps2 {
 	};
 
 	// Translates from PS2's default scancode set to USB/HID
+    template <typename Diagnostics = NullDiagnostics>
 	class UsbTranslator
 	{
 	public:
-		UsbTranslator();
+        UsbTranslator();
+        UsbTranslator(Diagnostics &diagnostics);
 		void reset();
 		UsbKeyAction translatePs2Keycode(ps2::KeyboardOutput ps2Scan);
 		KeyboardLeds translateLeds(UsbKeyboardLeds usbLeds);
@@ -35,6 +37,7 @@ namespace ps2 {
 		bool isSpecial;
 		bool isUnmake;
 		int pauseKeySequenceIndex;
+        Diagnostics *diagnostics;
 	};
 }
 

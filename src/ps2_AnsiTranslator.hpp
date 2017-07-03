@@ -3,7 +3,8 @@
 
 namespace ps2 {
 	// For reference: http://www.computer-engineering.org/ps2keyboard/scancodes2.html
-	const char AnsiTranslator::ps2ToAsciiMap[] PROGMEM = {
+    template<typename Diagnostics>
+    const char AnsiTranslator<Diagnostics>::ps2ToAsciiMap[] PROGMEM = {
 		'\t', // [0d] Tab
 		'`',  // [0e] ` ~
 		'=',  // [0f] Keypad =
@@ -119,27 +120,45 @@ namespace ps2 {
 		'9',  // [7d] Keypad 9 PageUp
 	};
 
-	const byte AnsiTranslator::pauseKeySequence[] PROGMEM {
+    template<typename Diagnostics>
+    const byte AnsiTranslator<Diagnostics>::pauseKeySequence[] PROGMEM {
 		0xe1, 0x14, 0x77
 	};
 
-	AnsiTranslator::AnsiTranslator()
+    template<typename Diagnostics>
+    AnsiTranslator<Diagnostics>::AnsiTranslator()
 	{
-		isSpecial = false;
-		isUnmake = false;
-		isCtrlDown = false;
-		isShiftDown = false;
-		isCapsLockMode = false;
-		isNumLockMode = false;
-		pauseKeySequenceIndex = 0;
+        this->isSpecial = false;
+        this->isUnmake = false;
+        this->isCtrlDown = false;
+        this->isShiftDown = false;
+        this->isCapsLockMode = false;
+        this->isNumLockMode = false;
+        this->pauseKeySequenceIndex = 0;
+        this->diagnostics = Diagnostics::defaultInstance();
 	}
 
-	void AnsiTranslator::reset() {
-		isSpecial = false;
-		isUnmake = false;
+    template<typename Diagnostics>
+    AnsiTranslator<Diagnostics>::AnsiTranslator(Diagnostics &diagnostics)
+    {
+        this->isSpecial = false;
+        this->isUnmake = false;
+        this->isCtrlDown = false;
+        this->isShiftDown = false;
+        this->isCapsLockMode = false;
+        this->isNumLockMode = false;
+        this->pauseKeySequenceIndex = 0;
+        this->diagnostics = &diagnostics;
+    }
+
+    template<typename Diagnostics>
+    void AnsiTranslator<Diagnostics>::reset() {
+        this->isSpecial = false;
+        this->isUnmake = false;
 	}
 
-	char AnsiTranslator::translatePs2Keycode(KeyboardOutput ps2Scan)
+    template<typename Diagnostics>
+    char AnsiTranslator<Diagnostics>::translatePs2Keycode(KeyboardOutput ps2Scan)
 	{
 		if (ps2Scan == KeyboardOutput::unmake)
 		{
@@ -288,13 +307,15 @@ namespace ps2 {
 		return charTranslation;
 	}
 
-	char AnsiTranslator::rawTranslate(KeyboardOutput ps2Scan) {
+    template<typename Diagnostics>
+    char AnsiTranslator<Diagnostics>::rawTranslate(KeyboardOutput ps2Scan) {
 		return ((uint8_t)ps2Scan >= 0x0d && ((uint8_t)ps2Scan - 0x0d) < sizeof(ps2ToAsciiMap))
 			? (char)pgm_read_byte(ps2ToAsciiMap + (uint8_t)ps2Scan - 0x0d)
 			: '\0';
 	}
 
-	bool AnsiTranslator::isKeyAffectedByNumlock(KeyboardOutput ps2Scan, char rawTranslation) {
+    template<typename Diagnostics>
+    bool AnsiTranslator<Diagnostics>::isKeyAffectedByNumlock(KeyboardOutput ps2Scan, char rawTranslation) {
 		if (ps2Scan < KeyboardOutput::sc2_keypad1)
 			return false;
 		return rawTranslation == '.' || (rawTranslation >= '0' && rawTranslation <= '9');

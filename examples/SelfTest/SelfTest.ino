@@ -56,7 +56,7 @@ void printResult(const char *msg, bool result)
 class TestQueueDiagnostics
 {
 public:
-	void BufferOverflow()
+	void bufferOverflow()
 	{
 		if (!overflowExpected) {
 			Serial.println("testQueue: Unexpected buffer overflow");

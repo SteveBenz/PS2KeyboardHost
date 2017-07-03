@@ -7,11 +7,13 @@ namespace ps2 {
 	// This class provides a translation from PS2 incoming scancodes to Ansi.  Right now,
 	//  the name "Ansi" is aspirational, as the implementation given here only works for
 	//  English keyboards.
-	class AnsiTranslator
+    template <typename Diagnostics = NullDiagnostics>
+    class AnsiTranslator
 	{
 	public:
 		AnsiTranslator();
-		void reset();
+        AnsiTranslator(Diagnostics &diagnostics);
+        void reset();
 
 		// Processes the given scan code from the keyboard.  If it indicates a new, ansi
 		//  character has been pressed, it will return the ansi value.  Else it will return
@@ -40,6 +42,7 @@ namespace ps2 {
 		bool isCapsLockMode;
 		bool isNumLockMode;
 		int pauseKeySequenceIndex;
+        Diagnostics *diagnostics;
 	};
 }
 

@@ -1,25 +1,26 @@
 #include "ps2_Keyboard.h"
 #include "ps2_AnsiTranslator.h"
-#include "Diagnostics.h"
+#include "ps2_SimpleDiagnostics.h"
 
-static ps2::AnsiTranslator keyMapping;
-static ps2::Keyboard<4,2,1,Diagnostics_> ps2Keyboard(Diagnostics);
+typedef ps2::SimpleDiagnostics<254> Diagnostics_;
+static Diagnostics_ diagnostics;
+static ps2::AnsiTranslator<Diagnostics_> keyMapping(diagnostics);
+static ps2::Keyboard<4,2,1, Diagnostics_> ps2Keyboard(diagnostics);
 static ps2::KeyboardLeds lastLedSent;
 
-// the setup function runs once when you press reset or power the board
 void setup() {
 	pinMode(LED_BUILTIN, OUTPUT);
 
 	ps2Keyboard.begin();
 	ps2Keyboard.reset();
 
-	// Start out with NumLock on
 	keyMapping.setNumLock(true);
 	lastLedSent = ps2::KeyboardLeds::numLock;
 	ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::numLock);
 }
 
 void loop() {
+    diagnostics.setLedIndicator<LED_BUILTIN_RX>();
 	ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
 	if (scanCode == ps2::KeyboardOutput::garbled) {
 		keyMapping.reset();
@@ -32,6 +33,12 @@ void loop() {
 		if (buf[0] == '\r') {
 			Serial.println();
 		}
+        else if (buf[0] == '\004') { // ctrl+D
+            Serial.println();
+            diagnostics.sendReport(Serial);
+            Serial.println();
+            diagnostics.reset();
+        }
 		else if (buf[0] >= ' ') { // Characters < ' ' are control-characters; this example isn't clever enough to do anything with them.
 			Serial.write(buf);
 		}

@@ -80,13 +80,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Diagnostics.h">
-      <FileType>CppCode</FileType>
-    </ClInclude>
     <ClInclude Include="__vm\.Ps2ToUsbKeyboardAdapter.vsarduino.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Diagnostics.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
@@ -94,4 +88,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM3" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

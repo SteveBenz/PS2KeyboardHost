@@ -306,26 +306,31 @@ static const byte pauseKeySequence[] {
 	//0xe1, 0xfc, 0x00, 0x04, 0x14, 0x77
 };
 
-ps2::UsbTranslator::UsbTranslator()
+template <typename Diagnostics>
+ps2::UsbTranslator<Diagnostics>::UsbTranslator(Diagnostics &diagnostics)
 {
+	this->isSpecial = false;
+    this->isUnmake = false;
+    this->pauseKeySequenceIndex = 0;
+    this->diagnostics = &diagnostics;
+}
+
+template <typename Diagnostics>
+void ps2::UsbTranslator<Diagnostics>::reset() {
 	isSpecial = false;
 	isUnmake = false;
-	pauseKeySequenceIndex = 0;
 }
 
-void ps2::UsbTranslator::reset() {
-	isSpecial = false;
-	isUnmake = false;
-}
-
-ps2::KeyboardLeds ps2::UsbTranslator::translateLeds(UsbKeyboardLeds usbLeds)
+template <typename Diagnostics>
+ps2::KeyboardLeds ps2::UsbTranslator<Diagnostics>::translateLeds(UsbKeyboardLeds usbLeds)
 {
-	return ((usbLeds & UsbCapsLockLed) ? ps2::KeyboardLeds::capsLock : ps2::KeyboardLeds::none)
-		 | ((usbLeds & UsbNumLockLed) ? ps2::KeyboardLeds::numLock : ps2::KeyboardLeds::none)
-		 | ((usbLeds & UsbScrollLockLed) ? ps2::KeyboardLeds::scrollLock : ps2::KeyboardLeds::none);
+	return (((int)usbLeds & (int)ps2::UsbKeyboardLeds::capsLock) ? ps2::KeyboardLeds::capsLock : ps2::KeyboardLeds::none)
+		 | (((int)usbLeds & (int)ps2::UsbKeyboardLeds::numLock) ? ps2::KeyboardLeds::numLock : ps2::KeyboardLeds::none)
+		 | (((int)usbLeds & (int)ps2::UsbKeyboardLeds::scrollLock) ? ps2::KeyboardLeds::scrollLock : ps2::KeyboardLeds::none);
 }
 
-ps2::UsbKeyAction ps2::UsbTranslator::translatePs2Keycode(ps2::KeyboardOutput ps2Scan)
+template <typename Diagnostics>
+ps2::UsbKeyAction ps2::UsbTranslator<Diagnostics>::translatePs2Keycode(ps2::KeyboardOutput ps2Scan)
 {
 	ps2::UsbKeyAction action;
 	action.hidCode = 0;
@@ -363,7 +368,7 @@ ps2::UsbKeyAction ps2::UsbTranslator::translatePs2Keycode(ps2::KeyboardOutput ps
 
 	if (usbCode == 0)
 	{
-		Diagnostics.fail(FailureCode::KeyUnknownKeys);
+        diagnostics->noTranslationForKey(this->isSpecial, ps2Scan);
 		this->isUnmake = false;
 		this->isSpecial = false;
 		return action;

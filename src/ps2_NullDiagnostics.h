@@ -5,11 +5,13 @@
 
 namespace ps2 {
 
-    // This is the default class for diagnostic information for all the classes in this library.
-    // It's the class you want if want to drop diagnostic information on the floor
-    // (because, say, your device works plenty reliably and there's nothing to debug
-    // anymore).  If you're not in that blessed place, then you can create your own
-    // class that implements all these methods and stashes the data somewhere.
+    /** \brief
+     *  This is the default class for diagnostic information for all the classes in this library.
+     *  It's the class you want if want to drop diagnostic information on the floor
+     *  (because, say, your device works plenty reliably and there's nothing to debug
+     *  anymore).  If you're not in that blessed place, then you can create your own
+     *  class that implements all these methods and stashes the data somewhere.
+     */
     class NullDiagnostics {
     public:
         // These usually mean an interrupt got dropped - e.g. because another interrupt

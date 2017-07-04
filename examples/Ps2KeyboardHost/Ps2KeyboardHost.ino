@@ -9,8 +9,6 @@ static ps2::Keyboard<4,2,1, Diagnostics_> ps2Keyboard(diagnostics);
 static ps2::KeyboardLeds lastLedSent;
 
 void setup() {
-    pinMode(LED_BUILTIN, OUTPUT);
-
     ps2Keyboard.begin();
     ps2Keyboard.reset();
 

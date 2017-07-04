@@ -68,6 +68,9 @@ $(document).ready(function(){initNavTree('classps2_1_1_usb_translator.html','');
 </div><!--header-->
 <div class="contents">
 
+<p>Translates from PS2's default scancode set to USB/HID.  
+ <a href="classps2_1_1_usb_translator.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ps2___usb_translator_8h_source.html">ps2_UsbTranslator.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -77,13 +80,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:accb71727e5755fe61316eebb581a2d09"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_usb_translator.html#accb71727e5755fe61316eebb581a2d09">UsbTranslator</a> (Diagnostics &amp;diagnostics)</td></tr>
 <tr class="separator:accb71727e5755fe61316eebb581a2d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa45f06799b0e0621555a304f9d17086a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_usb_translator.html#aa45f06799b0e0621555a304f9d17086a">reset</a> ()</td></tr>
+<tr class="memdesc:aa45f06799b0e0621555a304f9d17086a"><td class="mdescLeft">&#160;</td><td class="mdescRight">causes it to forget about any scan codes that it has recorded so far and start fresh.  <a href="#aa45f06799b0e0621555a304f9d17086a">More...</a><br /></td></tr>
 <tr class="separator:aa45f06799b0e0621555a304f9d17086a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8876cfbe405430d80b61e79f8143b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structps2_1_1_usb_key_action.html">UsbKeyAction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_usb_translator.html#aad8876cfbe405430d80b61e79f8143b0">translatePs2Keycode</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">ps2::KeyboardOutput</a> ps2Scan)</td></tr>
+<tr class="memdesc:aad8876cfbe405430d80b61e79f8143b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Examines a scan code (from the default PS2 scan code set) and translates it into the corresponding USB/HID scan code.  <a href="#aad8876cfbe405430d80b61e79f8143b0">More...</a><br /></td></tr>
 <tr class="separator:aad8876cfbe405430d80b61e79f8143b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a742afd723ad71db335be2b16c81b21a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceps2.html#ab1f1a2199d2e9075dbc006a91fd2f71c">KeyboardLeds</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_usb_translator.html#a742afd723ad71db335be2b16c81b21a8">translateLeds</a> (<a class="el" href="namespaceps2.html#ac061b2b282be1630f9262c9734386bac">UsbKeyboardLeds</a> usbLeds)</td></tr>
 <tr class="separator:a742afd723ad71db335be2b16c81b21a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename Diagnostics = NullDiagnostics&gt;<br />
+class ps2::UsbTranslator&lt; Diagnostics &gt;</h3>
+
+<p>Translates from PS2's default scancode set to USB/HID. </p>
+<p>The translation was mostly culled from <a href="http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf">http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa46d53bf2606bfa101d6cdce8b60a92d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa46d53bf2606bfa101d6cdce8b60a92d">&#9670;&nbsp;</a></span>UsbTranslator() <span class="overload">[1/2]</span></h2>
 
@@ -141,6 +152,8 @@ template&lt;typename Diagnostics &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>causes it to forget about any scan codes that it has recorded so far and start fresh. </p>
+
 </div>
 </div>
 <a id="a742afd723ad71db335be2b16c81b21a8"></a>
@@ -180,6 +193,9 @@ template&lt;typename Diagnostics &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Examines a scan code (from the default PS2 scan code set) and translates it into the corresponding USB/HID scan code. </p>
+<dl class="section return"><dt>Returns</dt><dd>A gesture to send to the USB <a class="el" href="classps2_1_1_keyboard.html" title="Instances of this class can be used to interface with a PS2 keyboard. This class does not decode the ...">Keyboard</a> - either a key up, key down, or no-action. (No action would happen if the scan code was found to be a part of a multi-byte sequence from the PS2.) </dd></dl>
 
 </div>
 </div>

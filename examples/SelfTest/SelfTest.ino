@@ -122,7 +122,7 @@ static void testQueue()
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-    diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::keepAliveBlink>();
+    diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::heartbeat>();
 
     int pin1Value = digitalRead(switch1Pin);
     byte f1_f4[4] = { 0x07, 0x0f, 0x17, 0x1f };

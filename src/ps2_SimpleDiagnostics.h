@@ -5,19 +5,94 @@
 #include <util/atomic.h>
 
 namespace ps2 {
+    /** \brief Used with \ref Simplediagnostics to control the behavior of a pin that
+     *         will signal the device's user that an error has been recorded.
+     */
     enum class DiagnosticsLedBlink {
-        none,
-        keepAliveBlink,
-        onErrorOnly,
-    };
-    enum class DiagnosticsOutputTarget {
-        none,
-        keyboard,
-        serial,
-        both,
+        /** The LED blinks slowly when there's no error and fast when an error has happened.
+         *   (If you see a slow blink, then you at least know that the device is cycling
+         *   through the loop and not stuck in a loop somewhere.)
+         */
+        heartbeat,
+
+        /** The pin is left HIGH unless an error has been recorded, in which case it will
+            be toggled on and off rapidly. */
+        blinkOnError,
+
+        /** The pin is left LOW until an error is registered, at which point it switches to HIGH */
+        toggleHigh,
+
+        /** The pin is left HIGH until an error is registered, at which point it switches to LOW */
+        toggleLow
     };
 
-    template <uint16_t Size>
+    /** \brief A basic recorder for events coming from the PS2 keyboard class library.
+     *
+     *  \details
+     *
+     *   It addition to recording events, it can also blink an LED when an error has been
+     *   recorded.  It can dump its output to any print-capable class, such as the Serial port
+     *   or a USB keyboard.
+     *
+     *   \section Usage Basic Usage
+     *
+     *   \code
+     *    typedef ps2::SimpleDiagnostics<32> Diagnostics;
+     *    static Diagnostics diagnostics;
+     *    static ps2::Keyboard<4,2,1,Diagnostics> ps2Keyboard(diagnostics);
+     *
+     *    void loop() {
+     *      diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::heartbeat>();
+     *      if ( <magic-user-gesture> ) {
+     *        diagnostics.sendReport(Serial);
+     *        diagnostics.reset();
+     *      }
+     *   \endcode
+     *
+     *   Each event is recorded as a series of one or more bytes in a circular queue.  The queue
+     *   is meant to be read right-to-left, with the newest events at the right.  Thus if an
+     *   event has multiple bytes in it, the extra bytes will be pushed onto the queue first.
+     *   The last byte pushed contains the event ID and a count of the number of extra bytes.
+     *   The number of extra bytes is in the lower two bits and the event ID in the upper 6.
+     *   If the event ID is less than 16, it is taken to be an error.
+     *
+     *   There are two bytes reserved in the structure for storing all the errors that have
+     *   happened since the recorder was last reset (as a bit-field).
+     *
+     *   \section Subclassing Subclassing
+     *
+     *    If you want to record events from other parts of your application, you can create a
+     *    subclass that defines new events.  The Ps2ToUsbKeyboardAdapter example demonstrates
+     *    how to do that:
+     *
+     *    \code
+     *     class Diagnostics
+     *         : public ps2::SimpleDiagnostics<254>
+     *     {
+     *       typedef ps2::SimpleDiagnostics<254> base;
+     *       enum class UsbTranslatorAppCode : uint8_t {
+     *         sentUsbKeyDown = 0 + base::firstUnusedInfoCode,
+     *         sentUsbKeyUp = 1 + base::firstUnusedInfoCode,
+     *       };
+     *     public:
+     *       void sentUsbKeyDown(byte b) { this->push((uint8_t)UsbTranslatorAppCode::sentUsbKeyDown, b); }
+     *       void sentUsbKeyUp(byte b) { this->push((uint8_t)UsbTranslatorAppCode::sentUsbKeyUp, b); }
+     *     };
+     *    \endcode
+     *
+     *    Note that there are a maximum of 16 error identifiers and a maximum of 48 non-error identifiers.
+     *
+     *    \section AuthorsNote Author's Note
+     *     Debugging and logging are often areas where we wish we could do more, but they can be
+     *     infinite pits of labor if you let them.  Further, when neglected, the rest of the project
+     *     becomes an infinite pit of labor...  There are two things I would wish for in the future:
+     *     I wish it would store more data and, in particular, record the 10 keystrokes or
+     *     other events before and after any error.  I would also like to see a website-based
+     *     diagnostic data interpreter.
+     *
+     *  \tparam Size  The number of bytes to use for recording events.
+     */
+    template <uint16_t Size = 60>
     class SimpleDiagnostics
     {
         byte data[Size];
@@ -59,6 +134,22 @@ namespace ps2 {
             }
         }
 
+        void push(byte code) {
+            this->recordFailure(code);
+            pushByte(code << 2);
+        }
+        void push(byte code, byte extraData1) {
+            pushByte(extraData1);
+            this->recordFailure(code);
+            pushByte((code << 2) | 1);
+        }
+        void push(byte code, byte extraData1, byte extraData2) {
+            pushByte(extraData2);
+            pushByte(extraData1);
+            this->recordFailure(code);
+            pushByte((code << 2) | 2);
+        }
+
     protected:
         static const int firstUnusedFailureCode = 9;
         static const int firstUnusedInfoCode = 18;
@@ -76,23 +167,10 @@ namespace ps2 {
             push((byte)code, (byte)extraData1, (byte)extraData2);
         }
 
-        void push(byte code) {
-            this->recordFailure(code);
-            pushByte(code << 2);
-        }
-        void push(byte code, byte extraData1) {
-            this->recordFailure(code);
-            pushByte((code << 2) | 1);
-            pushByte(extraData1);
-        }
-        void push(byte code, byte extraData1, byte extraData2) {
-            this->recordFailure(code);
-            pushByte((code << 2) | 2);
-            pushByte(extraData1);
-            pushByte(extraData2);
-        }
-
     public:
+        /** \brief Dumps all event data to a print-based class
+         *  \details It's a good idea to call \ref reset after calling this.
+         */
         template <typename Target>
         void sendReport(Target &printTo) {
             // This report isn't the least bit human-readable.  While developing this software, it became
@@ -124,28 +202,38 @@ namespace ps2 {
             printTo.print("}");
         }
 
+        /** \brief Returns true if any errors have been recorded since the last call to \ref reset. */
         bool anyErrors() const { return this->failureCodes != 0; }
 
+        /** \brief Clears all recorded data. */
         void reset() {
             this->failureCodes = 0;
             this->index = -1;
         }
 
-        template <uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink ledBehavior = DiagnosticsLedBlink::onErrorOnly>
+        /** \brief Enables you to have a blinking indicator when an error happens.
+         *  \tparam DiagnosticLedPin The led's pin - usually one of the built-in pins.
+         *  \tparam LedBehavior Controls what the LED does.  See \ref DiagnosticsLedBlink
+         *                      for the available behaviors.
+         */
+        template <uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError>
         void setLedIndicator() {
-            switch (ledBehavior) {
-            case DiagnosticsLedBlink::keepAliveBlink:
-                digitalWrite(DiagnosticLedPin, (millis() & (failureCodes != 0 ? 128 : 1024)) ? HIGH : LOW);
+            bool value;
+            switch (LedBehavior) {
+            case DiagnosticsLedBlink::heartbeat:
+                value = (millis() & (failureCodes != 0 ? 128 : 1024));
                 break;
-            case DiagnosticsLedBlink::onErrorOnly:
-                if (failureCodes != 0) {
-                    digitalWrite(DiagnosticLedPin, (millis() & 128) ? HIGH : LOW);
-                }
+            case DiagnosticsLedBlink::blinkOnError:
+                value = (failureCodes == 0 || (millis() & 128));
                 break;
-            default:
-                // Do nothing;
+            case DiagnosticsLedBlink::toggleHigh:
+                value = (failureCodes != 0);
+                break;
+            case DiagnosticsLedBlink::toggleLow:
+                value = (failureCodes == 0);
                 break;
             }
+            digitalWrite(DiagnosticLedPin, value ? HIGH : LOW);
         }
 
         void packetDidNotStartWithZero() { this->push(Ps2Code::packetDidNotStartWithZero); }

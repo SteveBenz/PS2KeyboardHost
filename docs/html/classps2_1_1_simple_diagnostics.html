@@ -70,19 +70,26 @@ $(document).ready(function(){initNavTree('classps2_1_1_simple_diagnostics.html',
 </div><!--header-->
 <div class="contents">
 
+<p>A basic recorder for events coming from the PS2 keyboard class library.  
+ <a href="classps2_1_1_simple_diagnostics.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="ps2___simple_diagnostics_8h_source.html">ps2_SimpleDiagnostics.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1d334ff6c4bc833f102f90f8acae001b"><td class="memTemplParams" colspan="2">template&lt;typename Target &gt; </td></tr>
 <tr class="memitem:a1d334ff6c4bc833f102f90f8acae001b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a1d334ff6c4bc833f102f90f8acae001b">sendReport</a> (Target &amp;printTo)</td></tr>
+<tr class="memdesc:a1d334ff6c4bc833f102f90f8acae001b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps all event data to a print-based class.  <a href="#a1d334ff6c4bc833f102f90f8acae001b">More...</a><br /></td></tr>
 <tr class="separator:a1d334ff6c4bc833f102f90f8acae001b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a3cdeb1d943cf6837e64bebe567e9ea7e">anyErrors</a> () const</td></tr>
+<tr class="memdesc:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a>.  <a href="#a3cdeb1d943cf6837e64bebe567e9ea7e">More...</a><br /></td></tr>
 <tr class="separator:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a806cb6ba25da232dfdc4b389ed2fe212"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a> ()</td></tr>
+<tr class="memdesc:a806cb6ba25da232dfdc4b389ed2fe212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all recorded data.  <a href="#a806cb6ba25da232dfdc4b389ed2fe212">More...</a><br /></td></tr>
 <tr class="separator:a806cb6ba25da232dfdc4b389ed2fe212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59feccd426dd377abb2a009d50b59fee"><td class="memTemplParams" colspan="2">template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink ledBehavior = DiagnosticsLedBlink::onErrorOnly&gt; </td></tr>
+<tr class="memitem:a59feccd426dd377abb2a009d50b59fee"><td class="memTemplParams" colspan="2">template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError&gt; </td></tr>
 <tr class="memitem:a59feccd426dd377abb2a009d50b59fee"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a59feccd426dd377abb2a009d50b59fee">setLedIndicator</a> ()</td></tr>
+<tr class="memdesc:a59feccd426dd377abb2a009d50b59fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables you to have a blinking indicator when an error happens.  <a href="#a59feccd426dd377abb2a009d50b59fee">More...</a><br /></td></tr>
 <tr class="separator:a59feccd426dd377abb2a009d50b59fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80cf8d41c988e040d757c606b0751927"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a80cf8d41c988e040d757c606b0751927">packetDidNotStartWithZero</a> ()</td></tr>
 <tr class="separator:a80cf8d41c988e040d757c606b0751927"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,12 +125,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a162d69dcc8283104afd30596c6456b4c"><td class="memTemplParams" colspan="2">template&lt;typename E1 , typename E2 , typename E3 &gt; </td></tr>
 <tr class="memitem:a162d69dcc8283104afd30596c6456b4c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a162d69dcc8283104afd30596c6456b4c">push</a> (E1 code, E2 extraData1, E3 extraData2)</td></tr>
 <tr class="separator:a162d69dcc8283104afd30596c6456b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec2f29c09aec3cbab921688aa75e04e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#aec2f29c09aec3cbab921688aa75e04e0">push</a> (byte code)</td></tr>
-<tr class="separator:aec2f29c09aec3cbab921688aa75e04e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58de35d3f97e417bbdf1184255c13736"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a58de35d3f97e417bbdf1184255c13736">push</a> (byte code, byte extraData1)</td></tr>
-<tr class="separator:a58de35d3f97e417bbdf1184255c13736"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45f538723be5512954f3950aede97a63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a45f538723be5512954f3950aede97a63">push</a> (byte code, byte extraData1, byte extraData2)</td></tr>
-<tr class="separator:a45f538723be5512954f3950aede97a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -132,14 +133,37 @@ Static Protected Attributes</h2></td></tr>
 <tr class="memitem:a8656c9521b659ee6019f60d958f802b0"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a8656c9521b659ee6019f60d958f802b0">firstUnusedInfoCode</a> = 18</td></tr>
 <tr class="separator:a8656c9521b659ee6019f60d958f802b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;uint16_t Size = 60&gt;<br />
+class ps2::SimpleDiagnostics&lt; Size &gt;</h3>
+
+<p>A basic recorder for events coming from the PS2 keyboard class library. </p>
+<p>It addition to recording events, it can also blink an LED when an error has been recorded. It can dump its output to any print-capable class, such as the Serial port or a USB keyboard.</p>
+<h1><a class="anchor" id="Usage"></a>
+Basic Usage</h1>
+<div class="fragment"><div class="line"><span class="keyword">typedef</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics&lt;32&gt;</a> Diagnostics;</div><div class="line"><span class="keyword">static</span> Diagnostics diagnostics;</div><div class="line"><span class="keyword">static</span> <a class="code" href="classps2_1_1_keyboard.html">ps2::Keyboard&lt;4,2,1,Diagnostics&gt;</a> ps2Keyboard(diagnostics);</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">  diagnostics.setLedIndicator&lt;LED_BUILTIN_RX, <a class="code" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca3a06e053a0726537b202ce4ace81dee7">ps2::DiagnosticsLedBlink::heartbeat</a>&gt;();</div><div class="line">  <span class="keywordflow">if</span> ( &lt;magic-user-gesture&gt; ) {</div><div class="line">    diagnostics.sendReport(Serial);</div><div class="line">    diagnostics.reset();</div><div class="line">  }</div></div><!-- fragment --><p>Each event is recorded as a series of one or more bytes in a circular queue. The queue is meant to be read right-to-left, with the newest events at the right. Thus if an event has multiple bytes in it, the extra bytes will be pushed onto the queue first. The last byte pushed contains the event ID and a count of the number of extra bytes. The number of extra bytes is in the lower two bits and the event ID in the upper 6. If the event ID is less than 16, it is taken to be an error.</p>
+<p>There are two bytes reserved in the structure for storing all the errors that have happened since the recorder was last reset (as a bit-field).</p>
+<h1><a class="anchor" id="Subclassing"></a>
+Subclassing</h1>
+<p>If you want to record events from other parts of your application, you can create a subclass that defines new events. The Ps2ToUsbKeyboardAdapter example demonstrates how to do that:</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>Diagnostics</div><div class="line">    : <span class="keyword">public</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt;254&gt;</div><div class="line">{</div><div class="line">  <span class="keyword">typedef</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics&lt;254&gt;</a> base;</div><div class="line">  <span class="keyword">enum class</span> UsbTranslatorAppCode : uint8_t {</div><div class="line">    sentUsbKeyDown = 0 + base::firstUnusedInfoCode,</div><div class="line">    sentUsbKeyUp = 1 + base::firstUnusedInfoCode,</div><div class="line">  };</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyDown(byte b) { this-&gt;push((uint8_t)UsbTranslatorAppCode::sentUsbKeyDown, b); }</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyUp(byte b) { this-&gt;push((uint8_t)UsbTranslatorAppCode::sentUsbKeyUp, b); }</div><div class="line">};</div></div><!-- fragment --><p>Note that there are a maximum of 16 error identifiers and a maximum of 48 non-error identifiers.</p>
+<h1><a class="anchor" id="AuthorsNote"></a>
+Author's Note</h1>
+<p>Debugging and logging are often areas where we wish we could do more, but they can be infinite pits of labor if you let them. Further, when neglected, the rest of the project becomes an infinite pit of labor... There are two things I would wish for in the future: I wish it would store more data and, in particular, record the 10 keystrokes or other events before and after any error. I would also like to see a website-based diagnostic data interpreter.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Size</td><td>The number of bytes to use for recording events. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3cdeb1d943cf6837e64bebe567e9ea7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3cdeb1d943cf6837e64bebe567e9ea7e">&#9670;&nbsp;</a></span>anyErrors()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -158,6 +182,8 @@ template&lt;uint16_t Size&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a>. </p>
+
 </div>
 </div>
 <a id="a628810157f62b2e218d5b0d2b9c3cc36"></a>
@@ -166,7 +192,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -193,7 +219,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -231,7 +257,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -259,7 +285,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -297,7 +323,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -324,7 +350,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -351,7 +377,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -378,7 +404,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -400,12 +426,12 @@ template&lt;uint16_t Size&gt; </div>
 </div>
 </div>
 <a id="afbcbfa2c0716642630a1b0b1f813b5a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbcbfa2c0716642630a1b0b1f813b5a3">&#9670;&nbsp;</a></span>push() <span class="overload">[1/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afbcbfa2c0716642630a1b0b1f813b5a3">&#9670;&nbsp;</a></span>push() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <div class="memtemplate">
 template&lt;typename E &gt; </div>
 <table class="mlabels">
@@ -430,12 +456,12 @@ template&lt;typename E &gt; </div>
 </div>
 </div>
 <a id="ad2fbf911ee92f7591cbd0ca26e1b3a2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2fbf911ee92f7591cbd0ca26e1b3a2f">&#9670;&nbsp;</a></span>push() <span class="overload">[2/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2fbf911ee92f7591cbd0ca26e1b3a2f">&#9670;&nbsp;</a></span>push() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <div class="memtemplate">
 template&lt;typename E1 , typename E2 &gt; </div>
 <table class="mlabels">
@@ -470,12 +496,12 @@ template&lt;typename E1 , typename E2 &gt; </div>
 </div>
 </div>
 <a id="a162d69dcc8283104afd30596c6456b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a162d69dcc8283104afd30596c6456b4c">&#9670;&nbsp;</a></span>push() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a162d69dcc8283104afd30596c6456b4c">&#9670;&nbsp;</a></span>push() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <div class="memtemplate">
 template&lt;typename E1 , typename E2 , typename E3 &gt; </div>
 <table class="mlabels">
@@ -515,123 +541,13 @@ template&lt;typename E1 , typename E2 , typename E3 &gt; </div>
 
 </div>
 </div>
-<a id="aec2f29c09aec3cbab921688aa75e04e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec2f29c09aec3cbab921688aa75e04e0">&#9670;&nbsp;</a></span>push() <span class="overload">[4/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
-          <td>(</td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a58de35d3f97e417bbdf1184255c13736"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58de35d3f97e417bbdf1184255c13736">&#9670;&nbsp;</a></span>push() <span class="overload">[5/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
-          <td>(</td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>code</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>extraData1</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a45f538723be5512954f3950aede97a63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45f538723be5512954f3950aede97a63">&#9670;&nbsp;</a></span>push() <span class="overload">[6/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
-          <td>(</td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>code</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>extraData1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">byte&#160;</td>
-          <td class="paramname"><em>extraData2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a6694897f3f814de7c80d2c38a77c673c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6694897f3f814de7c80d2c38a77c673c">&#9670;&nbsp;</a></span>receivedByte()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -659,7 +575,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -678,6 +594,8 @@ template&lt;uint16_t Size&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Clears all recorded data. </p>
+
 </div>
 </div>
 <a id="a7768839be0d79a4c343c845848b96fef"></a>
@@ -686,7 +604,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -713,7 +631,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <div class="memtemplate">
 template&lt;typename Target &gt; </div>
 <table class="mlabels">
@@ -735,6 +653,9 @@ template&lt;typename Target &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Dumps all event data to a print-based class. </p>
+<p>It's a good idea to call <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a> after calling this. </p>
+
 </div>
 </div>
 <a id="ac6dacc57b7b9e1c12c47bd1840e89f05"></a>
@@ -743,7 +664,7 @@ template&lt;typename Target &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -771,9 +692,9 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <div class="memtemplate">
-template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink ledBehavior = DiagnosticsLedBlink::onErrorOnly&gt; </div>
+template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -792,6 +713,15 @@ template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink ledBehav
 </table>
 </div><div class="memdoc">
 
+<p>Enables you to have a blinking indicator when an error happens. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">DiagnosticLedPin</td><td>The led's pin - usually one of the built-in pins. </td></tr>
+    <tr><td class="paramname">LedBehavior</td><td>Controls what the LED does. See <a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefc">DiagnosticsLedBlink</a> for the available behaviors. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -801,7 +731,7 @@ template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink ledBehav
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -825,7 +755,7 @@ template&lt;uint16_t Size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size&gt; </div>
+template&lt;uint16_t Size = 60&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

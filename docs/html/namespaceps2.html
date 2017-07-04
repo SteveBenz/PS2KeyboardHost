@@ -87,10 +87,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_receive_functor.html">NullReceiveFunctor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html">SimpleDiagnostics</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A basic recorder for events coming from the PS2 keyboard class library.  <a href="classps2_1_1_simple_diagnostics.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structps2_1_1_usb_key_action.html">UsbKeyAction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A translated PS2 keystroke - it indicates either a keydown, a key up, or that there should be no immediate action.  <a href="structps2_1_1_usb_key_action.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_usb_translator.html">UsbTranslator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translates from PS2's default scancode set to USB/HID.  <a href="classps2_1_1_usb_translator.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -103,7 +106,8 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#ab1f1a2199d2e9075dbc006a91fd2f71ca334c4a4c42fdb79d7ebc3e73b517e6f8">KeyboardLeds::none</a> = 0x0
 <br />
- }</td></tr>
+ }<tr class="memdesc:ab1f1a2199d2e9075dbc006a91fd2f71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The LED's available on a standard PS2 keyboard.  <a href="namespaceps2.html#ab1f1a2199d2e9075dbc006a91fd2f71c">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:ab1f1a2199d2e9075dbc006a91fd2f71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bc33a2de7ec8ab6dd653393f378956b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956ba334c4a4c42fdb79d7ebc3e73b517e6f8">KeyboardOutput::none</a> = 0x0, 
@@ -443,7 +447,8 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956ba63ee4ca71666e25ad53c7aae3d2c76ba">KeyboardOutput::sc3_menu</a> = 0x8d
 <br />
- }</td></tr>
+ }<tr class="memdesc:a5bc33a2de7ec8ab6dd653393f378956b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Byte-codes sent back from the Ps2 keyboard to the host.  <a href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a5bc33a2de7ec8ab6dd653393f378956b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b30520369ff5e3b5742bb18f952a224"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#a8b30520369ff5e3b5742bb18f952a224">KeyCode</a> : uint16_t { <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#a8b30520369ff5e3b5742bb18f952a224af75aa90cddb1438860f9832200fa7758">PS2_NONE</a> = 0x0, 
@@ -660,17 +665,13 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:ab6ca63d33b95d82c35be1bb3e5479c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5984d4f7576a2473bcd24dff4d8cefc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefc">DiagnosticsLedBlink</a> { <a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca334c4a4c42fdb79d7ebc3e73b517e6f8">DiagnosticsLedBlink::none</a>, 
-<a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca2718174634f12700d07cc485b8bf35bd">DiagnosticsLedBlink::keepAliveBlink</a>, 
-<a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefcaeb606d2168a56908c4cdae98a5871f55">DiagnosticsLedBlink::onErrorOnly</a>
- }</td></tr>
+<tr class="memitem:ab5984d4f7576a2473bcd24dff4d8cefc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefc">DiagnosticsLedBlink</a> { <a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca3a06e053a0726537b202ce4ace81dee7">DiagnosticsLedBlink::heartbeat</a>, 
+<a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefcaf8cac28d550028200842b4959ff16f41">DiagnosticsLedBlink::blinkOnError</a>, 
+<a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca53bf569cc69f8ecc39a4b2bfa201865b">DiagnosticsLedBlink::toggleHigh</a>, 
+<a class="el" href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefca604332fd00dc8a67831175efdc86c020">DiagnosticsLedBlink::toggleLow</a>
+ }<tr class="memdesc:ab5984d4f7576a2473bcd24dff4d8cefc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used with Simplediagnostics to control the behavior of a pin that will signal the device's user that an error has been recorded.  <a href="namespaceps2.html#ab5984d4f7576a2473bcd24dff4d8cefc">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:ab5984d4f7576a2473bcd24dff4d8cefc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43639c30460f59a9353903107c8e41a9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9">DiagnosticsOutputTarget</a> { <a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9a334c4a4c42fdb79d7ebc3e73b517e6f8">DiagnosticsOutputTarget::none</a>, 
-<a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9a388a56dbb62a010dc26a378981346247">DiagnosticsOutputTarget::keyboard</a>, 
-<a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9a74136b24217cb75599440e6e1d807cf7">DiagnosticsOutputTarget::serial</a>, 
-<a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9af6cb3e816496528d4187db53bc66567f">DiagnosticsOutputTarget::both</a>
- }</td></tr>
-<tr class="separator:a43639c30460f59a9353903107c8e41a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a511e9920b7f2ef164f91c1740d0244bf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceps2.html#a511e9920b7f2ef164f91c1740d0244bf">TypematicRate</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#a511e9920b7f2ef164f91c1740d0244bfaa0bd0cf77e154f444d71336f26511a58">TypematicRate::fastestRate</a> = 0x00, 
 <a class="el" href="namespaceps2.html#a511e9920b7f2ef164f91c1740d0244bfacc35417dbfa403747ce33a150f614897">TypematicRate::slowestRate</a> = 0x1f, 
@@ -708,7 +709,8 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="namespaceps2.html#ac061b2b282be1630f9262c9734386bacaa181a603769c1f98ad927e7367c7aa51">UsbKeyboardLeds::all</a> = 0x07
 <br />
- }</td></tr>
+ }<tr class="memdesc:ac061b2b282be1630f9262c9734386bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">The bitfield that describes USB LED's.  <a href="namespaceps2.html#ac061b2b282be1630f9262c9734386bac">More...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:ac061b2b282be1630f9262c9734386bac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -754,38 +756,17 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefca334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefca2718174634f12700d07cc485b8bf35bd"></a>keepAliveBlink&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefcaeb606d2168a56908c4cdae98a5871f55"></a>onErrorOnly&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
-</div>
-</div>
-<a id="a43639c30460f59a9353903107c8e41a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43639c30460f59a9353903107c8e41a9">&#9670;&nbsp;</a></span>DiagnosticsOutputTarget</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespaceps2.html#a43639c30460f59a9353903107c8e41a9">ps2::DiagnosticsOutputTarget</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Used with Simplediagnostics to control the behavior of a pin that will signal the device's user that an error has been recorded. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a43639c30460f59a9353903107c8e41a9a334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a43639c30460f59a9353903107c8e41a9a388a56dbb62a010dc26a378981346247"></a>keyboard&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a43639c30460f59a9353903107c8e41a9a74136b24217cb75599440e6e1d807cf7"></a>serial&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a43639c30460f59a9353903107c8e41a9af6cb3e816496528d4187db53bc66567f"></a>both&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefca3a06e053a0726537b202ce4ace81dee7"></a>heartbeat&#160;</td><td class="fielddoc"><p>The LED blinks slowly when there's no error and fast when an error has happened. (If you see a slow blink, then you at least know that the device is cycling through the loop and not stuck in a loop somewhere.) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefcaf8cac28d550028200842b4959ff16f41"></a>blinkOnError&#160;</td><td class="fielddoc"><p>The pin is left HIGH unless an error has been recorded, in which case it will be toggled on and off rapidly. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefca53bf569cc69f8ecc39a4b2bfa201865b"></a>toggleHigh&#160;</td><td class="fielddoc"><p>The pin is left LOW until an error is registered, at which point it switches to HIGH </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab5984d4f7576a2473bcd24dff4d8cefca604332fd00dc8a67831175efdc86c020"></a>toggleLow&#160;</td><td class="fielddoc"><p>The pin is left HIGH until an error is registered, at which point it switches to LOW </p>
+</td></tr>
 </table>
 
 </div>
@@ -809,6 +790,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The LED's available on a standard PS2 keyboard. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab1f1a2199d2e9075dbc006a91fd2f71ca7de458398d470d70483d4313f169d808"></a>capsLock&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab1f1a2199d2e9075dbc006a91fd2f71caf354c4af4fd2fd82f6064396bee2f293"></a>numLock&#160;</td><td class="fielddoc"></td></tr>
@@ -838,6 +821,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Byte-codes sent back from the Ps2 keyboard to the host. </p>
+<p>Entries prefixed by "sc2" are from the standard "Scan Code Set 2". Those with "sc2ex" are from the same set, but the ones that are prefixed with the 'extend' byte. Entries prefixed by "sc3" are from the PS2 scan code set, which is far simpler, needing only one byte. Being the simpler option, it is, of course, widely shunned. Still, if you're building a device that's using an old <a class="el" href="namespaceps2.html">ps2</a> keyboard to control it, you should strongly consider using that set. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5bc33a2de7ec8ab6dd653393f378956ba334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5bc33a2de7ec8ab6dd653393f378956ba5254725e7c8e187a3cee4e8bd692692b"></a>garbled&#160;</td><td class="fielddoc"></td></tr>
@@ -1427,6 +1413,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The bitfield that describes USB LED's. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac061b2b282be1630f9262c9734386baca334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac061b2b282be1630f9262c9734386bacaf354c4af4fd2fd82f6064396bee2f293"></a>numLock&#160;</td><td class="fielddoc"></td></tr>

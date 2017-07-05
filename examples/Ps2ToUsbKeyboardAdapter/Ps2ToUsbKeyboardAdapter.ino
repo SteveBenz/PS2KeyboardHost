@@ -9,7 +9,7 @@
 #include "HID-Project.h"
 
 // Create a log of all the data going to and from the keyboard and the host.
-class Diagnostics_
+class Diagnostics
     : public ps2::SimpleDiagnostics<254>
 {
     typedef ps2::SimpleDiagnostics<254> base;
@@ -22,17 +22,17 @@ class Diagnostics_
     };
 
 public:
-    void sentUsbKeyDown(byte b) { this->push((uint8_t)UsbTranslatorAppCode::sentUsbKeyDown, b); }
-    void sentUsbKeyUp(byte b) { this->push((uint8_t)UsbTranslatorAppCode::sentUsbKeyUp, b); }
+    void sentUsbKeyDown(byte b) { this->push(UsbTranslatorAppCode::sentUsbKeyDown, b); }
+    void sentUsbKeyUp(byte b) { this->push(UsbTranslatorAppCode::sentUsbKeyUp, b); }
 };
 
 // The USB library supports a begin() statement; this code delays calling it until we're
 //  ready to actually do something with the keyboard, but that doesn't seem real valuable.
 static bool hasBegun = false;
 
-static Diagnostics_ Diagnostics;
-static ps2::UsbTranslator<Diagnostics_> keyMapping(Diagnostics);
-static ps2::Keyboard<4,2,1, Diagnostics_> ps2Keyboard(Diagnostics);
+static Diagnostics diagnostics;
+static ps2::UsbTranslator<Diagnostics> keyMapping(diagnostics);
+static ps2::Keyboard<4,2,1, Diagnostics> ps2Keyboard(diagnostics);
 static ps2::UsbKeyboardLeds ledValueLastSentToPs2 = ps2::UsbKeyboardLeds::none;
 
 // This example demonstrates how to create keyboard translations (in this case, how the caps lock
@@ -87,12 +87,10 @@ void loop() {
 
     // On the Pro-Micro, which is what this code was developed on, pin 13 is not connected to anything,
     //  so pin 17 is the easiest one.
-    Diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::onErrorOnly>();
+    diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::blinkOnError>();
 
     ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
     if (scanCode == ps2::KeyboardOutput::garbled) {
-        // although it'll auto-retry, we want to ensure we don't end up with stuck keys.
-        keyMapping.reset();
     }
     else if (scanCode != ps2::KeyboardOutput::none)
     {
@@ -115,11 +113,11 @@ void loop() {
                     //  but perhaps it'd be better to send the report if the key is held down or some other
                     //  more specific feedback.  We send the output to the keyboard itself, since the device
                     //  might not be used in a computer that actually has the code to read the serial port.
-                    Diagnostics.sendReport(BootKeyboard);
-                    Diagnostics.reset();
+                    diagnostics.sendReport(BootKeyboard);
+                    diagnostics.reset();
                 }
                 else {
-                    Diagnostics.sentUsbKeyDown(hidCode);
+                    diagnostics.sentUsbKeyDown(hidCode);
                     BootKeyboard.press(hidCode);
                 }
                 break;
@@ -128,7 +126,7 @@ void loop() {
                     // Don't send the keyup, because we hid the keydown.
                 }
                 else {
-                    Diagnostics.sentUsbKeyUp(hidCode);
+                    diagnostics.sentUsbKeyUp(hidCode);
                     BootKeyboard.release(hidCode);
                 }
                 break;

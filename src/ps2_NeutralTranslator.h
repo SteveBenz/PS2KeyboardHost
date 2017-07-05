@@ -1,30 +1,11 @@
-
-/*
-  The PS2 keyboard output is pretty complicated.  It needs to be so in order to
-  be used in a general-purpose computer, and the general purpose computer has
-  dedicated hardware to translate this complicated code into something useful
-  to applications.  This translator provides that kind of thing to the Arduino.
-  It translates the keycodes into a made-up, but at least predictable, coding.
-  
-  Author's Note (2017/7/1) This is a port of the translation that's done in the
-  PS2KeyAdvanced library (https://github.com/techpaul/PS2KeyAdvanced).  I kept
-  it here only because I hope to make this library a superset of all of the
-  assorted PS2 libraries currently available.  While PS2KeyAdvanced has great
-  functionality, I feel like this translation mechanism (which you can't turn off
-  in that library) is a poor choice.  You should either go all the way to
-  ASCII (and be your own keyboard controller) or have a nicely packaged collection
-  of buttons.  If you're a nicely packaged collection of buttons, then you'd be
-  better off switching to the PS2 ScanCode set and mapping between the keycode
-  there and the function you want to enable when it's pressed.  Having a layer
-  like this in between just costs you bytes and adds a new way to have things
-  go wrong.  So I can't recommend using this class at all, but perhaps there's a
-  use-case I failed to imagine.
-*/
 #pragma once
 #include "ps2_KeyboardOutput.h"
 
 namespace ps2
 {
+    /**
+     *  Describes a neutral encoding for keypresses used with the \ref NeutralTranslator.
+     */
     enum KeyCode : uint16_t {
         PS2_NONE = 0x0,
 
@@ -203,6 +184,33 @@ namespace ps2
     inline KeyCode &operator &=(KeyCode &code, KeyCode modifiers) { return code = (KeyCode)((uint16_t)code & (uint16_t)modifiers); }
     inline KeyCode operator ~(KeyCode code) { return (KeyCode)(~(uint16_t)code); }
 
+
+    /**
+     * \brief
+     *  A translation from PS2 default ScanCode Set to a neutral format.
+     *
+     * \details
+     *  The PS2 keyboard output is pretty complicated.  It needs to be so in order to
+     *  be used in a general-purpose computer, and the general purpose computer has
+     *  dedicated hardware to translate this complicated code into something useful
+     *  to applications.  This translator provides that kind of thing to the Arduino.
+     *  It translates the keycodes into a made-up, but at least predictable, coding.
+     *
+     * \deprecated
+     *  This is a port of the translation that's done in the
+     *  PS2KeyAdvanced library (https://github.com/techpaul/PS2KeyAdvanced).  I kept
+     *  it here only because I hope to make this library a superset of all of the
+     *  assorted PS2 libraries currently available.  While PS2KeyAdvanced has great
+     *  functionality, I feel like this translation mechanism (which you can't turn off
+     *  in that library) is a poor choice.  You should either go all the way to
+     *  ASCII (and be your own keyboard controller) or have a nicely packaged collection
+     *  of buttons.  If you're a nicely packaged collection of buttons, then you'd be
+     *  better off switching to the PS2 ScanCode set and mapping between the keycode
+     *  there and the function you want to enable when it's pressed.  Having a layer
+     *  like this in between just costs you bytes and adds a new way to have things
+     *  go wrong.  So I can't recommend using this class at all, but perhaps there's a
+     *  use-case I failed to imagine.
+     */
     class NeutralTranslator {
         bool isUnmake : 1;
         bool isExtended : 1;

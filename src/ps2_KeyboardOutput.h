@@ -1,7 +1,15 @@
 #pragma once
 
 namespace ps2 {
-    // Byte-codes sent back from the Ps2 keyboard to the host.  
+    /** \brief Byte-codes sent back from the Ps2 keyboard to the host.
+     *  \details
+     *    Entries prefixed by "sc2" are from the standard "Scan Code Set 2".
+     *    Those with "sc2ex" are from the same set, but the ones that are prefixed with
+     *    the 'extend' byte.  Entries prefixed by "sc3" are from the PS2 scan code set,
+     *    which is far simpler, needing only one byte.  Being the simpler option, it is,
+     *    of course, widely shunned.  Still, if you're building a device that's using an
+     *    old ps2 keyboard to control it, you should strongly consider using that set.
+     */
     enum class KeyboardOutput : uint8_t {
         // These are codes returned from this API, rather than from the keyboard itself.
         none            = 0x0,

@@ -1,11 +1,6 @@
 /*
 Keyboard.h - PS2 Keyboard library
 Copyright (c) 2007 Free Software Foundation.  All right reserved.
-Written by Christian Weichel <info@32leaves.net>
-
-** Mostly rewritten Paul Stoffregen <paul@pjrc.com>, June 2010
-** Modified for use with Arduino 13 by L. Abraham Smith, <n3bah@microcompdesign.com> *
-** Modified for easy interrup pin assignement on method begin(datapin,irq_pin). Cuningan <cuninganreset@gmail.com> **
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -53,32 +48,80 @@ namespace ps2 {
     };
 
     /**
-     *  Implements the PS2 keyboard protocol.  To use this class, you need to set up an instance
-     *  of it, with the data and clock pins supplied as template arguments, and then you need to
-     *  call begin to start the protocol.  After that, you need to frequently poll the readScanCode
-     *  method to read the stream of keypresses.
+     * \brief
+     *  Instances of this class can be used to interface with a PS2 keyboard.  This class does not
+     *  decode the keystroke protocol, but rather provides the data from the keyboard in a raw form.
+     *  You either need to write code that directly understands what the PS2 is providing, or use
+     *  one of the provided translator classes (e.g. \ref AnsiTranslator).
      *
-     *  The other methods allow you to set up the keyboard in a variety of ways.  Be aware that while
-     *  the readScanCode interface is very fast (in the microseconds), the other commands can take
-     *  much longer (usually a few milliseconds).  All of the keyboard setup methods support a bool that
-     *  reports success or not, but you really shouldn't burden your program with error recovery for that.
-     *  First, if you're building the idea of being able to plug your keyboard in & out, that's a bad
-     *  idea, as PS2 keyboards can fry themselves if you hot-swap them.  The biggest source of legitimate
-     *  error I know of is long-running interrupts which cause the PS2 clock interrupt to be skipped.
-     *  Having short-lived interrupt routines is one of the ways to having a happy life in Arduino-land,
-     *  but if you can't help that then do all of the PS2 keyboard setup before enabling interrupts for
-     *  your other devices.
+     * \tparam DataPin The pin number of the pin that's connected to the PS2 data wire.
+     * \tparam ClockPin The pin number of the pin that's connected to the PS2 clock wire.  This
+     *                  pin must be one that supports interrupts on your board.
+     * \tparam BufferSize The size of the internal buffer that stores the bytes coming from the
+     *                    keyboard between the time they're received from the ClockPin-based
+     *                    interrupts and the time they're consumed by calls to \ref readScanCode.
+     *                    If you are calling that method very frequently (many times per millisecond)
+     *                    then 1 is enough.  Expect each keystroke to eat about 4 bytes, so 16
+     *                    can hold up to 4 keystrokes.  There's nothing wrong with larger numbers,
+     *                    but you probably want some amount of responsiveness to user commands.
+     * \tparam Diagnostics A class that will record any unpleasantness that befalls your program
+     *                     such as the aforementioned buffer overflows.  This is purely a debugging
+     *                     aid.  If you don't need to be doing any debugging, you can stick wit the
+     *                     default, \ref NullDiagnostics, which has no-op implementations for all the
+     *                     event handlers.  The C++ compiler will optimize empty implementations
+     *                     completely away, so you pay no penalty for having this debug code in your
+     *                     project if you don't use it.  The \ref SimpleDiagnostics implementation
+     *                     provides an implementation that records all the events.
      *
-     *  With an Arduino, the less time you spend in your interrupt callbacks the better.  That's because
-     *  when one interrupt is being processed, another is being blocked.  As a rule, keyboard input should
-     *  not be treated as a real-time problem (that is, a problem requiring sub-millisecond responses)
-     *  because the human that's typing on it is incapable of that kind of precision.  So the preferred
-     *  way to deal with this class is polling - that is, you should have a normal-mode task that just
-     *  pings the readScanCode method.  If you're going to be polling it very frequently (multiple times
-     *  per millisecond), then you can go with a small buffer size (1 being the minimum).  Each full
-     *  keystroke, including data for both up and down, takes 3, sometimes 5, and in a few rare cases
-     *  more.  The default of 16 is going to be overkill for most applications, but if you're not
-     *  pushing against your RAM limit, why chance it?
+     * \details
+     *  A great source of information about the PS2 keyboard can be found here: http://www.computer-engineering.org/ps2keyboard/.
+     *  This documentation assumes you have a basic grasp of that.
+     *
+     *  Most programs will use this class like this:
+     *
+     * \code
+     * static ps2::Keyboard<4,2> ps2Keyboard(diagnostics);
+     *
+     * void setup() {
+     *   ps2Keyboard.begin();
+     *   ps2Keyboard.reset();
+     *   // more keyboard setup if needed (e.g. set the scan code set)
+     * }
+     *
+     * void loop() {
+     *   ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
+     *   if (scanCode != ps2::KeyboardOutput::none) {
+     *     respondTo(scanCode);
+     *   };
+     * }
+     * \endcode
+     *
+     *  In this example, the keyboard is wired up with the data pin connected to pin 4 and
+     *  the clock pin connected to pin 2.  The setup function should start up the keyboard.
+     *  In many cases, you really don't have to do anything other than call 'begin' to get
+     *  going.  Here, it calls 'reset' to undo whatever mode the keyboard might already be in.
+     *  In the real world, this is unlikely to ever be necessary, but there you are.  A more
+     *  likely move would be to set the keyboard up in the PS/2 scan code set and perhaps
+     *  disabling typematic or enabling unmake codes to make it easier to interpret the
+     *  keyboard's protocol.
+     *
+     *  You should poll the keyboard from your loop implementation, as illustrated here.
+     *
+     *  With all things Arduino, you should understand the performance.  \ref readScanCode takes
+     *  only a few machine instructions to complete.  The methods that push data to the keyboard
+     *  take longer (on the order of milliseconds) because of the handshake between the two
+     *  devices and the throttling of sending one bit at a time at 10KHz.
+     *
+     *  All of the keyboard setup methods return a bool that reports success or not; you can
+     *  test them if you feel it necessary, but few applications will really need to.
+     *
+     *  The biggest source of legitimate error is long-running interrupts which cause
+     *  the PS2 clock interrupt to be skipped.  The response to the clock pin must be swift
+     *  and consistent, else you'll get garbled messages.  The protocol is just robust
+     *  enough to know that a failure has happened, but not robust enough to fully recover.
+     *  If you're going to have another interrupt source in your project, see to it that
+     *  its interrupt handler is as quick as possible.  For its part, the PS2 handler is
+     *  just a few instructions in all cases.
      *
      *  If you supply an OnReceivedFunctor, then the operator() method of the object will be called
      *  each time a code is seen on the output line that is not been requested by this class itself.
@@ -135,10 +178,14 @@ namespace ps2 {
             // keyboards I have to-hand.)
             //
             // Although this looks fantastically more complicated than plain digitalRead, the
-            // instruction count is lower.
+            // instruction count is lower.  It'd be even lower if the methods listed here were
+            // implemented a little better (e.g. as template methods rather than macros).
             uint8_t dataPinValue = (*portInputRegister(digitalPinToPort(DataPin)) & digitalPinToBitMask(DataPin)) ? 1 : 0; // ==digitalRead(DataPin);
 
             lastReadInterruptMicroseconds = micros();
+            // TODO: There should be code here that detects if bitCounter > 0 && the time since
+            //  the last read interrupt is > a millisecond and, if so, log that and reset
+            //  bitCounter.
 
             switch (bitCounter)
             {
@@ -395,7 +442,6 @@ namespace ps2 {
         KeyboardOutput readScanCode() {
             KeyboardOutput code = this->inputBuffer.pop();
 
-            unsigned long nowMicroseconds = micros();
             if (code == KeyboardOutput::none && this->receivedHasFramingError)
             {
                 // NACK's affect what the device perceives as the last character sent, so if we
@@ -404,8 +450,8 @@ namespace ps2 {
                 //  send time for the 12 bits is going to be around 12*1000000/17000 700us and the
                 //  slowest would be 1200us.  Again, that's the full cycle.  Most of the errors
                 //  are going to be found at the parity & stop bit, so we'll wait 200us, as a guess,
-                //  before resending;
-                if (failureTimeMicroseconds + 200 > nowMicroseconds) {
+                //  before asking for a retry.
+                if (failureTimeMicroseconds + 200 > micros()) {
                     return KeyboardOutput::none;
                 }
                 this->sendNack();
@@ -415,13 +461,23 @@ namespace ps2 {
             return code;
         }
 
+        /** \brief Sets the keyboard's onboard LED's.
+         *  \details
+         *   This method takes several milliseconds and ties up the communication line with the keyboard.
+         *   You'll probably want to keep a variable somewhere that records what the current state of the
+         *   LED's are, and ensure that you only call this function when they actually change.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool sendLedStatus(KeyboardLeds ledStatus)
         {
             return sendCommand(ps2CommandCode::setLeds, (byte)ledStatus);
         }
 
-        // Resets the keyboard and returns true if the keyboard appears well, false otherwise.
-        // This can take up to a second to complete.
+        /** \brief Resets the keyboard and returns true if the keyboard appears well, false otherwise.
+         *  \details
+         *   This can take up to a second to complete.  (Because of the Protocol spec).
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool reset() {
             this->inputBuffer.clear();
             this->sendCommand(ps2CommandCode::reset);
@@ -430,8 +486,9 @@ namespace ps2 {
             return result == KeyboardOutput::batSuccessful;
         }
 
-        // Returns the device ID returned by the keyboard - according to the documentation, this
-        //  will always be 0xab83.  In the event of an error, this will return 0xffff.
+        /** \brief Returns the device ID returned by the keyboard - according to the documentation, this
+         *         will always be 0xab83.  In the event of an error, this will return 0xffff.
+         */
         uint16_t readId() {
             this->sendCommand(ps2CommandCode::readId);
             KeyboardOutput response = this->expectResponse();
@@ -447,6 +504,8 @@ namespace ps2 {
             return id;
         }
 
+        /** \brief Gets the current scancode set.
+         */
         ScanCodeSet getScanCodeSet() {
             if (!this->sendCommand(ps2CommandCode::setScanCodeSet, 0)) {
                 return ScanCodeSet::error;
@@ -460,83 +519,122 @@ namespace ps2 {
             }
         }
 
+        /** \brief Sets the current scancode set.
+        *   \returns Returns true if the keyboard responded appropriately and false otherwise.
+        */
         bool setScanCodeSet(ScanCodeSet newScanCodeSet) {
             return this->sendCommand(ps2CommandCode::setScanCodeSet, (byte)newScanCodeSet);
         }
 
-        // Sends the "Echo" command to the keyboard, which should send an "Echo" in return.
-        // This can be used to verifies that a keyboard is connected and working properly.
-        // Returns true if the keyboard responded appropriately and false otherwise.
-        // This method may take several milliseconds to complete.
+        /** \brief
+         *    Sends the "Echo" command to the keyboard, which should send an "Echo" in return.
+         *   This can be used to verifies that a keyboard is connected and working properly.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool echo() {
             this->sendByte((byte)ps2CommandCode::echo);
             return this->expectResponse(KeyboardOutput::echo);
         }
 
+        /** \brief Sets the typematic rate (how fast presses come) and the delay (the time
+         *         between key down and the start of auto-repeating.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool setTypematicRateAndDelay(TypematicRate rate, TypematicStartDelay startDelay) {
             byte combined = (byte)rate | (((byte)startDelay) << 4);
             return this->sendCommand(ps2CommandCode::setTypematicRate, combined);
         }
 
-        // Restores scan code set, typematic rate, and typematic delay.
+        /** \brief Restores scan code set, typematic rate, and typematic delay.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool resetToDefaults()
         {
             return this->sendCommand(ps2CommandCode::useDefaultSettings);
         }
 
+        /** \brief Allows the keyboard to start sending data again.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool enable() { return this->sendCommand(ps2CommandCode::enable); }
+
+        /** \brief Makes it so the keyboard will no longer responsd to keystrokes.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool disable() { return this->sendCommand(ps2CommandCode::disable); }
 
-        // Instructs the keyboard to resume sending "break" codes (see enableBreakCodes).
-        // This method has no effect if you are not in the ps2 scan code set!
+        /** \brief Re-enables typematic and break (unmake, key release) for all keys.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool enableBreakAndTypematic() {
             return this->sendCommand(ps2CommandCode::enableBreakAndTypeMaticForAllKeys);
         }
 
-        // Instructs the keyboard to resume sending "break" codes (see enableBreakCodes).
-        // This method has no effect if you are not in the ps2 scan code set!
+        /** \brief Makes the keyboard no longer send "break" or "unmake" events when keys are released.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool disableBreakCodes() {
             return this->sendCommand(ps2CommandCode::disableBreaksForAllKeys);
         }
 
-        // Instructs the keyboard to stop sending "break" codes for some keys (see enableBreakCodes).
-        // This method has no effect if you are not in the ps2 scan code set!
-        // SpecificKeys should be an array consisting of valid set-3 scan codes.  If it contains a
-        // single invalid one, mayhem could ensue.
-        //
-        // note that after calling this method, the keyboard will be disabled. call enable to fix that.
+        /** \brief  Instructs the keyboard to stop sending "break" codes for some keys (that is, it
+        *           disables the notifications that come when a key is released.)
+        *
+         *  \details
+         *   This method has no effect if you are not in the ps2 scan code set!
+         *
+         *   After calling this method, the keyboard will be disabled. call enable to fix that.
+         *
+         * \param specificKeys An array consisting of valid set-3 scan codes.  If it contains a
+         *                     single invalid one, mayhem could ensue.
+         * \param numKeys The number of keys to change
+         */
         bool disableBreakCodes(const byte *specificKeys, int numKeys) {
             return this->sendCommand(ps2CommandCode::disableBreaksForSpecificKeys, specificKeys, numKeys);
         }
 
-        // Instructs the keyboard not to do typematic repeats
-        // This method has no effect if you are not in the ps2 scan code set!
+        /** \brief Makes the keyboard no longer send multiple key down events while a key is held down.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool disableTypematic() {
             return this->sendCommand(ps2CommandCode::disableTypematicForAllKeys);
         }
 
-        // Instructs the keyboard not to do typematic repeats
-        // This method has no effect if you are not in the ps2 scan code set!
+        /** \brief Re-enables typematic and break for all keys.
+         *  \returns Returns true if the keyboard responded appropriately and false otherwise.
+         */
         bool disableBreakAndTypematic() {
             return this->sendCommand(ps2CommandCode::disableBreakAndTypematicForAllKeys);
         }
 
-        // Instructs the keyboard to stop sending "break" codes for some keys (see enableBreakCodes).
-        // This method has no effect if you are not in the ps2 scan code set!
-        // SpecificKeys should be an array consisting of valid set-3 scan codes.  If it contains a
-        // single invalid one, mayhem could ensue.
-        //
-        // note that after calling this method, the keyboard will be disabled. call enable to fix that.
+        /** \brief  Instructs the keyboard to disable typematic (additional key down events when
+         *          the user presses and holds a key) for a given set of keys.
+         *  \details
+         *   This method has no effect if you are not in the ps2 scan code set!
+         *
+         *   After calling this method, the keyboard will be disabled. call enable to fix that.
+         *
+         * \param specificKeys An array consisting of valid set-3 scan codes.  If it contains a
+         *                     single invalid one, mayhem could ensue.
+         * \param numKeys The number of keys to change
+         */
         bool disableTypematic(const byte *specificKeys, int numKeys) {
             return this->sendCommand(ps2CommandCode::disableTypematicForSpecificKeys, specificKeys, numKeys);
         }
 
-        // Instructs the keyboard to stop sending "break" codes for some keys (see enableBreakCodes).
-        // This method has no effect if you are not in the ps2 scan code set!
-        // SpecificKeys should be an array consisting of valid set-3 scan codes.  If it contains a
-        // single invalid one, mayhem could ensue.
-        //
-        // note that after calling this method, the keyboard will be disabled. call enable to fix that.
+        /** \brief  Instructs the keyboard to disable typematic (additional key down events when
+         *          the user presses and holds a key) and break sequences (events that tell you when
+         *          a key has been released) for a given set of keys.
+         *
+         *  \details
+         *   This method has no effect if you are not in the ps2 scan code set!
+         *
+         *   After calling this method, the keyboard will be disabled. call enable to fix that.
+         *
+         * \param specificKeys An array consisting of valid set-3 scan codes.  If it contains a
+         *                     single invalid one, mayhem could ensue.
+         * \param numKeys The number of keys to change
+         */
         bool disableBreakAndTypematic(const byte *specificKeys, int numKeys) {
             return this->sendCommand(ps2CommandCode::disableBreakAndTypematicForSpecificKeys, specificKeys, numKeys);
         }

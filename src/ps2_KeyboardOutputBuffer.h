@@ -5,6 +5,9 @@
 #include <util/atomic.h>
 
 namespace ps2 {
+    /** @private
+     *  A class for buffering the data coming from the PS2.
+     */
     template <uint8_t Size, typename TDiagnostics = NullDiagnostics>
     class KeyboardOutputBuffer {
         volatile uint8_t head;
@@ -68,6 +71,9 @@ namespace ps2 {
 
     // If the only thing you're driving is the keyboard, then you really don't need a multi-byte buffer.
 
+    /** @private
+    *  A class for buffering the data coming from the PS2, specialized for one byte.
+    */
     template <typename TDiagnostics>
     class KeyboardOutputBuffer<1, TDiagnostics> {
         volatile KeyboardOutput buffer;

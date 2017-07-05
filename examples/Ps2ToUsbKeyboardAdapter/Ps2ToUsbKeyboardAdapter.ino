@@ -99,8 +99,8 @@ void loop() {
 
     bool isRemapMode = digitalRead(switch1Pin) != 0;
 
-    // On the Pro-Micro, which is what this code was developed on, pin 13 is not connected to anything,
-    //  so pin 17 is the easiest one.
+    // On many Arduino's, pin 13 is connected to an on-board LED.  On the Pro-Micro, which this is
+    //  developed on, there isn't a dedicated user-facing LED, but you can piggy-back on the TX & RX lights.
     diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::blinkOnError>();
 
     ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();

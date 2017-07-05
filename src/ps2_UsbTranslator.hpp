@@ -1,31 +1,25 @@
+/*
+Copyright (C) 2017 Steve Benz <s8878992@hotmail.com>
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+USA
+*/
 #pragma once
 
 #include <HID-Project.h>
 
-
-// Got from: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2
-/*
-#define KEY_MEDIA_PLAYPAUSE 0xe8
-#define KEY_MEDIA_STOPCD 0xe9
-#define KEY_MEDIA_PREVIOUSSONG 0xea
-#define KEY_MEDIA_NEXTSONG 0xeb
-#define KEY_MEDIA_EJECTCD 0xec
-#define KEY_MEDIA_VOLUMEUP 0xed
-#define KEY_MEDIA_VOLUMEDOWN 0xee
-#define KEY_MEDIA_MUTE 0xef
-#define KEY_MEDIA_WWW 0xf0
-#define KEY_MEDIA_BACK 0xf1
-#define KEY_MEDIA_FORWARD 0xf2
-#define KEY_MEDIA_STOP 0xf3
-#define KEY_MEDIA_FIND 0xf4
-#define KEY_MEDIA_SCROLLUP 0xf5
-#define KEY_MEDIA_SCROLLDOWN 0xf6
-#define KEY_MEDIA_EDIT 0xf7
-#define KEY_MEDIA_SLEEP 0xf8
-#define KEY_MEDIA_COFFEE 0xf9
-#define KEY_MEDIA_REFRESH 0xfa
-#define KEY_MEDIA_CALC 0xfb
-*/
 
 // These translation tables were distilled from here:
 //  http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf

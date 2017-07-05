@@ -1,6 +1,5 @@
 /*
-Keyboard.h - PS2 Keyboard library
-Copyright (c) 2007 Free Software Foundation.  All right reserved.
+Copyright (C) 2017 Steve Benz <s8878992@hotmail.com>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -14,9 +13,9 @@ Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+USA
 */
-
 #pragma once
 
 #if defined(ARDUINO) && ARDUINO >= 100

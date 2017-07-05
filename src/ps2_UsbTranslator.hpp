@@ -18,9 +18,6 @@ USA
 */
 #pragma once
 
-#include <HID-Project.h>
-
-
 // These translation tables were distilled from here:
 //  http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf
 // They could certainly be ProgMem, but it's unlikely to matter to anybody,

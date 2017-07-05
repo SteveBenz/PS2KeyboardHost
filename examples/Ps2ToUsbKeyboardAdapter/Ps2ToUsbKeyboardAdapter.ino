@@ -19,6 +19,7 @@ USA
 #include "ps2_Keyboard.h"
 #include "ps2_SimpleDiagnostics.h"
 #include "ps2_UsbTranslator.h"
+// This sketch requires you to have the "HIDProject" Arduino library installed.
 #include "HID-Project.h"
 
 // Create a log of all the data going to and from the keyboard and the host.
@@ -40,7 +41,7 @@ public:
 };
 
 // The USB library supports a begin() statement; this code delays calling it until we're
-//  ready to actually do something with the keyboard, but that doesn't seem real valuable.
+//  ready to actually do something with the keyboard, but that doesn't seem valuable.
 static bool hasBegun = false;
 
 static Diagnostics diagnostics;

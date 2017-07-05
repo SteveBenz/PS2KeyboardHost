@@ -5,7 +5,7 @@
 #include <util/atomic.h>
 
 namespace ps2 {
-    /** \brief Used with \ref Simplediagnostics to control the behavior of a pin that
+    /** \brief Used with \ref SimpleDiagnostics to control the behavior of a pin that
      *         will signal the device's user that an error has been recorded.
      */
     enum class DiagnosticsLedBlink {

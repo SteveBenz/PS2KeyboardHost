@@ -35,12 +35,12 @@ namespace ps2 {
         char translatePs2Keycode(ps2::KeyboardOutput ps2Scan);
 
         /** \brief Gets the state of the Ctrl key.
-         *  \returns True if the key was pressed down as of the last call to \translatePs2Keycode.
+         *  \returns True if the key was pressed down as of the last call to \ref translatePs2Keycode.
          */
         inline bool isCtrlKeyDown() const { return this->isCtrlDown; }
 
         /** \brief Gets the state of the Shift key.
-         *  \returns True if the key was pressed down as of the last call to \translatePs2Keycode.
+         *  \returns True if the key was pressed down as of the last call to \ref translatePs2Keycode.
          */
         inline bool isShiftKeyDown() const { return this->isShiftDown; }
 

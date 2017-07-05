@@ -59,7 +59,7 @@ namespace ps2 {
      *                  pin must be one that supports interrupts on your board.
      * \tparam BufferSize The size of the internal buffer that stores the bytes coming from the
      *                    keyboard between the time they're received from the ClockPin-based
-     *                    interrupts and the time they're consumed by calls to \ref ReadScanCode.
+     *                    interrupts and the time they're consumed by calls to \ref readScanCode.
      *                    If you are calling that method very frequently (many times per millisecond)
      *                    then 1 is enough.  Expect each keystroke to eat about 4 bytes, so 16
      *                    can hold up to 4 keystrokes.  There's nothing wrong with larger numbers,
@@ -107,7 +107,7 @@ namespace ps2 {
      *
      *  You should poll the keyboard from your loop implementation, as illustrated here.
      *
-     *  With all things Arduino, you should understand the performance.  \readScanCode takes
+     *  With all things Arduino, you should understand the performance.  \ref readScanCode takes
      *  only a few machine instructions to complete.  The methods that push data to the keyboard
      *  take longer (on the order of milliseconds) because of the handshake between the two
      *  devices and the throttling of sending one bit at a time at 10KHz.

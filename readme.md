@@ -46,13 +46,13 @@ a bare minimum of RAM usage and code size.
 
 There are three examples provided:
 
-[Ps2ToUsbKeyboardAdapter](https://github.com/SteveBenz/firsttry/tree/master/examples/Ps2ToUsbKeyboardAdapter) - actually
+[Ps2ToUsbKeyboardAdapter](https://github.com/SteveBenz/firsttry/blob/master/examples/Ps2ToUsbKeyboardAdapter/Ps2ToUsbKeyboardAdapter.ino) - actually
 a fully-functional program for converting PS2 keyboards to USB while allowing you to re-map keys along the way.
 
-[Ps2KeyboardHost](https://github.com/SteveBenz/firsttry/tree/master/examples/Ps2KeyboardHost) - reads the PS2 keyboard,
+[Ps2KeyboardHost](https://github.com/SteveBenz/firsttry/tree/master/examples/Ps2KeyboardHost/Ps2KeyboardHost.ino) - reads the PS2 keyboard,
 converts the codes to Ascii and prints them on the Serial device.
 
-[SelfTest](https://github.com/SteveBenz/firsttry/tree/master/examples/SelfTest) - is a test application that excercises
+[SelfTest](https://github.com/SteveBenz/firsttry/tree/master/examples/SelfTest/SelfTest.ino) - is a test application that excercises
 most of the functionality of the PS2.  If you intend to create an application based on the PS2 scancode set, this
 is a great way to experiment with the settings until you find something that will work for your application.
 

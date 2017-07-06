@@ -57,14 +57,9 @@ static const int switch2Pin = 8;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-    pinMode(LED_BUILTIN, OUTPUT);
     ps2Keyboard.begin();
     pinMode(switch1Pin, INPUT_PULLUP);
     pinMode(switch2Pin, INPUT_PULLUP);
-
-    // We're not actually going to pay much mind to this, but it could produce
-    // useful diagnostics if things don't go well.
-    ps2Keyboard.echo();
 }
 
 static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
@@ -138,6 +133,7 @@ void loop() {
             case ps2::UsbKeyAction::KeyUp:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {
                     // Don't send the keyup, because we hid the keydown.
+                    ps2Keyboard.echo();
                 }
                 else {
                     diagnostics.sentUsbKeyUp(hidCode);

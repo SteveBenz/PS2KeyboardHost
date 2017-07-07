@@ -39,6 +39,7 @@ namespace ps2 {
         void packetDidNotEndWithOne() {}
         void packetIncomplete() {}
         void sendFrameError() {}
+        void startupFailure() {}
 
         // Polling frequency isn't high enough or the buffer is too small.
         void bufferOverflow() {}

@@ -127,6 +127,7 @@ namespace ps2 {
             incorrectResponse = 6,
             noResponse = 7,
             noTranslationForKey = 8,
+            startupFailure = 9,
 
             sentByte = 16,
             receivedByte = 17,
@@ -169,7 +170,7 @@ namespace ps2 {
         }
 
     protected:
-        static const int firstUnusedFailureCode = 9;
+        static const int firstUnusedFailureCode = 10;
         static const int firstUnusedInfoCode = 18;
 
         template <typename E>
@@ -269,6 +270,8 @@ namespace ps2 {
         void noTranslationForKey(bool isExtended, KeyboardOutput code) {
             this->push(Ps2Code::noTranslationForKey, isExtended, code);
         }
+        void startupFailure() { this->push(Ps2Code::startupFailure); }
+
         void sentByte(byte b) { this->push(Ps2Code::sentByte, b); }
         void receivedByte(byte b) { this->push(Ps2Code::receivedByte, b); }
     };

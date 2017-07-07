@@ -40,13 +40,9 @@ public:
     void sentUsbKeyUp(byte b) { this->push(UsbTranslatorAppCode::sentUsbKeyUp, b); }
 };
 
-// The USB library supports a begin() statement; this code delays calling it until we're
-//  ready to actually do something with the keyboard, but that doesn't seem valuable.
-static bool hasBegun = false;
-
 static Diagnostics diagnostics;
 static ps2::UsbTranslator<Diagnostics> keyMapping(diagnostics);
-static ps2::Keyboard<4,2,1, Diagnostics> ps2Keyboard(diagnostics);
+static ps2::Keyboard<3,2,1, Diagnostics> ps2Keyboard(diagnostics);
 static ps2::UsbKeyboardLeds ledValueLastSentToPs2 = ps2::UsbKeyboardLeds::none;
 
 // This example demonstrates how to create keyboard translations (in this case, how the caps lock
@@ -57,9 +53,13 @@ static const int switch2Pin = 8;
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-    ps2Keyboard.begin();
     pinMode(switch1Pin, INPUT_PULLUP);
     pinMode(switch2Pin, INPUT_PULLUP);
+
+    ps2Keyboard.begin();
+    ps2Keyboard.awaitStartup();
+
+    BootKeyboard.begin();
 }
 
 static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
@@ -103,12 +103,6 @@ void loop() {
     }
     else if (scanCode != ps2::KeyboardOutput::none)
     {
-        if (!hasBegun)
-        {
-            BootKeyboard.begin();
-            hasBegun = true;
-        }
-
         ps2::UsbKeyAction action = keyMapping.translatePs2Keycode(scanCode);
         KeyboardKeycode hidCode = (KeyboardKeycode)action.hidCode;
 

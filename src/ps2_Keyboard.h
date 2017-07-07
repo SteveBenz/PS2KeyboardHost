@@ -432,11 +432,49 @@ namespace ps2 {
             this->enableReadInterrupts();
         }
 
-        /** Returns the last code sent by the keyboard.  You should call this function frequently
-         *  (several times per millisecond) as there is no buffering.  If there is nothing to read,
-         *  this method will return 'none'.  It can also return 'garbled' if there's been a framing
-         *  error.  You should probably just ignore this result, the keyboard will attempt to retry,
-         *  but that's far from a sure-thing.
+        /** \brief After the keyboard gets power, the PS2 keyboard sends a code that indicates successful
+         *    or unsuccessful startup.  This waits for that to happen.
+         *  \details
+         *    All this function does is wait for a proscribed amount of time (750ms, as suggested by
+         *    the documentation), for a batSuccessful code.  That's straightforward.  The thing to be
+         *    careful of is this - if you call this function in your begin() and then upload the program
+         *    to your Arduino, all this is going to do is delay for 750ms and then throw a diagnostic
+         *    code - that's because the keyboard has power throughout the event and so doesn't power-on.
+         *
+         *    But once you get your device into the field, you really can count on the proper behavior
+         *    (well, unless you have, say, a reset button that resets the Arduino).
+         *
+         *    There are two reasonable ways to deal with this - first, if you need to set up the keyboard,
+         *    e.g. set up a scan code set and all that, you need to call this method before you get up to
+         *    your shennanigans - the keyboard just won't respond until it's done booting.  If that's you,
+         *    and you're keen on having Diagnostic data, you can call \ref SimpleDiagnostic::reset right
+         *    after this to clean it up.  If you're really keen on diagnostics, then you'll set up a
+         *    "RELEASE" preprocessor symbol and skip the reset when you compile in that mode.
+         *
+         *    If you don't actually need to do any setup, then you can just skip calling this method.  Yes,
+         *    the keyboard will send that batSuccessful (hopefully) signal later on, but \ref readScanCode
+         *    specifically looks for that code and drops it on the floor when it arrives.
+         */
+        bool awaitStartup() {
+            return this->expectResponse(KeyboardOutput::batSuccessful, 750);
+        }
+
+        /** \brief
+         *   Returns the last code sent by the keyboard.
+         *  \details
+         *   You should call this function frequently, in your loop implementation most likely.  The
+         *   more often you call it, the more responsive your device will be.  If you cannot call it
+         *   frequently, make sure you have an appropriately-sized buffer (BufferSize).
+         *
+         *   If there is nothing to read, this method will return 'none'.
+         *
+         *   It can also return 'garbled' if there's been a framing error.  A retry will be attempted,
+         *   but that's far from a sure-thing.  If you get this result, it likely indicates a collision
+         *   with one of your interrupt handlers.  Look into reducing the amount of processing you do
+         *   in your interrupt handlers.
+         *
+         *   In any case, if you see a 'garbled' result, you might be losing some keystrokes, so do
+         *   what you can to make sure that it doesn't impact the device too badly.
          */
         KeyboardOutput readScanCode() {
             KeyboardOutput code = this->inputBuffer.pop();
@@ -455,6 +493,20 @@ namespace ps2 {
                 }
                 this->sendNack();
                 return KeyboardOutput::garbled;
+            }
+            else if (code == KeyboardOutput::batSuccessful && !this->expectingResult) {
+                // The keyboard will send either batSuccessful or batFailure on startup.
+                //   The way this class is structured, we can't really be sure that begin()
+                //   will be called immediately after power-up, nor can we be sure that the
+                //   Arduino wasn't just reset (while the keyboard had power the whole time).
+                //   So we can't write code in begin() that just waits for the message.
+                //   We could have a flag that is true until the first action is taken
+                //   with the keyboard, but that seems needlessly wasteful.
+                code = this->inputBuffer.pop();
+            }
+            else if (code == KeyboardOutput::batFailure && !this->expectingResult) {
+                diagnostics->startupFailure();
+                code = this->inputBuffer.pop();
             }
 
             return code;

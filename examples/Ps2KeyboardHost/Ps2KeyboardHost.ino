@@ -23,16 +23,21 @@ USA
 typedef ps2::SimpleDiagnostics<254> Diagnostics_;
 static Diagnostics_ diagnostics;
 static ps2::AnsiTranslator<Diagnostics_> keyMapping(diagnostics);
-static ps2::Keyboard<4,2,1, Diagnostics_> ps2Keyboard(diagnostics);
-static ps2::KeyboardLeds lastLedSent;
+static ps2::Keyboard<3,2,1, Diagnostics_> ps2Keyboard(diagnostics);
+static ps2::KeyboardLeds lastLedSent = ps2::KeyboardLeds::none;
 
 void setup() {
     ps2Keyboard.begin();
-    ps2Keyboard.reset();
-
     keyMapping.setNumLock(true);
-    lastLedSent = ps2::KeyboardLeds::numLock;
+    ps2Keyboard.awaitStartup();
+
+    // see the docs for awaitStartup - TL;DR <- when we reset the board but not the keyboard, awaitStartup
+    //  records an error because it thinks the keyboard didn't power-up correctly.  When debugging, that's
+    //  true - but only because it never powered down.
+    diagnostics.reset();
+
     ps2Keyboard.sendLedStatus(ps2::KeyboardLeds::numLock);
+    lastLedSent = ps2::KeyboardLeds::numLock;
 }
 
 void loop() {

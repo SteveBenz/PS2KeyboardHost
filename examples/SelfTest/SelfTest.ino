@@ -22,7 +22,7 @@ USA
 
 typedef ps2::SimpleDiagnostics<32> Diagnostics;
 static Diagnostics diagnostics;
-static ps2::Keyboard<4,2,1,Diagnostics> ps2Keyboard(diagnostics);
+static ps2::Keyboard<3,2,1,Diagnostics> ps2Keyboard(diagnostics);
 static const int switch1Pin = 6;
 static const int switch2Pin = 8;
 
@@ -32,10 +32,6 @@ void setup() {
     ps2Keyboard.begin();
     pinMode(switch1Pin, INPUT_PULLUP);
     pinMode(switch2Pin, INPUT_PULLUP);
-
-    // We're not actually going to pay much mind to this, but it could produce
-    // useful diagnostics if things don't go well.
-    ps2Keyboard.reset();
 }
 
 int oldSwitch1PinValue = 0;

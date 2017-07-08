@@ -331,6 +331,12 @@ namespace ps2 {
             instance->writeInterruptHandler();
         }
 
+        /** \brief  Waits for a byte to be sent from the keyboard for a limited amount of time.
+         *          It peeks from the buffer, so a subsequent call to inputbuffer.pop will be
+         *          necessary to prevent a future call to the readScanCode method from picking it up.
+         *  \returns It returns the value it read or none if nothing showed up in the time alotted
+         *           or garbled if there was a communcation error in that time.
+         */
         KeyboardOutput expectResponse(uint16_t timeoutInMilliseconds = immediateResponseTimeInMilliseconds)
         {
             unsigned long startMilliseconds = millis();
@@ -340,7 +346,14 @@ namespace ps2 {
             expectingResult = true;
             do
             {
-                actualResponse = this->readScanCode();
+                actualResponse = this->inputBuffer.peek();
+                if (actualResponse == KeyboardOutput::none && this->receivedHasFramingError) {
+                    actualResponse = KeyboardOutput::garbled;
+                    // Note that clearing this is intended to prevent future polling from trying to get the
+                    //  bad character re-sent, but it might not work, depending on the nature of the error.
+                    //  Future interrupts could set it again.
+                    this->receivedHasFramingError = false;
+                }
                 nowMilliseconds = millis();
             } while (actualResponse == KeyboardOutput::none && (nowMilliseconds < stopMilliseconds || (stopMilliseconds < startMilliseconds && startMilliseconds <= nowMilliseconds)));
             expectingResult = false;
@@ -351,6 +364,10 @@ namespace ps2 {
             return actualResponse;
         }
 
+        /** \brief Waits a limited amount of time for a specific byte to be written by the keyboard.
+         *         If it appears, this method returns true.  If a different keycode appears, it will return
+         *         false and leave that byte on the input queue.
+         */
         bool expectResponse(KeyboardOutput expectedResponse, uint16_t timeoutInMilliseconds = immediateResponseTimeInMilliseconds) {
             KeyboardOutput actualResponse = expectResponse(timeoutInMilliseconds);
 
@@ -363,6 +380,7 @@ namespace ps2 {
                 return false;
             }
             else {
+                this->inputBuffer.pop();
                 return true;
             }
         }
@@ -532,9 +550,7 @@ namespace ps2 {
         bool reset() {
             this->inputBuffer.clear();
             this->sendCommand(ps2CommandCode::reset);
-
-            KeyboardOutput result = this->expectResponse(1000);
-            return result == KeyboardOutput::batSuccessful;
+            return this->expectResponse(KeyboardOutput::batSuccessful, 1000);
         }
 
         /** \brief Returns the device ID returned by the keyboard - according to the documentation, this
@@ -546,11 +562,13 @@ namespace ps2 {
             if (response == KeyboardOutput::none) {
                 return 0xffff;
             }
+            this->inputBuffer.pop();
             uint16_t id = ((uint8_t)response) << 8;
             response = this->expectResponse();
             if (response == KeyboardOutput::none) {
                 return 0xffff;
             }
+            this->inputBuffer.pop();
             id |= (uint8_t)response;
             return id;
         }
@@ -563,6 +581,7 @@ namespace ps2 {
             }
             ScanCodeSet result = (ScanCodeSet)this->expectResponse();
             if (result == ScanCodeSet::pcxt || result == ScanCodeSet::pcat || result == ScanCodeSet::ps2) {
+                this->inputBuffer.pop();
                 return result;
             }
             else {

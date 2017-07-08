@@ -34,8 +34,8 @@ void setup() {
     pinMode(switch2Pin, INPUT_PULLUP);
 }
 
-int oldSwitch1PinValue = 0;
-int oldSwitch2PinValue = -2;
+int oldSwitch1PinValue = HIGH;
+int oldSwitch2PinValue = HIGH;
 static ps2::NeutralTranslator translator;
 
 void waitForUnmake(ps2::KeyboardOutput key)
@@ -129,14 +129,14 @@ static void testQueue()
     }
 }
 
+static byte f1_f4[4] = { 0x07, 0x0f, 0x17, 0x1f };
+static byte f7_f8[4] = { 0x37, 0x3f };
+
 // the loop function runs over and over again until power down or reset
 void loop() {
     diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::heartbeat>();
 
     int pin1Value = digitalRead(switch1Pin);
-    byte f1_f4[4] = { 0x07, 0x0f, 0x17, 0x1f };
-    byte f7_f8[4] = { 0x37, 0x3f };
-
     if (!pin1Value && oldSwitch1PinValue) {
         Serial.print("Reset...");
 
@@ -161,14 +161,13 @@ void loop() {
     if (pin2Value != oldSwitch2PinValue)
     {
         if (pin2Value) {
-            printResult("disable", ps2Keyboard.disable());
+            printResult("enable", ps2Keyboard.enable());
         }
         else {
-            printResult("enable", ps2Keyboard.enable());
+            printResult("disable", ps2Keyboard.disable());
         }
         oldSwitch2PinValue = pin2Value;
     }
-    bool isEnabled = !pin2Value;
 
     ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
     if (scanCode != ps2::KeyboardOutput::none) {
@@ -269,12 +268,30 @@ void loop() {
                 Serial.println("testQueue done");
                 break;
             }
-
             case ps2::KeyboardOutput::sc2_tab: {
                 waitForUnmake(scanCode);
                 diagnostics.sendReport(Serial);
                 Serial.println();
                 break;
+            }
+            case ps2::KeyboardOutput::sc2_h: {
+                waitForUnmake(scanCode);
+                // Simulating what happens if you wait for startup but the keyboard doesn't
+                //  generate one - either because it's a strange keyboard or because the
+                //  arduino rebooted but the keyboard didn't.
+                // First, clear any errors, since this is sure to generate a new one and the
+                //  slate would be clean in a reboot scenario anyway.
+                diagnostics.reset();
+                Serial.println("Starting awaitStartup");
+                // Warn the tester - it's also a thing to validate that any keystroke stops
+                //  the wait and leaves that keystroke on the queue.
+                bool result = ps2Keyboard.awaitStartup();
+                Serial.print("awaitStartup returned ");
+                Serial.print(result ? "true" : "false");
+                Serial.print(" Diagnostics:");
+                diagnostics.sendReport(Serial);
+                diagnostics.reset();
+                Serial.println();
             }
         }
 

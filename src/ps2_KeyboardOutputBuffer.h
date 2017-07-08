@@ -28,9 +28,11 @@ namespace ps2 {
      */
     template <uint8_t Size, typename TDiagnostics = NullDiagnostics>
     class KeyboardOutputBuffer {
-        volatile uint8_t head;
-        volatile uint8_t tail;
-        volatile KeyboardOutput buffer[Size];
+        // These do not need to be marked volatile because of the use of ATOMIC_BLOCK and the requirement
+        //  that push be called from within an interrupt.
+        uint8_t head;
+        uint8_t tail;
+        KeyboardOutput buffer[Size];
         TDiagnostics *diagnostics;
 
         const uint8_t EmptyMarker = 0xff;
@@ -46,16 +48,16 @@ namespace ps2 {
          *  expects to be run from inside an interrupt handler
          */
         void push(KeyboardOutput valueAtTop) {
-            uint8_t nextTail = (tail + 1) % Size;
-            if (head == EmptyMarker) {
-                head = tail;
+            uint8_t nextTail = (this->tail + 1) % Size;
+            if (this->head == EmptyMarker) {
+                this->head = this->tail;
             }
-            else if (head == tail) {
+            else if (this->head == this->tail) {
                 this->diagnostics->bufferOverflow();
-                ++head;
+                ++this->head;
             }
-            buffer[tail] = valueAtTop;
-            tail = nextTail;
+            buffer[this->tail] = valueAtTop;
+            this->tail = nextTail;
         }
 
         /** If the queue has any content, it returns the value.  if there
@@ -65,23 +67,31 @@ namespace ps2 {
             KeyboardOutput valueAtTop;
             ATOMIC_BLOCK(ATOMIC_FORCEON)
             {
-                if (head == EmptyMarker) {
+                if (this->head == EmptyMarker) {
                     valueAtTop = KeyboardOutput::none;
                 }
                 else {
-                    valueAtTop = buffer[head];
-                    head = (head + 1) % Size;
-                    if (head == tail) {
-                    	head = EmptyMarker;
-                    }
+                    valueAtTop = buffer[this->head];
+                    int h = (this->head + 1) % Size;
+                    this->head = (h == this->tail) ? EmptyMarker : h;
                 }
+            }
+            return valueAtTop;
+        }
+
+        KeyboardOutput peek() {
+            KeyboardOutput valueAtTop;
+            ATOMIC_BLOCK(ATOMIC_FORCEON)
+            {
+                uint8_t h = this->head;
+                valueAtTop = (h == EmptyMarker) ? KeyboardOutput::none : this->buffer[h];
             }
             return valueAtTop;
         }
 
         void clear() {
             ATOMIC_BLOCK(ATOMIC_FORCEON) {
-                head = EmptyMarker;
+                this->head = EmptyMarker;
             }
         }
     };
@@ -120,14 +130,19 @@ namespace ps2 {
             KeyboardOutput valueAtTop;
             ATOMIC_BLOCK(ATOMIC_FORCEON)
             {
-                valueAtTop = buffer;
-                buffer = KeyboardOutput::none;
+                valueAtTop = this->buffer;
+                this->buffer = KeyboardOutput::none;
             }
             return valueAtTop;
         }
 
+        KeyboardOutput peek() {
+            return this->buffer;
+        }
+
+
         void clear() {
-            buffer = KeyboardOutput::none;
+            this->buffer = KeyboardOutput::none;
         }
     };
 }

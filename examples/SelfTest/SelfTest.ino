@@ -20,11 +20,29 @@ USA
 #include "ps2_NeutralTranslator.h"
 #include "ps2_SimpleDiagnostics.h"
 
+// This example is really a testbed for the features of PS2 keyboards and this library.
+// It uses a pair of input pins to test some functions that'd be hard to initiate with
+// a keyboard - when switch1 is pulled low it initiates a reset of the keyboard.  When
+// pin2 is pulled low it disables the keyboard and re-enables it when it goes high again.
+//
+// Lots of functions are tied to specific key presses.  See the switch statement in loop()
+// to see what all of them are.
+//
+// If you need to submit a change to the library, please use this program to shake it down
+// before creating a pull request.  Typing "qwer" is a good quick test to ensure that bidirectional
+// communications work.  "t" is a must if you change the buffer code.  But a good shakedown
+// would include using all the facilities in this example and making new ones if you've got
+// a new scenario.
+
+static const int clockPin = 2;
+static const int dataPin = 3;
+static const int switch1Pin = 6;
+static const int switch2Pin = 7;
+
+
 typedef ps2::SimpleDiagnostics<32> Diagnostics;
 static Diagnostics diagnostics;
-static ps2::Keyboard<3,2,1,Diagnostics> ps2Keyboard(diagnostics);
-static const int switch1Pin = 6;
-static const int switch2Pin = 8;
+static ps2::Keyboard<dataPin,clockPin,1,Diagnostics> ps2Keyboard(diagnostics);
 
 // the setup function runs once when you press reset or power the board
 void setup() {

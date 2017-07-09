@@ -452,6 +452,8 @@ namespace ps2 {
 
         /** \brief After the keyboard gets power, the PS2 keyboard sends a code that indicates successful
          *    or unsuccessful startup.  This waits for that to happen.
+         *  \param timeoutInMillis The number of milliseconds to wait for the keyboard to send its
+         *             success/fail message.
          *  \details
          *    All this function does is wait for a proscribed amount of time (750ms, as suggested by
          *    the documentation), for a batSuccessful code.  That's straightforward.  The thing to be
@@ -473,8 +475,8 @@ namespace ps2 {
          *    the keyboard will send that batSuccessful (hopefully) signal later on, but \ref readScanCode
          *    specifically looks for that code and drops it on the floor when it arrives.
          */
-        bool awaitStartup() {
-            return this->expectResponse(KeyboardOutput::batSuccessful, 750);
+        bool awaitStartup(uint16_t timeoutInMillis = 750) {
+            return this->expectResponse(KeyboardOutput::batSuccessful, timeoutInMillis);
         }
 
         /** \brief
@@ -543,14 +545,16 @@ namespace ps2 {
         }
 
         /** \brief Resets the keyboard and returns true if the keyboard appears well, false otherwise.
+         *  \param timeoutInMillis The number of milliseconds to wait for the keyboard to send its
+         *             success/fail message.
          *  \details
          *   This can take up to a second to complete.  (Because of the Protocol spec).
          *  \returns Returns true if the keyboard responded appropriately and false otherwise.
          */
-        bool reset() {
+        bool reset(uint16_t timeoutInMillis = 1000) {
             this->inputBuffer.clear();
             this->sendCommand(ps2CommandCode::reset);
-            return this->expectResponse(KeyboardOutput::batSuccessful, 1000);
+            return this->expectResponse(KeyboardOutput::batSuccessful, timeoutInMillis);
         }
 
         /** \brief Returns the device ID returned by the keyboard - according to the documentation, this

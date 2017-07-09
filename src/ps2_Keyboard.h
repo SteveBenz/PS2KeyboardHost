@@ -169,7 +169,7 @@ namespace ps2 {
             uint8_t dataPinValue = (*portInputRegister(digitalPinToPort(DataPin)) & digitalPinToBitMask(DataPin)) ? 1 : 0; // ==digitalRead(DataPin);
 
             lastReadInterruptMicroseconds = micros();
-            // TODO: There should be code here that detects if bitCounter > 0 && the time since
+            // TODO: Perhaps there should be code here that detects if bitCounter > 0 && the time since
             //  the last read interrupt is > a millisecond and, if so, log that and reset
             //  bitCounter.
             //
@@ -501,6 +501,15 @@ namespace ps2 {
                 //  slowest would be 1200us.  Again, that's the full cycle.  Most of the errors
                 //  are going to be found at the parity & stop bit, so we'll wait 200us, as a guess,
                 //  before asking for a retry.
+                //
+                // In hindsight, I think likely the most effective way to do error detection would
+                //  be to wait for a certain amount of time after the last read interrupt when a
+                //  failure has previously been detected.  For that to work, then when the keyboard
+                //  sends a multi-byte sequence, there'd have to be a pause between one byte and
+                //  the next; I haven't validated that such a pause actually exists, however.
+                //
+                // The other concern is how to ensure that we can get Arduino-time during that
+                //  window; it'll be hard to guarantee that in a general purpose library.
                 if (failureTimeMicroseconds + 200 > micros()) {
                     return KeyboardOutput::none;
                 }

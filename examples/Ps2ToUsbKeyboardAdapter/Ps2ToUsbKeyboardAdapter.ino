@@ -57,7 +57,7 @@ void setup() {
     pinMode(switch2Pin, INPUT_PULLUP);
 
     ps2Keyboard.begin();
-    ps2Keyboard.awaitStartup();
+    //ps2Keyboard.awaitStartup();
 
     BootKeyboard.begin();
 }

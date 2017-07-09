@@ -428,10 +428,10 @@ namespace ps2 {
         }
 
         /**
-        * Starts the keyboard "service" by registering the external interrupt.
-        * setting the pin modes correctly and driving those needed to high.
-        * The best place to call this method is in the setup routine.
-        */
+         * Starts the keyboard "service" by registering the external interrupt.
+         * setting the pin modes correctly and driving those needed to high.
+         * The best place to call this method is in the setup routine.
+         */
         void begin() {
             pinMode(ClockPin, INPUT_PULLUP);
             pinMode(DataPin, INPUT_PULLUP);

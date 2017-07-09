@@ -185,6 +185,15 @@ namespace ps2 {
             // TODO: There should be code here that detects if bitCounter > 0 && the time since
             //  the last read interrupt is > a millisecond and, if so, log that and reset
             //  bitCounter.
+            //
+            //  It doesn't really need doing principally because the error-recovery code is already
+            //  going to catch this (even if it doesn't do it very well).  If you have other interrupts
+            //  in your system and they happen with concurrently with the keyboard, I think it's unlikely
+            //  you'll ever be able to craft a foolproof system.  That since the "Ack" request only
+            //  gets the previous byte.  What we'd really need to recover would be something that asks
+            //  the keyboard for all keys currently pressed, and there's no such thing.
+            //
+            //  But perhaps I'm wrong and it's not as bad as all that.
 
             switch (bitCounter)
             {

@@ -41,11 +41,6 @@ namespace ps2 {
      *  http://www.computer-engineering.org/ps2keyboard/
      */
 
-    class NullReceiveFunctor {
-    public:
-        void operator()(KeyboardOutput o) {}
-    };
-
     /**
      * \brief
      *  Instances of this class can be used to interface with a PS2 keyboard.  This class does not
@@ -121,19 +116,12 @@ namespace ps2 {
      *  If you're going to have another interrupt source in your project, see to it that
      *  its interrupt handler is as quick as possible.  For its part, the PS2 handler is
      *  just a few instructions in all cases.
-     *
-     *  If you supply an OnReceivedFunctor, then the operator() method of the object will be called
-     *  each time a code is seen on the output line that is not been requested by this class itself.
-     *  (That is, if a key is pressed, it'll get called for the bytes associated with that, but if
-     *  you call the method to set the LED, the Ack code that the keyboard sends back does not generate
-     *  a call.
      */
-    template<int DataPin, int ClockPin, int BufferSize = 16, typename Diagnostics = NullDiagnostics, typename OnReceivedFunctor = NullReceiveFunctor>
+    template<int DataPin, int ClockPin, int BufferSize = 16, typename Diagnostics = NullDiagnostics>
     class Keyboard {
         static const uint8_t immediateResponseTimeInMilliseconds = 10;
 
         Diagnostics *diagnostics;
-        OnReceivedFunctor *onRecievedFunctor;
 
         // These are not marked as volatile because they are only modified in the interrupt
         // handler and at startup (before the interrupt handler is enabled).
@@ -142,7 +130,6 @@ namespace ps2 {
         uint32_t failureTimeMicroseconds = 0;
         uint32_t lastReadInterruptMicroseconds = 0;
         Parity parity = Parity::even;
-        bool expectingResult = false;
         bool receivedHasFramingError = false;
 
         // This guy is marked volatile because it's exchanged between the interrupt handler and normal code.
@@ -352,7 +339,6 @@ namespace ps2 {
             unsigned long stopMilliseconds = startMilliseconds + timeoutInMilliseconds;
             unsigned long nowMilliseconds;
             KeyboardOutput actualResponse;
-            expectingResult = true;
             do
             {
                 actualResponse = this->inputBuffer.peek();
@@ -365,7 +351,6 @@ namespace ps2 {
                 }
                 nowMilliseconds = millis();
             } while (actualResponse == KeyboardOutput::none && (nowMilliseconds < stopMilliseconds || (stopMilliseconds < startMilliseconds && startMilliseconds <= nowMilliseconds)));
-            expectingResult = false;
 
             if (actualResponse == KeyboardOutput::none) {
                 this->diagnostics->noResponse(KeyboardOutput::none);
@@ -441,7 +426,6 @@ namespace ps2 {
             this->diagnostics = &diagnostics;
             instance = this;
         }
-
 
         /**
         * Starts the keyboard "service" by registering the external interrupt.
@@ -523,7 +507,7 @@ namespace ps2 {
                 this->sendNack();
                 return KeyboardOutput::garbled;
             }
-            else if (code == KeyboardOutput::batSuccessful && !this->expectingResult) {
+            else if (code == KeyboardOutput::batSuccessful) {
                 // The keyboard will send either batSuccessful or batFailure on startup.
                 //   The way this class is structured, we can't really be sure that begin()
                 //   will be called immediately after power-up, nor can we be sure that the
@@ -533,7 +517,7 @@ namespace ps2 {
                 //   with the keyboard, but that seems needlessly wasteful.
                 code = this->inputBuffer.pop();
             }
-            else if (code == KeyboardOutput::batFailure && !this->expectingResult) {
+            else if (code == KeyboardOutput::batFailure) {
                 diagnostics->startupFailure();
                 code = this->inputBuffer.pop();
             }
@@ -723,6 +707,6 @@ namespace ps2 {
         }
     };
 
-    template<int DataPin, int ClockPin, int BufferSize, typename Diagnostics, typename OnReceivedFunctor>
-    Keyboard<DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor> *Keyboard<DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor>::instance = nullptr;
+    template<int DataPin, int ClockPin, int BufferSize, typename Diagnostics>
+    Keyboard<DataPin, ClockPin, BufferSize, Diagnostics> *Keyboard<DataPin, ClockPin, BufferSize, Diagnostics>::instance = nullptr;
 }

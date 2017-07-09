@@ -58,9 +58,9 @@ namespace ps2 {
         void sentByte(byte b) {}
         void receivedByte(byte b) {}
 
-        // This is used by Ps2Keyboard.begin() - you only need to provide this if you call that
-        //  interface.  Note that this implementation returns something bogus, which is only okay
-        //  because all of the implementations are empty, and get optimized away by the compiler.
+        // Only the Null class should provide this interface.  Note that this implementation
+        //  returns something bogus, which is only okay because all of the implementations are empty,
+        //  and get optimized away by the compiler.
         static NullDiagnostics *defaultInstance() { return (NullDiagnostics *)nullptr; }
     };
 }

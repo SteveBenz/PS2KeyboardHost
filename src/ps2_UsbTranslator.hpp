@@ -209,7 +209,7 @@ USA
     0x00, // [2c] unused
     0x00, // [2d] unused
     0x00, // [2e] unused
-    0x00, // [2f] unused
+    0x65, // [2f] Menu Key
     0x00, // [30] unused
     0x00, // [31] unused
     0x00, // [32] unused
@@ -286,7 +286,7 @@ USA
     0x00, // [79] unused
     0x4e, // [7a] Page Down (Note 1)
     0x00, // [7b] unused
-    0x00, // [7c] unused
+    0x46, // [7c] Print Screen
     0x4b, // [7d] Page Up (Note 1)
     0x48, // [7e] Pause (when ctrl is down)
     0x00, // [7f] unused

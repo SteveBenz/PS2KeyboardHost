@@ -109,12 +109,7 @@ void loop() {
         switch (action.gesture) {
             case ps2::UsbKeyAction::KeyDown:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {
-                    // Real use-cases for using the Scroll Lock key are thin on the ground, so this is okay,
-                    //  but perhaps it'd be better to send the report if the key is held down or some other
-                    //  more specific feedback.  We send the output to the keyboard itself, since the device
-                    //  might not be used in a computer that actually has the code to read the serial port.
-                    diagnostics.sendReport(BootKeyboard);
-                    diagnostics.reset();
+                    // Hide this keypress.
                 }
                 else {
                     diagnostics.sentUsbKeyDown(hidCode);
@@ -123,8 +118,12 @@ void loop() {
                 break;
             case ps2::UsbKeyAction::KeyUp:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {
-                    // Don't send the keyup, because we hid the keydown.
-                    ps2Keyboard.echo();
+                    // Real use-cases for using the Scroll Lock key are thin on the ground, so hijacking
+                    //  it for diagnostics.  Ideally, if you can spare a button or some other external
+                    //  signal, that'd be better.  Doing it on keyup so that there shouldn't be any PS2
+                    //  activity while we're pumping out the report.
+                    diagnostics.sendReport(BootKeyboard);
+                    diagnostics.reset();
                 }
                 else {
                     diagnostics.sentUsbKeyUp(hidCode);

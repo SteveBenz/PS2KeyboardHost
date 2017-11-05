@@ -116,6 +116,7 @@ namespace ps2 {
         byte data[Size];
         int index = -1;
         uint16_t failureCodes = 0;
+        uint32_t millisAtLastRecording = 0;
 
         enum class Ps2Code : uint8_t {
             packetDidNotStartWithZero = 0,
@@ -128,14 +129,24 @@ namespace ps2 {
             noResponse = 7,
             noTranslationForKey = 8,
             startupFailure = 9,
+            _firstUnusedError = 10,
 
             sentByte = 16,
             receivedByte = 17,
+            pause = 18, // Data is one byte, milliseconds+4/8 (0 to 2.043sec)
+            reserved1 = 19,
+            reserved2 = 20,
+            reserved3 = 21,
+            // Reserve a few so that more info-level events can come in without jacking up
+            // any existing readers.
+            _firstUnusedInfo = 22,
         };
 
         void recordFailure(uint8_t code) {
-            ATOMIC_BLOCK(ATOMIC_FORCEON) {
-                this->failureCodes |= 1 << code;
+            if (code < 16) {
+                ATOMIC_BLOCK(ATOMIC_FORCEON) {
+                    this->failureCodes |= 1 << code;
+                }
             }
         }
 
@@ -153,37 +164,59 @@ namespace ps2 {
             }
         }
 
-        void push(byte code) {
+        void pushRaw(byte code) {
             this->recordFailure(code);
             pushByte(code << 2);
         }
-        void push(byte code, byte extraData1) {
-            pushByte(extraData1);
+        void pushRaw(byte code, byte extraData1) {
             this->recordFailure(code);
+            pushByte(extraData1);
             pushByte((code << 2) | 1);
         }
-        void push(byte code, byte extraData1, byte extraData2) {
+        void pushRaw(byte code, byte extraData1, byte extraData2) {
+            this->recordFailure(code);
             pushByte(extraData2);
             pushByte(extraData1);
-            this->recordFailure(code);
             pushByte((code << 2) | 2);
         }
 
+        void recordPause()
+        {
+            unsigned long millisNow = millis();
+            unsigned long timeDelta = millisNow - millisAtLastRecording;
+            if (timeDelta >= 4 && timeDelta < 2044) {
+                pushRaw((byte)Ps2Code::pause, (byte)((timeDelta + 4) >> 3));
+                millisAtLastRecording = millisNow;
+            }
+            else if (timeDelta >= 2044) {
+                unsigned long lowResDelay = (timeDelta + 32) >> 6;
+                if (lowResDelay > 0xffff) {
+                    lowResDelay = 0xffff;
+                }
+                pushRaw((byte)Ps2Code::pause, (byte)(lowResDelay >>8), (byte)(lowResDelay & 0xff));
+                millisAtLastRecording = millisNow;
+            }
+            // Else it's too short to make note of
+        }
+
     protected:
-        static const int firstUnusedFailureCode = 10;
-        static const int firstUnusedInfoCode = 18;
+        static const uint8_t firstUnusedFailureCode = (uint8_t)Ps2Code::_firstUnusedError;
+        static const uint8_t firstUnusedInfoCode = (uint8_t)Ps2Code::_firstUnusedInfo;
 
         template <typename E>
         void push(E code) {
-            push((byte)code);
+            recordPause();
+            pushRaw((byte)code);
         }
         template <typename E1,typename E2>
         void push(E1 code, E2 extraData1) {
-            push((byte)code, (uint8_t)extraData1);
+            recordPause();
+            pushRaw((byte)code, (uint8_t)extraData1);
         }
         template <typename E1, typename E2, typename E3>
         void push(E1 code, E2 extraData1, E3 extraData2) {
-            push((byte)code, (byte)extraData1, (byte)extraData2);
+            recordPause();
+            pushRaw((byte)code, (byte)extraData1, (byte)extraData2);
         }
 
     public:

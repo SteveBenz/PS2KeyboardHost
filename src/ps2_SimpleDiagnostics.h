@@ -288,6 +288,7 @@ namespace ps2 {
         void reset() {
             this->failureCodes = 0;
             this->index = -1;
+            this->bytesInLastError = 0;
         }
 
         /** \brief Enables you to have a blinking indicator when an error happens.

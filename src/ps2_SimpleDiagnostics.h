@@ -110,10 +110,12 @@ namespace ps2 {
      *
      *  \tparam Size  The number of bytes to use for recording events.
      */
-    template <uint16_t Size = 60>
+    template <uint16_t Size = 60, uint16_t LastErrorSize = 30>
     class SimpleDiagnostics
     {
         byte data[Size];
+        byte lastError[LastErrorSize];
+        uint16_t bytesInLastError = 0;
         int index = -1;
         uint16_t failureCodes = 0;
         uint32_t millisAtLastRecording = 0;
@@ -147,6 +149,25 @@ namespace ps2 {
                 ATOMIC_BLOCK(ATOMIC_FORCEON) {
                     this->failureCodes |= 1 << code;
                 }
+
+                uint16_t numBytesCopied = 0;
+                uint16_t i = index < 0 ? -1 - index : index;
+                i = (i == 0 ? Size : i) - 1;
+                while (index >= 0 || i != Size - 1)
+                {
+                    byte bytesInWord = 1 + (this->data[i] & 0x3);
+                    if (numBytesCopied + bytesInWord > LastErrorSize) {
+                        break;
+                    }
+
+                    while (bytesInWord > 0) {
+                        this->lastError[numBytesCopied] = this->data[i];
+                        i = (i == 0 ? Size : i) - 1;
+                        ++numBytesCopied;
+                        --bytesInWord;
+                    }
+                }
+                bytesInLastError = numBytesCopied;
             }
         }
 
@@ -165,19 +186,19 @@ namespace ps2 {
         }
 
         void pushRaw(byte code) {
-            this->recordFailure(code);
             pushByte(code << 2);
+            this->recordFailure(code);
         }
         void pushRaw(byte code, byte extraData1) {
-            this->recordFailure(code);
             pushByte(extraData1);
             pushByte((code << 2) | 1);
+            this->recordFailure(code);
         }
         void pushRaw(byte code, byte extraData1, byte extraData2) {
-            this->recordFailure(code);
             pushByte(extraData2);
             pushByte(extraData1);
             pushByte((code << 2) | 2);
+            this->recordFailure(code);
         }
 
         void recordPause()
@@ -235,20 +256,26 @@ namespace ps2 {
             printTo.print("{");
             printTo.print(this->failureCodes, 16);
             printTo.print(":");
-            int startInclusive = index < 0 ? 0 : index;
-            int end = index < 0 ? -1 - index : index;
-            if (index < 0)
+
+            // This content ends up getting reversed
+            for (int i = bytesInLastError-1; i >= 0; --i) {
+                printTo.print(this->lastError[i] >> 4, 16);
+                printTo.print(this->lastError[i] & 0xf, 16);
+            }
+            printTo.print("|");
+
+            if (this->index < 0)
             {
-                for (int i = 0; i < -1 - index; ++i) {
+                for (int i = 0; i < -1 - this->index; ++i) {
                     // Can't just do print(data,16), as it'll get truncated if it's < 16.
-                    printTo.print(data[i] >> 4, 16);
-                    printTo.print(data[i] & 0xf, 16);
+                    printTo.print(this->data[i] >> 4, 16);
+                    printTo.print(this->data[i] & 0xf, 16);
                 }
             }
             else {
-                for (int i = index; i < Size + index; ++i) {
-                    printTo.print(data[i % Size] >> 4, 16);
-                    printTo.print(data[i % Size] & 0xf, 16);
+                for (int i = this->index; i < Size + this->index; ++i) {
+                    printTo.print(this->data[i % Size] >> 4, 16);
+                    printTo.print(this->data[i % Size] & 0xf, 16);
                 }
             }
             printTo.print("}");

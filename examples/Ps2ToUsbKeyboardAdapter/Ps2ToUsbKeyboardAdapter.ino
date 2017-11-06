@@ -131,6 +131,9 @@ void loop() {
                 else {
                     diagnostics.sentUsbKeyUp(hidCode);
                     BootKeyboard.release(hidCode);
+                    if (hidCode == KeyboardKeycode::KEY_TILDE) {
+                        diagnostics.incorrectResponse(ps2::KeyboardOutput::ack, ps2::KeyboardOutput::nack);
+                    }
                 }
                 break;
         }

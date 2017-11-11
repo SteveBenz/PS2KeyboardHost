@@ -24,9 +24,9 @@ USA
 
 // Create a log of all the data going to and from the keyboard and the host.
 class Diagnostics
-    : public ps2::SimpleDiagnostics<254>
+    : public ps2::SimpleDiagnostics<512, 60>
 {
-    typedef ps2::SimpleDiagnostics<254> base;
+    typedef ps2::SimpleDiagnostics<512, 60> base;
 
     enum class UsbTranslatorAppCode : uint8_t {
         // no errors
@@ -131,9 +131,6 @@ void loop() {
                 else {
                     diagnostics.sentUsbKeyUp(hidCode);
                     BootKeyboard.release(hidCode);
-                    if (hidCode == KeyboardKeycode::KEY_TILDE) {
-                        diagnostics.incorrectResponse(ps2::KeyboardOutput::ack, ps2::KeyboardOutput::nack);
-                    }
                 }
                 break;
         }

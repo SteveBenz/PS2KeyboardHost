@@ -125,8 +125,19 @@ void loop() {
                     //  it for diagnostics.  Ideally, if you can spare a button or some other external
                     //  signal, that'd be better.  Doing it on keyup so that there shouldn't be any PS2
                     //  activity while we're pumping out the report.
-                    diagnostics.sendReport(BootKeyboard);
-                    diagnostics.reset();
+                    unsigned long start = micros();
+                    volatile int x = 0;
+                    for (int i = 0; i < 1000; ++i)
+                    {
+                        x ^= BootKeyboard.yow(1 + (i & 127), true);
+                        x ^= BootKeyboard.yow(1 + (i & 127), false);
+                    }
+                    unsigned long end = micros();
+                    BootKeyboard.print("micros: ");
+                    BootKeyboard.println(end - start);
+
+                    //diagnostics.sendReport(BootKeyboard);
+                    //diagnostics.reset();
                 }
                 else {
                     diagnostics.sentUsbKeyUp(hidCode);

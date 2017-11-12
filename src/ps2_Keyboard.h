@@ -416,6 +416,7 @@ namespace ps2 {
         }
 
         void sendNack() {
+            this->diagnostics->sentByte((byte)ps2CommandCode::resend);
             this->sendByte((byte)ps2CommandCode::resend);
         }
 

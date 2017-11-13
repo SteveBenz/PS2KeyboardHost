@@ -513,7 +513,16 @@ namespace ps2 {
                 if (failureTimeMicroseconds + 200 > micros()) {
                     return KeyboardOutput::none;
                 }
-                this->sendNack();
+                if (this->bitCounter > 3) {
+                    this->sendNack();
+                }
+                else {
+                    this->diagnostics->clockLineGlitch(this->bitCounter);
+                    this->receivedHasFramingError = false;
+                    this->bitCounter = 0;
+                    this->ioByte = 0;
+                    this->parity = Parity::even;
+                }
                 return KeyboardOutput::garbled;
             }
             else if (code == KeyboardOutput::batSuccessful) {

@@ -131,6 +131,13 @@ namespace ps2 {
 
             sentByte = 16,
             receivedByte = 17,
+            pause = 18, // Data is one byte, milliseconds+4/8 (0 to 2.043sec)
+            clockLineGlitch = 19, // data is # of bits received
+            reserved2 = 20,
+            reserved3 = 21,
+            // Reserve a few so that more info-level events can come in without jacking up
+            // any existing readers.
+            _firstUnusedInfo = 22,
         };
 
         void recordFailure(uint8_t code) {
@@ -271,6 +278,9 @@ namespace ps2 {
             this->push(Ps2Code::noTranslationForKey, isExtended, code);
         }
         void startupFailure() { this->push(Ps2Code::startupFailure); }
+        void clockLineGlitch(uint8_t numBitsSent) {
+            this->push(Ps2Code::clockLineGlitch, numBitsSent);
+        }
 
         void sentByte(byte b) { this->push(Ps2Code::sentByte, b); }
         void receivedByte(byte b) { this->push(Ps2Code::receivedByte, b); }

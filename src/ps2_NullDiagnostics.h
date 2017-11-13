@@ -57,6 +57,7 @@ namespace ps2 {
 
         void sentByte(byte b) {}
         void receivedByte(byte b) {}
+        void clockLineGlitch(uint8_t numBitsSent) {}
 
         // Only the Null class should provide this interface.  Note that this implementation
         //  returns something bogus, which is only okay because all of the implementations are empty,

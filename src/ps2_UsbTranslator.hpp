@@ -19,7 +19,7 @@ USA
 #pragma once
 
 // These translation tables were distilled from here:
-//  http://www.hiemalis.org/~keiji/PC/scancode-translate.pdf
+//  http://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/translate.pdf
 // They could certainly be ProgMem, but it's unlikely to matter to anybody,
 // as if you're implementing a PS2->USB conversion on your Arduino, it's
 // unlikely you'll be doing anything else that requires a ton of space,
@@ -336,6 +336,14 @@ ps2::UsbKeyAction ps2::UsbTranslator<Diagnostics>::translatePs2Keycode(ps2::Keyb
     if (ps2Scan == ps2::KeyboardOutput::extend)
     {
         this->isSpecial = true;
+        return action;
+    }
+
+    if (ps2Scan == ps2::KeyboardOutput::sc2_leftShift && this->isSpecial) {
+        // This sequence gets sent in front of keys like left-arrow when the shift key is down.
+        // This information doesn't need to get sent to the USB.
+        this->isSpecial = false;
+        this->isUnmake = false;
         return action;
     }
 

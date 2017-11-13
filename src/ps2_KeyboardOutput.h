@@ -164,6 +164,7 @@ namespace ps2 {
         sc2_lang4       = 0x62,
         sc2_lang5       = 0x5f,
 
+        sc2ex_pauseBreak= 0x5f,
         sc2ex_rightCtrl = 0x14, // same as sc2_leftCtrl
         sc2ex_rightAlt  = 0x11, // same as sc2_leftAlt
         // Note that rightShift is not in the extended space.

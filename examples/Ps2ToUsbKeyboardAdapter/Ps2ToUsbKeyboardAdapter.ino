@@ -75,9 +75,6 @@ static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
     case HID_KEYBOARD_CAPS_LOCK:
         return KEY_LEFT_CTRL;
 
-    case KEY_PAUSE: // pause
-        return (KeyboardKeycode)0xe8;
-
     default:
         return usbKeystroke;
     }

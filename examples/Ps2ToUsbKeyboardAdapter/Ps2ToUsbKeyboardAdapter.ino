@@ -62,7 +62,14 @@ void setup() {
     BootKeyboard.begin();
 }
 
-static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
+static KeyboardKeycode noTranslation(KeyboardKeycode usbKeystroke)
+{
+    return usbKeystroke;
+}
+
+
+
+static KeyboardKeycode aggressiveCtrlRemap(KeyboardKeycode usbKeystroke)
 {
     switch (usbKeystroke)
     {
@@ -74,6 +81,24 @@ static KeyboardKeycode translateUsbKeystroke(KeyboardKeycode usbKeystroke)
 
     case HID_KEYBOARD_CAPS_LOCK:
         return KEY_LEFT_CTRL;
+
+    default:
+        return usbKeystroke;
+    }
+}
+
+static KeyboardKeycode capsLockToControl(KeyboardKeycode usbKeystroke)
+{
+    switch (usbKeystroke)
+    {
+    case HID_KEYBOARD_CAPS_LOCK:
+        return KEY_LEFT_CTRL;
+
+    case KEY_RIGHT_ALT:
+        return KEY_LEFT_GUI;
+
+    case HID_KEYBOARD_RIGHT_CONTROL:
+        return KEY_MENU;
 
     default:
         return usbKeystroke;
@@ -96,16 +121,18 @@ void loop() {
     diagnostics.setLedIndicator<LED_BUILTIN_RX, ps2::DiagnosticsLedBlink::blinkOnError>();
 
     ps2::KeyboardOutput scanCode = ps2Keyboard.readScanCode();
-    if (scanCode == ps2::KeyboardOutput::garbled) {
-    }
-    else if (scanCode != ps2::KeyboardOutput::none)
+    if (scanCode != ps2::KeyboardOutput::none && scanCode != ps2::KeyboardOutput::garbled)
     {
         ps2::UsbKeyAction action = keyMapping.translatePs2Keycode(scanCode);
         KeyboardKeycode hidCode = (KeyboardKeycode)action.hidCode;
 
         if (isRemapMode) {
-            hidCode = translateUsbKeystroke(hidCode);
+            hidCode = aggressiveCtrlRemap(hidCode);
         }
+        else {
+            hidCode = capsLockToControl(hidCode);
+        }
+
         switch (action.gesture) {
             case ps2::UsbKeyAction::KeyDown:
                 if (hidCode == KeyboardKeycode::KEY_SCROLL_LOCK) {

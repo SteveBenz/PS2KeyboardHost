@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ps2KeyboardHost
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Allows you to read from one or more PS2-style keyboards on an Arduino.</div>
   </td>
@@ -86,6 +86,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf4a0ef925dbb60556447798631557f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a53d3e8917aa7225024ad1d88448652"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#a5a53d3e8917aa7225024ad1d88448652">sendFrameError</a> ()</td></tr>
 <tr class="separator:a5a53d3e8917aa7225024ad1d88448652"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37f3dd5a1e4ce904b7cdf2ace63bca32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#a37f3dd5a1e4ce904b7cdf2ace63bca32">startupFailure</a> ()</td></tr>
+<tr class="separator:a37f3dd5a1e4ce904b7cdf2ace63bca32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a056dcb71016d627c4511a200e2dc59dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#a056dcb71016d627c4511a200e2dc59dd">bufferOverflow</a> ()</td></tr>
 <tr class="separator:a056dcb71016d627c4511a200e2dc59dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f0f8dda76ffee9b1a56c5c7a854f318"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#a4f0f8dda76ffee9b1a56c5c7a854f318">incorrectResponse</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">ps2::KeyboardOutput</a> scanCode, <a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">ps2::KeyboardOutput</a> expectedScanCode)</td></tr>
@@ -98,6 +100,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54cfe29b82ca8b2dddb82943672dd7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a228b77a4b8765dcb763d52802551985d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#a228b77a4b8765dcb763d52802551985d">receivedByte</a> (byte b)</td></tr>
 <tr class="separator:a228b77a4b8765dcb763d52802551985d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb0ececfa5411d4a90da2045ebfae458"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_null_diagnostics.html#abb0ececfa5411d4a90da2045ebfae458">clockLineGlitch</a> (uint8_t numBitsSent)</td></tr>
+<tr class="separator:abb0ececfa5411d4a90da2045ebfae458"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -120,6 +124,32 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">void ps2::NullDiagnostics::bufferOverflow </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb0ececfa5411d4a90da2045ebfae458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0ececfa5411d4a90da2045ebfae458">&#9670;&nbsp;</a></span>clockLineGlitch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ps2::NullDiagnostics::clockLineGlitch </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>numBitsSent</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -420,6 +450,31 @@ Static Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37f3dd5a1e4ce904b7cdf2ace63bca32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37f3dd5a1e4ce904b7cdf2ace63bca32">&#9670;&nbsp;</a></span>startupFailure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ps2::NullDiagnostics::startupFailure </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>

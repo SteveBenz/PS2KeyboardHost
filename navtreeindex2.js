@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224aad1dc8df9f76da0b72180f4a7ff81f66":[3,0,0,6,1,32],
+"ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224aadb94d569bfda37c7ef63593f71d8bf8":[3,0,0,6,1,50],
+"ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224ab1d8ee2a4cfddf4b56b46d6410f90856":[3,0,0,6,1,109],
+"ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224ab34c35aab2cedb4fc2153fb7580970c0":[3,0,0,6,1,120],
 "ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224ab6d8085b02481d3773d512d955d0ca3e":[3,0,0,6,1,144],
 "ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224ab8b674e47e65d26e058815ff329121ca":[3,0,0,6,1,97],
 "ps2___neutral_translator_8h.html#a8b30520369ff5e3b5742bb18f952a224ab9d66071f1216cbc407700e837458219":[3,0,0,6,1,52],
@@ -111,10 +115,10 @@ var NAVTREEINDEX2 =
 "ps2___usb_translator_8hpp.html#a1791347a0eaeea7d97f91dc12176e91f":[3,0,0,14,1],
 "ps2___usb_translator_8hpp.html#aed01f9d759e85a6718e40ec73b36246c":[3,0,0,14,0],
 "ps2___usb_translator_8hpp_source.html":[3,0,0,14],
-"structps2_1_1_usb_key_action.html":[2,0,0,6],
-"structps2_1_1_usb_key_action.html#a247c58985e018f1daa2a193b22e66511":[2,0,0,6,4],
-"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0eca104e9751933918f1568eb7376b8478ea":[2,0,0,6,1],
-"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0eca557b5e857202e92ad3c63ff0deea3134":[2,0,0,6,0],
-"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0ecaa4f1367e6039c47e8586d29101584b4e":[2,0,0,6,2],
-"structps2_1_1_usb_key_action.html#acde2887a9d3f1ffd71c9470f0cbb309c":[2,0,0,6,3]
+"structps2_1_1_usb_key_action.html":[2,0,0,5],
+"structps2_1_1_usb_key_action.html#a247c58985e018f1daa2a193b22e66511":[2,0,0,5,4],
+"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0eca104e9751933918f1568eb7376b8478ea":[2,0,0,5,1],
+"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0eca557b5e857202e92ad3c63ff0deea3134":[2,0,0,5,0],
+"structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0ecaa4f1367e6039c47e8586d29101584b4e":[2,0,0,5,2],
+"structps2_1_1_usb_key_action.html#acde2887a9d3f1ffd71c9470f0cbb309c":[2,0,0,5,3]
 };

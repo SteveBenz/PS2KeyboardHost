@@ -124,6 +124,7 @@ var ps2___keyboard_output_8h =
       [ "sc2_lang3", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956ba314b3cebebe478e0e8201ee6806acd2b", null ],
       [ "sc2_lang4", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956ba9ae94afbd365d7b5ded4494af5f2cc05", null ],
       [ "sc2_lang5", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956babcebdebf2280c7f472680c17c541dd6f", null ],
+      [ "sc2ex_pauseBreak", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956ba9c81ce1c679e1a3be841e81c0e234a68", null ],
       [ "sc2ex_rightCtrl", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956ba337749144bf22f5772ba5acca1306b80", null ],
       [ "sc2ex_rightAlt", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956ba176f045dc38926a67d795f81b3469b21", null ],
       [ "sc2ex_leftGui", "ps2___keyboard_output_8h.html#a5bc33a2de7ec8ab6dd653393f378956baeabd4f2eada0954bc8abb0dbb82c8b89", null ],

@@ -5,7 +5,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     ] ],
     [ "ps2_AnsiTranslator.hpp", "ps2___ansi_translator_8hpp.html", "ps2___ansi_translator_8hpp" ],
     [ "ps2_Keyboard.h", "ps2___keyboard_8h.html", [
-      [ "NullReceiveFunctor", "classps2_1_1_null_receive_functor.html", "classps2_1_1_null_receive_functor" ],
       [ "Keyboard", "classps2_1_1_keyboard.html", "classps2_1_1_keyboard" ]
     ] ],
     [ "ps2_KeyboardLeds.h", "ps2___keyboard_leds_8h.html", "ps2___keyboard_leds_8h" ],

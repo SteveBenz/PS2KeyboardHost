@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ps2KeyboardHost
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Allows you to read from one or more PS2-style keyboards on an Arduino.</div>
   </td>
@@ -67,18 +67,29 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classps2_1_1_ansi_translator.html#adc1673b8e1c150ddc2fffac668338bbc">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
 </li>
 <li>anyErrors()
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#a3cdeb1d943cf6837e64bebe567e9ea7e">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#af735588d6efb74efe41c4ceeb61c8b58">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
+</li>
+<li>awaitStartup()
+: <a class="el" href="classps2_1_1_keyboard.html#a47cb2867f1970bda5508df772563c9a4">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>begin()
-: <a class="el" href="classps2_1_1_keyboard.html#a5408d56290a9df4d03488aa1547a5f7f">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a7a7278f6c873169a08f3d146099de48a">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>bufferOverflow()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a056dcb71016d627c4511a200e2dc59dd">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a628810157f62b2e218d5b0d2b9c3cc36">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a27315bbdd6c1a30f4e1e2be444bbbc96">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>clockLineGlitch()
+: <a class="el" href="classps2_1_1_null_diagnostics.html#abb0ececfa5411d4a90da2045ebfae458">ps2::NullDiagnostics</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a5bf45983b4011b94f2e55b2f4d6c1ecc">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 </ul>
 
@@ -88,39 +99,39 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classps2_1_1_null_diagnostics.html#ab4ff465dce0bfe4c94ae15b80e2ab89c">ps2::NullDiagnostics</a>
 </li>
 <li>disable()
-: <a class="el" href="classps2_1_1_keyboard.html#ad6972396297e3ecf4b3b2bbefb32e51e">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a1b45f986c1ad696e3825c42065bbc4d7">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>disableBreakAndTypematic()
-: <a class="el" href="classps2_1_1_keyboard.html#acaea565ee6321b3d1aaa79bab5c74ee3">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#aaa52b7fd667372da29910af999563223">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>disableBreakCodes()
-: <a class="el" href="classps2_1_1_keyboard.html#a2857f409218e80ac0425357254d15468">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a4b4591c2f4bb382036a6ab9f618b94bf">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>disableTypematic()
-: <a class="el" href="classps2_1_1_keyboard.html#a55fc3018eeeb454a0505fba0c1da4c8e">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a8e21303747d4f61838e327b0f61d73e1">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>echo()
-: <a class="el" href="classps2_1_1_keyboard.html#a7c5997847656caeb447c3b789a6c18d8">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a6e5a9d2f4e7cf961f70da765aed3d317">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>enable()
-: <a class="el" href="classps2_1_1_keyboard.html#a6abce6de6e8331f8abce25a322a91a6d">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a19d10c145fd83c08c43309dc681e367f">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>enableBreakAndTypematic()
-: <a class="el" href="classps2_1_1_keyboard.html#acd5fe3dd30e9d3fd7a11915366fa0fa8">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#aaacfec6413b37b4874876d5cf31d31c3">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
 <li>firstUnusedFailureCode
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#a7eb0cfc4a1f0b97ad6c63956ff0d48cf">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#acd07fabae44239e2323db9060e4d1889">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>firstUnusedInfoCode
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#a8656c9521b659ee6019f60d958f802b0">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#a928da6f7058cd80fa4bd6777474dc979">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 </ul>
 
@@ -136,7 +147,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 : <a class="el" href="classps2_1_1_ansi_translator.html#a57e7cad697f52254a987a8beced40f86">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
 </li>
 <li>getScanCodeSet()
-: <a class="el" href="classps2_1_1_keyboard.html#a18dcb3667bf963e82b4b059813760420">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a2a3cbce3d98353b6c18a501209ea7941">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 </ul>
 
@@ -151,7 +162,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>incorrectResponse()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a4f0f8dda76ffee9b1a56c5c7a854f318">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a536e544aa3d617f2ceba975e9e10443b">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a56ce3251d6ede1b3c67885d98a604fa5">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>isCtrlKeyDown()
 : <a class="el" href="classps2_1_1_ansi_translator.html#a9820d233bbcfc90385f3da8fd142b40c">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
@@ -164,7 +175,7 @@ $(document).ready(function(){initNavTree('functions.html','');});
 
 <h3><a id="index_k"></a>- k -</h3><ul>
 <li>Keyboard()
-: <a class="el" href="classps2_1_1_keyboard.html#a92dcb77f1ff16a4904572a5095fa55ff">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#ab4f105227693886082dc5754911524a8">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>KeyDown
 : <a class="el" href="structps2_1_1_usb_key_action.html#a9332f6761bebf4ede40d6a4838ddb0eca104e9751933918f1568eb7376b8478ea">ps2::UsbKeyAction</a>
@@ -184,18 +195,11 @@ $(document).ready(function(){initNavTree('functions.html','');});
 </li>
 <li>noResponse()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#ac6a9655306c9346ffa2c1960c5dcd364">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a3c4a48b5211b2b434548a52efc7ef16d">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#ab0da214f45a33a6f39f1bdb492668c3d">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>noTranslationForKey()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#aa5f412d7926446328e0810503174159a">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a1757193487c27f6ef319c2fc5e70d290">ps2::SimpleDiagnostics&lt; Size &gt;</a>
-</li>
-</ul>
-
-
-<h3><a id="index_o"></a>- o -</h3><ul>
-<li>operator()()
-: <a class="el" href="classps2_1_1_null_receive_functor.html#aabdbe98bfd5e24ae47c98ceafa7f6544">ps2::NullReceiveFunctor</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#ae5e11dd525f46f6d4b6ca2dae2a8c4ba">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 </ul>
 
@@ -203,46 +207,46 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>packetDidNotEndWithOne()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a1bf80ce33de61ece6f2d56dad671ff6e">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a52230e2fd6a07907a80100b68c415c38">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#af6a16fa31e8ff30b0c92ce726a011a2f">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>packetDidNotStartWithZero()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#aec93d1d1cb29fb51a05d8e081cb40f24">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a80cf8d41c988e040d757c606b0751927">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#aed3ef75231e2abe997a0c70c9532a517">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>packetIncomplete()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#aaf4a0ef925dbb60556447798631557f3">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#ab9d3ebd15e2753dd82bc8069baca178c">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a76127d2172eb1a9f6c323649e655715a">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>parityError()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#ab569790447d8cb822c302ef44faa8f2f">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a6aac64d5057a90180156431564e28666">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#af2a32b79ccee2f489f596bb567ee493d">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>push()
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#afbcbfa2c0716642630a1b0b1f813b5a3">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#a2d35f876ef2b39d810d296140b5e409d">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>readId()
-: <a class="el" href="classps2_1_1_keyboard.html#a5249a57a6c28eadb7cbff55a03c7aa3f">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a1d01a26f67fbedfb80c2a5080ce3e1a2">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>readScanCode()
-: <a class="el" href="classps2_1_1_keyboard.html#af5e50180406985b20073a56aa62f49d0">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a87092193e003b94cf3ced61b36f3cde0">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>receivedByte()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a228b77a4b8765dcb763d52802551985d">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a6694897f3f814de7c80d2c38a77c673c">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a53c133e46d51aa5bef6db00acc4bb0a3">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>reset()
 : <a class="el" href="classps2_1_1_ansi_translator.html#a9fea990375c461714949ad8ffb13852f">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
-, <a class="el" href="classps2_1_1_keyboard.html#a35abec5da3fc579e0b0549b89f73fdd0">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+, <a class="el" href="classps2_1_1_keyboard.html#a3a9e5414dda4640678bade8115a37f4d">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 , <a class="el" href="classps2_1_1_neutral_translator.html#aa6857af8b5e79f0fde39b41b7d737dc9">ps2::NeutralTranslator</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a3794a63aa4b6f36a7c83e7987d57c6b4">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 , <a class="el" href="classps2_1_1_usb_translator.html#aa45f06799b0e0621555a304f9d17086a">ps2::UsbTranslator&lt; Diagnostics &gt;</a>
 </li>
 <li>resetToDefaults()
-: <a class="el" href="classps2_1_1_keyboard.html#a9de2cd535e25d7f0cd0df9a5f4a1c3aa">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a9bd0bd371ca016b923de9a5f6b468013">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 </ul>
 
@@ -250,32 +254,36 @@ $(document).ready(function(){initNavTree('functions.html','');});
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>sendFrameError()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a5a53d3e8917aa7225024ad1d88448652">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#a7768839be0d79a4c343c845848b96fef">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a1850aa01b0636423dc0ba757dcc675f0">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>sendLedStatus()
-: <a class="el" href="classps2_1_1_keyboard.html#ab423032c297b959e5e99bef56f392831">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#abae81db544fd55b6aaba74e625d84d4a">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>sendReport()
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#a1d334ff6c4bc833f102f90f8acae001b">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#ac5210d7d1607ddd10c6e06b4b4911626">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>sentByte()
 : <a class="el" href="classps2_1_1_null_diagnostics.html#a54cfe29b82ca8b2dddb82943672dd7cd">ps2::NullDiagnostics</a>
-, <a class="el" href="classps2_1_1_simple_diagnostics.html#ac6dacc57b7b9e1c12c47bd1840e89f05">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#ab6ee57c080be8e3989359970807c5cc3">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>setCapsLock()
 : <a class="el" href="classps2_1_1_ansi_translator.html#aca13c6505feca91f3054c52212366961">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
 </li>
 <li>setLedIndicator()
-: <a class="el" href="classps2_1_1_simple_diagnostics.html#a59feccd426dd377abb2a009d50b59fee">ps2::SimpleDiagnostics&lt; Size &gt;</a>
+: <a class="el" href="classps2_1_1_simple_diagnostics.html#a8a9eda27cc64816b72c1d9017ea9d11b">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 <li>setNumLock()
 : <a class="el" href="classps2_1_1_ansi_translator.html#aa3643298b00bfcfa9ccc00a22b71214f">ps2::AnsiTranslator&lt; Diagnostics &gt;</a>
 </li>
 <li>setScanCodeSet()
-: <a class="el" href="classps2_1_1_keyboard.html#a1ad254e06fae6fb5eed1b20d25922027">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#a0f51d11f67c75ed2b688bcf62a68d9cb">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
 </li>
 <li>setTypematicRateAndDelay()
-: <a class="el" href="classps2_1_1_keyboard.html#a315429a66ee7e8c882e5b7c1186a73f8">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics, OnReceivedFunctor &gt;</a>
+: <a class="el" href="classps2_1_1_keyboard.html#ac880a2789415d57986bd02a4566b5560">ps2::Keyboard&lt; DataPin, ClockPin, BufferSize, Diagnostics &gt;</a>
+</li>
+<li>startupFailure()
+: <a class="el" href="classps2_1_1_null_diagnostics.html#a37f3dd5a1e4ce904b7cdf2ace63bca32">ps2::NullDiagnostics</a>
+, <a class="el" href="classps2_1_1_simple_diagnostics.html#a8d61d2a733b44b3f84b7455addfdf327">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</a>
 </li>
 </ul>
 

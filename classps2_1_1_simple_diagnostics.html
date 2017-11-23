@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ps2KeyboardHost: ps2::SimpleDiagnostics&lt; Size &gt; Class Template Reference</title>
+<title>Ps2KeyboardHost: ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,7 +26,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ps2KeyboardHost
-   &#160;<span id="projectnumber">1.0.0</span>
+   &#160;<span id="projectnumber">1.0.1</span>
    </div>
    <div id="projectbrief">Allows you to read from one or more PS2-style keyboards on an Arduino.</div>
   </td>
@@ -66,7 +66,7 @@ $(document).ready(function(){initNavTree('classps2_1_1_simple_diagnostics.html',
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classps2_1_1_simple_diagnostics-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ps2::SimpleDiagnostics&lt; Size &gt; Class Template Reference</div>  </div>
+<div class="title">ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -77,65 +77,69 @@ $(document).ready(function(){initNavTree('classps2_1_1_simple_diagnostics.html',
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1d334ff6c4bc833f102f90f8acae001b"><td class="memTemplParams" colspan="2">template&lt;typename Target &gt; </td></tr>
-<tr class="memitem:a1d334ff6c4bc833f102f90f8acae001b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a1d334ff6c4bc833f102f90f8acae001b">sendReport</a> (Target &amp;printTo)</td></tr>
-<tr class="memdesc:a1d334ff6c4bc833f102f90f8acae001b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps all event data to a print-based class.  <a href="#a1d334ff6c4bc833f102f90f8acae001b">More...</a><br /></td></tr>
-<tr class="separator:a1d334ff6c4bc833f102f90f8acae001b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a3cdeb1d943cf6837e64bebe567e9ea7e">anyErrors</a> () const</td></tr>
-<tr class="memdesc:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a>.  <a href="#a3cdeb1d943cf6837e64bebe567e9ea7e">More...</a><br /></td></tr>
-<tr class="separator:a3cdeb1d943cf6837e64bebe567e9ea7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a806cb6ba25da232dfdc4b389ed2fe212"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a> ()</td></tr>
-<tr class="memdesc:a806cb6ba25da232dfdc4b389ed2fe212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all recorded data.  <a href="#a806cb6ba25da232dfdc4b389ed2fe212">More...</a><br /></td></tr>
-<tr class="separator:a806cb6ba25da232dfdc4b389ed2fe212"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59feccd426dd377abb2a009d50b59fee"><td class="memTemplParams" colspan="2">template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError&gt; </td></tr>
-<tr class="memitem:a59feccd426dd377abb2a009d50b59fee"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a59feccd426dd377abb2a009d50b59fee">setLedIndicator</a> ()</td></tr>
-<tr class="memdesc:a59feccd426dd377abb2a009d50b59fee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables you to have a blinking indicator when an error happens.  <a href="#a59feccd426dd377abb2a009d50b59fee">More...</a><br /></td></tr>
-<tr class="separator:a59feccd426dd377abb2a009d50b59fee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80cf8d41c988e040d757c606b0751927"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a80cf8d41c988e040d757c606b0751927">packetDidNotStartWithZero</a> ()</td></tr>
-<tr class="separator:a80cf8d41c988e040d757c606b0751927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aac64d5057a90180156431564e28666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a6aac64d5057a90180156431564e28666">parityError</a> ()</td></tr>
-<tr class="separator:a6aac64d5057a90180156431564e28666"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52230e2fd6a07907a80100b68c415c38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a52230e2fd6a07907a80100b68c415c38">packetDidNotEndWithOne</a> ()</td></tr>
-<tr class="separator:a52230e2fd6a07907a80100b68c415c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d3ebd15e2753dd82bc8069baca178c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ab9d3ebd15e2753dd82bc8069baca178c">packetIncomplete</a> ()</td></tr>
-<tr class="separator:ab9d3ebd15e2753dd82bc8069baca178c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7768839be0d79a4c343c845848b96fef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a7768839be0d79a4c343c845848b96fef">sendFrameError</a> ()</td></tr>
-<tr class="separator:a7768839be0d79a4c343c845848b96fef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a628810157f62b2e218d5b0d2b9c3cc36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a628810157f62b2e218d5b0d2b9c3cc36">bufferOverflow</a> ()</td></tr>
-<tr class="separator:a628810157f62b2e218d5b0d2b9c3cc36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a536e544aa3d617f2ceba975e9e10443b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a536e544aa3d617f2ceba975e9e10443b">incorrectResponse</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> scanCode, <a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> expectedScanCode)</td></tr>
-<tr class="separator:a536e544aa3d617f2ceba975e9e10443b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c4a48b5211b2b434548a52efc7ef16d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a3c4a48b5211b2b434548a52efc7ef16d">noResponse</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> expectedScanCode)</td></tr>
-<tr class="separator:a3c4a48b5211b2b434548a52efc7ef16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1757193487c27f6ef319c2fc5e70d290"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a1757193487c27f6ef319c2fc5e70d290">noTranslationForKey</a> (bool isExtended, <a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> code)</td></tr>
-<tr class="separator:a1757193487c27f6ef319c2fc5e70d290"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6dacc57b7b9e1c12c47bd1840e89f05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ac6dacc57b7b9e1c12c47bd1840e89f05">sentByte</a> (byte b)</td></tr>
-<tr class="separator:ac6dacc57b7b9e1c12c47bd1840e89f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6694897f3f814de7c80d2c38a77c673c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a6694897f3f814de7c80d2c38a77c673c">receivedByte</a> (byte b)</td></tr>
-<tr class="separator:a6694897f3f814de7c80d2c38a77c673c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5210d7d1607ddd10c6e06b4b4911626"><td class="memTemplParams" colspan="2">template&lt;typename Target &gt; </td></tr>
+<tr class="memitem:ac5210d7d1607ddd10c6e06b4b4911626"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ac5210d7d1607ddd10c6e06b4b4911626">sendReport</a> (Target &amp;printTo)</td></tr>
+<tr class="memdesc:ac5210d7d1607ddd10c6e06b4b4911626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dumps all event data to a print-based class.  <a href="#ac5210d7d1607ddd10c6e06b4b4911626">More...</a><br /></td></tr>
+<tr class="separator:ac5210d7d1607ddd10c6e06b4b4911626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af735588d6efb74efe41c4ceeb61c8b58"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#af735588d6efb74efe41c4ceeb61c8b58">anyErrors</a> () const</td></tr>
+<tr class="memdesc:af735588d6efb74efe41c4ceeb61c8b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a3794a63aa4b6f36a7c83e7987d57c6b4">reset</a>.  <a href="#af735588d6efb74efe41c4ceeb61c8b58">More...</a><br /></td></tr>
+<tr class="separator:af735588d6efb74efe41c4ceeb61c8b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3794a63aa4b6f36a7c83e7987d57c6b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a3794a63aa4b6f36a7c83e7987d57c6b4">reset</a> ()</td></tr>
+<tr class="memdesc:a3794a63aa4b6f36a7c83e7987d57c6b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all recorded data.  <a href="#a3794a63aa4b6f36a7c83e7987d57c6b4">More...</a><br /></td></tr>
+<tr class="separator:a3794a63aa4b6f36a7c83e7987d57c6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a9eda27cc64816b72c1d9017ea9d11b"><td class="memTemplParams" colspan="2">template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError&gt; </td></tr>
+<tr class="memitem:a8a9eda27cc64816b72c1d9017ea9d11b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a8a9eda27cc64816b72c1d9017ea9d11b">setLedIndicator</a> ()</td></tr>
+<tr class="memdesc:a8a9eda27cc64816b72c1d9017ea9d11b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables you to have a blinking indicator when an error happens.  <a href="#a8a9eda27cc64816b72c1d9017ea9d11b">More...</a><br /></td></tr>
+<tr class="separator:a8a9eda27cc64816b72c1d9017ea9d11b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed3ef75231e2abe997a0c70c9532a517"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#aed3ef75231e2abe997a0c70c9532a517">packetDidNotStartWithZero</a> ()</td></tr>
+<tr class="separator:aed3ef75231e2abe997a0c70c9532a517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a32b79ccee2f489f596bb567ee493d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#af2a32b79ccee2f489f596bb567ee493d">parityError</a> ()</td></tr>
+<tr class="separator:af2a32b79ccee2f489f596bb567ee493d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6a16fa31e8ff30b0c92ce726a011a2f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#af6a16fa31e8ff30b0c92ce726a011a2f">packetDidNotEndWithOne</a> ()</td></tr>
+<tr class="separator:af6a16fa31e8ff30b0c92ce726a011a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76127d2172eb1a9f6c323649e655715a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a76127d2172eb1a9f6c323649e655715a">packetIncomplete</a> ()</td></tr>
+<tr class="separator:a76127d2172eb1a9f6c323649e655715a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1850aa01b0636423dc0ba757dcc675f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a1850aa01b0636423dc0ba757dcc675f0">sendFrameError</a> ()</td></tr>
+<tr class="separator:a1850aa01b0636423dc0ba757dcc675f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27315bbdd6c1a30f4e1e2be444bbbc96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a27315bbdd6c1a30f4e1e2be444bbbc96">bufferOverflow</a> ()</td></tr>
+<tr class="separator:a27315bbdd6c1a30f4e1e2be444bbbc96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ce3251d6ede1b3c67885d98a604fa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a56ce3251d6ede1b3c67885d98a604fa5">incorrectResponse</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> scanCode, <a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> expectedScanCode)</td></tr>
+<tr class="separator:a56ce3251d6ede1b3c67885d98a604fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0da214f45a33a6f39f1bdb492668c3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ab0da214f45a33a6f39f1bdb492668c3d">noResponse</a> (<a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> expectedScanCode)</td></tr>
+<tr class="separator:ab0da214f45a33a6f39f1bdb492668c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5e11dd525f46f6d4b6ca2dae2a8c4ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ae5e11dd525f46f6d4b6ca2dae2a8c4ba">noTranslationForKey</a> (bool isExtended, <a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a> code)</td></tr>
+<tr class="separator:ae5e11dd525f46f6d4b6ca2dae2a8c4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d61d2a733b44b3f84b7455addfdf327"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a8d61d2a733b44b3f84b7455addfdf327">startupFailure</a> ()</td></tr>
+<tr class="separator:a8d61d2a733b44b3f84b7455addfdf327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bf45983b4011b94f2e55b2f4d6c1ecc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a5bf45983b4011b94f2e55b2f4d6c1ecc">clockLineGlitch</a> (uint8_t numBitsSent)</td></tr>
+<tr class="separator:a5bf45983b4011b94f2e55b2f4d6c1ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ee57c080be8e3989359970807c5cc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ab6ee57c080be8e3989359970807c5cc3">sentByte</a> (byte b)</td></tr>
+<tr class="separator:ab6ee57c080be8e3989359970807c5cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53c133e46d51aa5bef6db00acc4bb0a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a53c133e46d51aa5bef6db00acc4bb0a3">receivedByte</a> (byte b)</td></tr>
+<tr class="separator:a53c133e46d51aa5bef6db00acc4bb0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:afbcbfa2c0716642630a1b0b1f813b5a3"><td class="memTemplParams" colspan="2">template&lt;typename E &gt; </td></tr>
-<tr class="memitem:afbcbfa2c0716642630a1b0b1f813b5a3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#afbcbfa2c0716642630a1b0b1f813b5a3">push</a> (E code)</td></tr>
-<tr class="separator:afbcbfa2c0716642630a1b0b1f813b5a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2fbf911ee92f7591cbd0ca26e1b3a2f"><td class="memTemplParams" colspan="2">template&lt;typename E1 , typename E2 &gt; </td></tr>
-<tr class="memitem:ad2fbf911ee92f7591cbd0ca26e1b3a2f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ad2fbf911ee92f7591cbd0ca26e1b3a2f">push</a> (E1 code, E2 extraData1)</td></tr>
-<tr class="separator:ad2fbf911ee92f7591cbd0ca26e1b3a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a162d69dcc8283104afd30596c6456b4c"><td class="memTemplParams" colspan="2">template&lt;typename E1 , typename E2 , typename E3 &gt; </td></tr>
-<tr class="memitem:a162d69dcc8283104afd30596c6456b4c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a162d69dcc8283104afd30596c6456b4c">push</a> (E1 code, E2 extraData1, E3 extraData2)</td></tr>
-<tr class="separator:a162d69dcc8283104afd30596c6456b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d35f876ef2b39d810d296140b5e409d"><td class="memTemplParams" colspan="2">template&lt;typename E &gt; </td></tr>
+<tr class="memitem:a2d35f876ef2b39d810d296140b5e409d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a2d35f876ef2b39d810d296140b5e409d">push</a> (E code)</td></tr>
+<tr class="separator:a2d35f876ef2b39d810d296140b5e409d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dcb4711c5c571c5bdb2960dcecc405"><td class="memTemplParams" colspan="2">template&lt;typename E1 , typename E2 &gt; </td></tr>
+<tr class="memitem:ad8dcb4711c5c571c5bdb2960dcecc405"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#ad8dcb4711c5c571c5bdb2960dcecc405">push</a> (E1 code, E2 extraData1)</td></tr>
+<tr class="separator:ad8dcb4711c5c571c5bdb2960dcecc405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90d98f8663f6c46267e8004e7f187e4d"><td class="memTemplParams" colspan="2">template&lt;typename E1 , typename E2 , typename E3 &gt; </td></tr>
+<tr class="memitem:a90d98f8663f6c46267e8004e7f187e4d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a90d98f8663f6c46267e8004e7f187e4d">push</a> (E1 code, E2 extraData1, E3 extraData2)</td></tr>
+<tr class="separator:a90d98f8663f6c46267e8004e7f187e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a7eb0cfc4a1f0b97ad6c63956ff0d48cf"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a7eb0cfc4a1f0b97ad6c63956ff0d48cf">firstUnusedFailureCode</a> = 9</td></tr>
-<tr class="separator:a7eb0cfc4a1f0b97ad6c63956ff0d48cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8656c9521b659ee6019f60d958f802b0"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a8656c9521b659ee6019f60d958f802b0">firstUnusedInfoCode</a> = 18</td></tr>
-<tr class="separator:a8656c9521b659ee6019f60d958f802b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd07fabae44239e2323db9060e4d1889"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#acd07fabae44239e2323db9060e4d1889">firstUnusedFailureCode</a> = (uint8_t)Ps2Code::_firstUnusedError</td></tr>
+<tr class="separator:acd07fabae44239e2323db9060e4d1889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a928da6f7058cd80fa4bd6777474dc979"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classps2_1_1_simple_diagnostics.html#a928da6f7058cd80fa4bd6777474dc979">firstUnusedInfoCode</a> = (uint8_t)Ps2Code::_firstUnusedInfo</td></tr>
+<tr class="separator:a928da6f7058cd80fa4bd6777474dc979"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;uint16_t Size = 60&gt;<br />
-class ps2::SimpleDiagnostics&lt; Size &gt;</h3>
+<div class="textblock"><h3>template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt;<br />
+class ps2::SimpleDiagnostics&lt; Size, LastErrorSize &gt;</h3>
 
 <p>A basic recorder for events coming from the PS2 keyboard class library. </p>
 <p>It addition to recording events, it can also blink an LED when an error has been recorded. It can dump its output to any print-capable class, such as the Serial port or a USB keyboard.</p>
@@ -146,7 +150,7 @@ Basic Usage</h1>
 <h1><a class="anchor" id="Subclassing"></a>
 Subclassing</h1>
 <p>If you want to record events from other parts of your application, you can create a subclass that defines new events. The Ps2ToUsbKeyboardAdapter example demonstrates how to do that:</p>
-<div class="fragment"><div class="line"><span class="keyword">class </span>Diagnostics</div><div class="line">    : <span class="keyword">public</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt;254&gt;</div><div class="line">{</div><div class="line">  <span class="keyword">typedef</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics&lt;254&gt;</a> base;</div><div class="line">  <span class="keyword">enum class</span> UsbTranslatorAppCode : uint8_t {</div><div class="line">    sentUsbKeyDown = 0 + base::firstUnusedInfoCode,</div><div class="line">    sentUsbKeyUp = 1 + base::firstUnusedInfoCode,</div><div class="line">  };</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyDown(byte b) { this-&gt;push((uint8_t)UsbTranslatorAppCode::sentUsbKeyDown, b); }</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyUp(byte b) { this-&gt;push((uint8_t)UsbTranslatorAppCode::sentUsbKeyUp, b); }</div><div class="line">};</div></div><!-- fragment --><p>Note that there are a maximum of 16 error identifiers and a maximum of 48 non-error identifiers.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span>Diagnostics</div><div class="line">    : <span class="keyword">public</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt;254&gt;</div><div class="line">{</div><div class="line">  <span class="keyword">typedef</span> <a class="code" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics&lt;254&gt;</a> base;</div><div class="line">  <span class="keyword">enum class</span> UsbTranslatorAppCode : uint8_t {</div><div class="line">    sentUsbKeyDown = 0 + base::firstUnusedInfoCode,</div><div class="line">    sentUsbKeyUp = 1 + base::firstUnusedInfoCode,</div><div class="line">  };</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyDown(byte b) { this-&gt;<a class="code" href="classps2_1_1_simple_diagnostics.html#a2d35f876ef2b39d810d296140b5e409d">push</a>((uint8_t)UsbTranslatorAppCode::sentUsbKeyDown, b); }</div><div class="line">  <span class="keywordtype">void</span> sentUsbKeyUp(byte b) { this-&gt;<a class="code" href="classps2_1_1_simple_diagnostics.html#a2d35f876ef2b39d810d296140b5e409d">push</a>((uint8_t)UsbTranslatorAppCode::sentUsbKeyUp, b); }</div><div class="line">};</div></div><!-- fragment --><p>Note that there are a maximum of 16 error identifiers and a maximum of 48 non-error identifiers.</p>
 <h1><a class="anchor" id="AuthorsNote"></a>
 Author's Note</h1>
 <p>Debugging and logging are often areas where we wish we could do more, but they can be infinite pits of labor if you let them. Further, when neglected, the rest of the project becomes an infinite pit of labor... There are two things I would wish for in the future: I wish it would store more data and, in particular, record the 10 keystrokes or other events before and after any error. I would also like to see a website-based diagnostic data interpreter.</p>
@@ -157,19 +161,19 @@ Author's Note</h1>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3cdeb1d943cf6837e64bebe567e9ea7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cdeb1d943cf6837e64bebe567e9ea7e">&#9670;&nbsp;</a></span>anyErrors()</h2>
+<a id="af735588d6efb74efe41c4ceeb61c8b58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af735588d6efb74efe41c4ceeb61c8b58">&#9670;&nbsp;</a></span>anyErrors()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::anyErrors </td>
+          <td class="memname">bool <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::anyErrors </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -182,23 +186,23 @@ template&lt;uint16_t Size = 60&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a>. </p>
+<p>Returns true if any errors have been recorded since the last call to <a class="el" href="classps2_1_1_simple_diagnostics.html#a3794a63aa4b6f36a7c83e7987d57c6b4">reset</a>. </p>
 
 </div>
 </div>
-<a id="a628810157f62b2e218d5b0d2b9c3cc36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a628810157f62b2e218d5b0d2b9c3cc36">&#9670;&nbsp;</a></span>bufferOverflow()</h2>
+<a id="a27315bbdd6c1a30f4e1e2be444bbbc96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27315bbdd6c1a30f4e1e2be444bbbc96">&#9670;&nbsp;</a></span>bufferOverflow()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::bufferOverflow </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::bufferOverflow </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -213,19 +217,47 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a536e544aa3d617f2ceba975e9e10443b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a536e544aa3d617f2ceba975e9e10443b">&#9670;&nbsp;</a></span>incorrectResponse()</h2>
+<a id="a5bf45983b4011b94f2e55b2f4d6c1ecc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf45983b4011b94f2e55b2f4d6c1ecc">&#9670;&nbsp;</a></span>clockLineGlitch()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::incorrectResponse </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::clockLineGlitch </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>numBitsSent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a56ce3251d6ede1b3c67885d98a604fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ce3251d6ede1b3c67885d98a604fa5">&#9670;&nbsp;</a></span>incorrectResponse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::incorrectResponse </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a>&#160;</td>
           <td class="paramname"><em>scanCode</em>, </td>
@@ -251,19 +283,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a3c4a48b5211b2b434548a52efc7ef16d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c4a48b5211b2b434548a52efc7ef16d">&#9670;&nbsp;</a></span>noResponse()</h2>
+<a id="ab0da214f45a33a6f39f1bdb492668c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0da214f45a33a6f39f1bdb492668c3d">&#9670;&nbsp;</a></span>noResponse()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::noResponse </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::noResponse </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceps2.html#a5bc33a2de7ec8ab6dd653393f378956b">KeyboardOutput</a>&#160;</td>
           <td class="paramname"><em>expectedScanCode</em></td><td>)</td>
@@ -279,19 +311,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a1757193487c27f6ef319c2fc5e70d290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1757193487c27f6ef319c2fc5e70d290">&#9670;&nbsp;</a></span>noTranslationForKey()</h2>
+<a id="ae5e11dd525f46f6d4b6ca2dae2a8c4ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e11dd525f46f6d4b6ca2dae2a8c4ba">&#9670;&nbsp;</a></span>noTranslationForKey()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::noTranslationForKey </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::noTranslationForKey </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>isExtended</em>, </td>
@@ -317,19 +349,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a52230e2fd6a07907a80100b68c415c38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52230e2fd6a07907a80100b68c415c38">&#9670;&nbsp;</a></span>packetDidNotEndWithOne()</h2>
+<a id="af6a16fa31e8ff30b0c92ce726a011a2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6a16fa31e8ff30b0c92ce726a011a2f">&#9670;&nbsp;</a></span>packetDidNotEndWithOne()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::packetDidNotEndWithOne </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::packetDidNotEndWithOne </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -344,19 +376,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a80cf8d41c988e040d757c606b0751927"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80cf8d41c988e040d757c606b0751927">&#9670;&nbsp;</a></span>packetDidNotStartWithZero()</h2>
+<a id="aed3ef75231e2abe997a0c70c9532a517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed3ef75231e2abe997a0c70c9532a517">&#9670;&nbsp;</a></span>packetDidNotStartWithZero()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::packetDidNotStartWithZero </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::packetDidNotStartWithZero </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -371,19 +403,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="ab9d3ebd15e2753dd82bc8069baca178c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9d3ebd15e2753dd82bc8069baca178c">&#9670;&nbsp;</a></span>packetIncomplete()</h2>
+<a id="a76127d2172eb1a9f6c323649e655715a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76127d2172eb1a9f6c323649e655715a">&#9670;&nbsp;</a></span>packetIncomplete()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::packetIncomplete </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::packetIncomplete </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -398,19 +430,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a6aac64d5057a90180156431564e28666"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6aac64d5057a90180156431564e28666">&#9670;&nbsp;</a></span>parityError()</h2>
+<a id="af2a32b79ccee2f489f596bb567ee493d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a32b79ccee2f489f596bb567ee493d">&#9670;&nbsp;</a></span>parityError()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::parityError </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::parityError </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -425,13 +457,13 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="afbcbfa2c0716642630a1b0b1f813b5a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbcbfa2c0716642630a1b0b1f813b5a3">&#9670;&nbsp;</a></span>push() <span class="overload">[1/3]</span></h2>
+<a id="a2d35f876ef2b39d810d296140b5e409d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d35f876ef2b39d810d296140b5e409d">&#9670;&nbsp;</a></span>push() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <div class="memtemplate">
 template&lt;typename E &gt; </div>
 <table class="mlabels">
@@ -439,7 +471,7 @@ template&lt;typename E &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::push </td>
           <td>(</td>
           <td class="paramtype">E&#160;</td>
           <td class="paramname"><em>code</em></td><td>)</td>
@@ -455,13 +487,13 @@ template&lt;typename E &gt; </div>
 
 </div>
 </div>
-<a id="ad2fbf911ee92f7591cbd0ca26e1b3a2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2fbf911ee92f7591cbd0ca26e1b3a2f">&#9670;&nbsp;</a></span>push() <span class="overload">[2/3]</span></h2>
+<a id="ad8dcb4711c5c571c5bdb2960dcecc405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dcb4711c5c571c5bdb2960dcecc405">&#9670;&nbsp;</a></span>push() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <div class="memtemplate">
 template&lt;typename E1 , typename E2 &gt; </div>
 <table class="mlabels">
@@ -469,7 +501,7 @@ template&lt;typename E1 , typename E2 &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::push </td>
           <td>(</td>
           <td class="paramtype">E1&#160;</td>
           <td class="paramname"><em>code</em>, </td>
@@ -495,13 +527,13 @@ template&lt;typename E1 , typename E2 &gt; </div>
 
 </div>
 </div>
-<a id="a162d69dcc8283104afd30596c6456b4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a162d69dcc8283104afd30596c6456b4c">&#9670;&nbsp;</a></span>push() <span class="overload">[3/3]</span></h2>
+<a id="a90d98f8663f6c46267e8004e7f187e4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d98f8663f6c46267e8004e7f187e4d">&#9670;&nbsp;</a></span>push() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <div class="memtemplate">
 template&lt;typename E1 , typename E2 , typename E3 &gt; </div>
 <table class="mlabels">
@@ -509,7 +541,7 @@ template&lt;typename E1 , typename E2 , typename E3 &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::push </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::push </td>
           <td>(</td>
           <td class="paramtype">E1&#160;</td>
           <td class="paramname"><em>code</em>, </td>
@@ -541,19 +573,19 @@ template&lt;typename E1 , typename E2 , typename E3 &gt; </div>
 
 </div>
 </div>
-<a id="a6694897f3f814de7c80d2c38a77c673c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6694897f3f814de7c80d2c38a77c673c">&#9670;&nbsp;</a></span>receivedByte()</h2>
+<a id="a53c133e46d51aa5bef6db00acc4bb0a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53c133e46d51aa5bef6db00acc4bb0a3">&#9670;&nbsp;</a></span>receivedByte()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::receivedByte </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::receivedByte </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
@@ -569,19 +601,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a806cb6ba25da232dfdc4b389ed2fe212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a806cb6ba25da232dfdc4b389ed2fe212">&#9670;&nbsp;</a></span>reset()</h2>
+<a id="a3794a63aa4b6f36a7c83e7987d57c6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3794a63aa4b6f36a7c83e7987d57c6b4">&#9670;&nbsp;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::reset </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -598,19 +630,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a7768839be0d79a4c343c845848b96fef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7768839be0d79a4c343c845848b96fef">&#9670;&nbsp;</a></span>sendFrameError()</h2>
+<a id="a1850aa01b0636423dc0ba757dcc675f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1850aa01b0636423dc0ba757dcc675f0">&#9670;&nbsp;</a></span>sendFrameError()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::sendFrameError </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::sendFrameError </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -625,13 +657,13 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a1d334ff6c4bc833f102f90f8acae001b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d334ff6c4bc833f102f90f8acae001b">&#9670;&nbsp;</a></span>sendReport()</h2>
+<a id="ac5210d7d1607ddd10c6e06b4b4911626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5210d7d1607ddd10c6e06b4b4911626">&#9670;&nbsp;</a></span>sendReport()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <div class="memtemplate">
 template&lt;typename Target &gt; </div>
 <table class="mlabels">
@@ -639,7 +671,7 @@ template&lt;typename Target &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::sendReport </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::sendReport </td>
           <td>(</td>
           <td class="paramtype">Target &amp;&#160;</td>
           <td class="paramname"><em>printTo</em></td><td>)</td>
@@ -654,23 +686,23 @@ template&lt;typename Target &gt; </div>
 </div><div class="memdoc">
 
 <p>Dumps all event data to a print-based class. </p>
-<p>It's a good idea to call <a class="el" href="classps2_1_1_simple_diagnostics.html#a806cb6ba25da232dfdc4b389ed2fe212">reset</a> after calling this. </p>
+<p>It's a good idea to call <a class="el" href="classps2_1_1_simple_diagnostics.html#a3794a63aa4b6f36a7c83e7987d57c6b4">reset</a> after calling this. </p>
 
 </div>
 </div>
-<a id="ac6dacc57b7b9e1c12c47bd1840e89f05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6dacc57b7b9e1c12c47bd1840e89f05">&#9670;&nbsp;</a></span>sentByte()</h2>
+<a id="ab6ee57c080be8e3989359970807c5cc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6ee57c080be8e3989359970807c5cc3">&#9670;&nbsp;</a></span>sentByte()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::sentByte </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::sentByte </td>
           <td>(</td>
           <td class="paramtype">byte&#160;</td>
           <td class="paramname"><em>b</em></td><td>)</td>
@@ -686,13 +718,13 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a59feccd426dd377abb2a009d50b59fee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59feccd426dd377abb2a009d50b59fee">&#9670;&nbsp;</a></span>setLedIndicator()</h2>
+<a id="a8a9eda27cc64816b72c1d9017ea9d11b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a9eda27cc64816b72c1d9017ea9d11b">&#9670;&nbsp;</a></span>setLedIndicator()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <div class="memtemplate">
 template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehavior = DiagnosticsLedBlink::blinkOnError&gt; </div>
 <table class="mlabels">
@@ -700,7 +732,7 @@ template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehav
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::setLedIndicator </td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::setLedIndicator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -724,20 +756,47 @@ template&lt;uint8_t DiagnosticLedPin = LED_BUILTIN, DiagnosticsLedBlink LedBehav
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a7eb0cfc4a1f0b97ad6c63956ff0d48cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7eb0cfc4a1f0b97ad6c63956ff0d48cf">&#9670;&nbsp;</a></span>firstUnusedFailureCode</h2>
+<a id="a8d61d2a733b44b3f84b7455addfdf327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d61d2a733b44b3f84b7455addfdf327">&#9670;&nbsp;</a></span>startupFailure()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::firstUnusedFailureCode = 9</td>
+          <td class="memname">void <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::startupFailure </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="acd07fabae44239e2323db9060e4d1889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd07fabae44239e2323db9060e4d1889">&#9670;&nbsp;</a></span>firstUnusedFailureCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::firstUnusedFailureCode = (uint8_t)Ps2Code::_firstUnusedError</td>
         </tr>
       </table>
   </td>
@@ -749,19 +808,19 @@ template&lt;uint16_t Size = 60&gt; </div>
 
 </div>
 </div>
-<a id="a8656c9521b659ee6019f60d958f802b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8656c9521b659ee6019f60d958f802b0">&#9670;&nbsp;</a></span>firstUnusedInfoCode</h2>
+<a id="a928da6f7058cd80fa4bd6777474dc979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a928da6f7058cd80fa4bd6777474dc979">&#9670;&nbsp;</a></span>firstUnusedInfoCode</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;uint16_t Size = 60&gt; </div>
+template&lt;uint16_t Size = 60, uint16_t LastErrorSize = 30&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size &gt;::firstUnusedInfoCode = 18</td>
+          <td class="memname">const uint8_t <a class="el" href="classps2_1_1_simple_diagnostics.html">ps2::SimpleDiagnostics</a>&lt; Size, LastErrorSize &gt;::firstUnusedInfoCode = (uint8_t)Ps2Code::_firstUnusedInfo</td>
         </tr>
       </table>
   </td>
